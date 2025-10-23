@@ -13,9 +13,7 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   
-  // Stati per modifica/elimina lavori
-  const [editingWork, setEditingWork] = useState<Work | null>(null);
-  const [editTitle, setEditTitle] = useState('');
+  // Stati per elimina lavori
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [workToDelete, setWorkToDelete] = useState<number | null>(null);
   
@@ -177,18 +175,6 @@ const Dashboard: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: ['shift-stats', selectedShift?.id] });
       setShowDeleteConfirm(false);
       setWorkToDelete(null);
-    },
-  });
-
-  const updateWorkMutation = useMutation({
-    mutationFn: async ({ id, title }: { id: number; title: string }) => {
-      const res = await workService.update(id, { title });
-      return res.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['recent-works', selectedShift?.id] });
-      setEditingWork(null);
-      setEditTitle('');
     },
   });
 
@@ -806,7 +792,7 @@ const Dashboard: React.FC = () => {
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <h4 className="pt-0 text-base font-semibold text-gray-800 mb-0">
-                            €{parseFloat(order.amount).toFixed(2)}
+                            €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
                           <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>

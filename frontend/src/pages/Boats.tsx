@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import BoatsNew from './BoatsNew';
 import BoatsDetails from './BoatsDetails';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { boatService, problemService, seasonService, shiftService } from '../services/api';
+import { problemService, seasonService, shiftService } from '../services/api';
 import { useAppContext } from '../context/AppContext';
 import type { Boat, Problem } from '../types';
 import BottomNav from '../components/Layout/BottomNav';
@@ -19,7 +19,6 @@ const Boats: React.FC = () => {
   const modalType = searchParams.get('modal');
   const problemId = searchParams.get('id');
 
-  const [selectedType] = useState<Boat['type'] | ''>('');
   const [selectedBoat] = useState<Boat | null>(null);
   const [searchText, setSearchText] = useState('');
   const [filterStatus, setFilterStatus] = useState<'all' | 'open' | 'closed'>('open');
@@ -71,16 +70,6 @@ const Boats: React.FC = () => {
       }
     }
   }, [shifts, selectedShift, selectedSeason, setSelectedShift, hasAutoSelected]);
-
-  const { data: parts } = useQuery({
-    queryKey: ['boat-parts', selectedType],
-    enabled: Boolean(selectedType),
-    queryFn: async () => {
-      if (!selectedType) return [] as string[];
-      const res = await boatService.getPartsByType(selectedType);
-      return res.data;
-    },
-  });
 
   // TUTTI i problemi esistenti (non solo della barca selezionata)
   const { data: allProblems, isLoading: problemsLoading } = useQuery({
