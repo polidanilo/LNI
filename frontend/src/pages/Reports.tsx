@@ -50,7 +50,7 @@ const Reports: React.FC = () => {
     if (contextSeason && seasonId !== contextSeason.id) {
       setSeasonId(contextSeason.id);
     }
-  }, [contextSeason]);
+  }, [contextSeason, seasonId]);
 
   const { data: seasonReport, isLoading } = useQuery({
     queryKey: ['season-report', seasonId],

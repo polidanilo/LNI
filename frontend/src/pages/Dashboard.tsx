@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { seasonService, shiftService, reportsService, workService, orderService, problemService } from '../services/api';
-import type { Season, Shift, Work } from '../types';
+import type { Work } from '../types';
 import BottomNav from '../components/Layout/BottomNav';
 import { useAppContext } from '../context/AppContext';
 import { getShiftOrdinalName } from '../utils/shiftNames';
-import UserTab from '../components/Common/UserTab';
 import CustomScrollbar from '../components/CustomScrollbar';
 
 const Dashboard: React.FC = () => {
-  const { selectedSeason, setSelectedSeason, selectedShift, setSelectedShift, token, setToken, currentUser, setCurrentUser } = useAppContext();
+  const { selectedSeason, setSelectedSeason, selectedShift, setSelectedShift, setToken, currentUser, setCurrentUser } = useAppContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   
@@ -114,7 +113,9 @@ const Dashboard: React.FC = () => {
     queryFn: async () => {
       if (!selectedShift) return [];
       const response = await problemService.list({
+        
         shift_id: selectedShift.id
+
       });
       return response.data.slice(0, 6);
     },
@@ -129,7 +130,6 @@ const Dashboard: React.FC = () => {
       if (!selectedShift) return [];
       const response = await workService.getAll({
         shift_id: selectedShift.id,
-        page_size: 6,
         sort_by: 'created_at',
         order: 'desc',
       });
@@ -146,7 +146,6 @@ const Dashboard: React.FC = () => {
       if (!selectedShift) return [];
       const response = await orderService.getAll({
         shift_id: selectedShift.id,
-        page_size: 6,
         sort_by: 'created_at',
         order: 'desc',
       });
@@ -245,24 +244,6 @@ const Dashboard: React.FC = () => {
     e.stopPropagation();
     const newStatus = order.status === 'completed' ? 'pending' : 'completed';
     toggleOrderStatusMutation.mutate({ id: order.id, status: newStatus });
-  };
-
-  const handleEditWork = (e: React.MouseEvent, work: Work) => {
-    e.stopPropagation();
-    if (editingWork?.id === work.id) {
-      // Salva modifiche
-      updateWorkMutation.mutate({ id: work.id, title: editTitle });
-    } else {
-      // Entra in modalità edit
-      setEditingWork(work);
-      setEditTitle(work.title);
-    }
-  };
-
-  const handleDeleteWork = (e: React.MouseEvent, workId: number) => {
-    e.stopPropagation();
-    setWorkToDelete(workId);
-    setShowDeleteConfirm(true);
   };
 
   const handleSeasonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -631,6 +612,7 @@ const Dashboard: React.FC = () => {
                             className="group w-8 h-8 mr-1 rounded-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
                             title={problem.status === 'closed' ? 'Segna come aperto' : 'Segna come risolto'}
                           >
+                            
                             {/* Icona normale */}
                             {problem.status === 'closed' ? (
                               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600 group-hover:hidden" viewBox="0 0 20 20" fill="currentColor">
