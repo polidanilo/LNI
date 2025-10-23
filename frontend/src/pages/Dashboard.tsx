@@ -680,20 +680,9 @@ const Dashboard: React.FC = () => {
                       <div className="flex items-start justify-between">
                         {/* Sinistra: Titolo, user, categoria, data */}
                         <div className="flex-1">
-                          {editingWork?.id === work.id ? (
-                            <input
-                              type="text"
-                              value={editTitle}
-                              onChange={(e) => setEditTitle(e.target.value)}
-                              onClick={(e) => e.stopPropagation()}
-                              className="w-full px-2 py-1 font-semibold text-gray-800 border border-gray-300 rounded text-base focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                              autoFocus
-                            />
-                          ) : (
-                            <h4 className="pt-0 text-base font-semibold text-gray-800 mb-0">
-                              {work.title}
-                            </h4>
-                          )}
+                          <h4 className="pt-0 text-base font-semibold text-gray-800 mb-0">
+                            {work.title}
+                          </h4>
                           <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span>•</span>
