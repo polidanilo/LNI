@@ -1,0 +1,243 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext.tsx';
+import api from '../services/api.ts';
+
+const Login: React.FC = () => {
+  const navigate = useNavigate();
+  const { setToken, setCurrentUser } = useAppContext();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isRegister, setIsRegister] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      if (isRegister) {
+        await api.post('/auth/register', { username, password });
+      }
+
+      const response = await api.post('/auth/login', { username, password });
+      const token = response.data.access_token;
+
+      setToken(token);
+
+      // Crea un profilo utente di default basato sull'username
+      // Questo funziona anche se il backend non ha l'endpoint /auth/profile
+      const userProfile = {
+        id: 1, // ID di default
+        username: username,
+        full_name: username, // Usa l'username come nome completo se non disponibile
+        email: `${username}@example.com` // Email di default
+      };
+
+      setCurrentUser(userProfile);
+
+      navigate('/');
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Errore di autenticazione');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div 
+      className="min-h-screen flex items-center justify-center py-9 relative"
+      style={{
+        backgroundColor: '#FFF4EF'
+      }}
+    >
+      {/* Background Image Layer */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          backgroundImage: 'url(/public/login-bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.15,
+          zIndex: 0
+        }}
+      />
+
+      <div className="w-full max-w-md px-4 relative z-10">
+        {/* Card Login con Gradient Border */}
+        <div 
+          className="bg-white rounded-3xl shadow-lg overflow-hidden my-9"
+          style={{
+            background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
+            border: '2px solid transparent'
+          }}
+        >
+          {/* Immagine protagonista */}
+          <div className="px-8 pt-8 pb-2 bg-white flex items-center justify-center">
+            <img src="/logo.jpg.jpg" alt="LNINazioni" 
+              className="w-full h-auto object-contain rounded-2xl"
+              style={{maxHeight: '200px'}}
+            />
+          </div>
+
+          {/* Form */}
+          <div className="px-8 pb-6">
+            <h2 className="text-2xl font-bold font-greycliff text-gray-800 text-center mb-6">
+              {isRegister ? 'Registrati' : 'Accedi'}
+            </h2>
+
+            <form onSubmit={handleSubmit} className="space-y-1">
+              {/* Username */}
+              <div>
+                <style>{`
+                  input[name="username"] {
+                    background-color: transparent !important;
+                    font-size: 16px !important;
+                    font-weight: 500 !important;
+                    color: #1F2937 !important;
+                  }
+                  input[name="username"]:-webkit-autofill,
+                  input[name="username"]:-webkit-autofill:hover,
+                  input[name="username"]:-webkit-autofill:focus,
+                  input[name="username"]:-webkit-autofill:active {
+                    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+                    -webkit-text-fill-color: #1F2937 !important;
+                    font-size: 16px !important;
+                    font-weight: 500 !important;
+                    background-color: transparent !important;
+                  }
+                `}</style>
+                <input
+                  type="text"
+                  name="username"
+                  autoComplete="off"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full px-2 py-2 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme text-gray-800 placeholder-gray-400"
+                  placeholder="Username"
+                  required
+                />
+              </div>
+
+              {/* Password con icona occhio */}
+              <div className="relative">
+                <style>{`
+                  input[name="password"] {
+                    background-color: transparent !important;
+                    font-size: 16px !important;
+                    font-weight: 500 !important;
+                    color: #1F2937 !important;
+                  }
+                  input[name="password"]:-webkit-autofill,
+                  input[name="password"]:-webkit-autofill:hover,
+                  input[name="password"]:-webkit-autofill:focus,
+                  input[name="password"]:-webkit-autofill:active {
+                    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+                    -webkit-text-fill-color: #1F2937 !important;
+                    font-size: 16px !important;
+                    font-weight: 500 !important;
+                    background-color: transparent !important;
+                  }
+                `}</style>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  autoComplete="off"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-2 py-2 pr-10 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme text-gray-800 placeholder-gray-400"
+                  placeholder="Password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  tabIndex={-1}
+                >
+                  {showPassword ? (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+
+              {/* Errore */}
+              {error && (
+                <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded text-sm text-center">
+                  {error}
+                </div>
+              )}
+
+              {/* Pulsante Accedi/Registrati */}
+              <div className="flex justify-center pt-6">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3 bg-primary-eme disabled:bg-gray-400 text-white rounded-full font-bold font-greycliff text-base transition-all duration-200 shadow-sm"
+                  style={{
+                    backgroundColor: loading ? undefined : '#10B981',
+                    cursor: loading ? 'not-allowed' : 'pointer'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!loading) {
+                      e.currentTarget.style.backgroundColor = 'rgb(15, 167, 116)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!loading) {
+                      e.currentTarget.style.backgroundColor = '#10B981';
+                    }
+                  }}
+                >
+                  {loading ? 'Caricamento...' : isRegister ? 'Registrati' : 'Accedi'}
+                </button>
+              </div>
+            </form>
+
+            {/* Switch Accesso/Registrazione */}
+            <div className="text-center mt-3 mb-6">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsRegister(!isRegister);
+                  setError('');
+                }}
+                className="text-primary-ros hover:opacity-80 font-medium text-sm transition-all"
+              >
+                {isRegister ? 'Hai già un account? Accedi' : 'Non hai un account? Registrati'}
+              </button>
+            </div>
+
+            {/* Credenziali di test */}
+            <div className="text-center pt-6 pb-2 border-t border-gray-200">
+                <p className="text-xs text-gray-500 mb-2">Credenziali di test:</p>
+                <div className="flex items-center justify-center gap-3 text-xs">
+                  <span className="text-gray-600">
+                    <span className="font-semibold">Username:</span> test
+                  </span>
+                  <span className="text-gray-400">|</span>
+                  <span className="text-gray-600">
+                    <span className="font-semibold">Password:</span> test123
+                  </span>
+                </div>
+              </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

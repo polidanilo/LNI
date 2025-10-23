@@ -1,0 +1,180 @@
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFBold.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFBold.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF Extra';
+    src: url('FONTSPRINGDEMO-GreycliffCFExtraBoldRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFExtraBoldRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFExtraBoldRegular.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF Demi';
+    src: url('FONTSPRINGDEMO-GreycliffCFDemiBoldItalic.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFDemiBoldItalic.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFDemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFMediumItalic.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFMediumItalic.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFMediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFHeavyRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFHeavyRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFHeavyRegular.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFMediumRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFMediumRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFMediumRegular.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF Extra';
+    src: url('FONTSPRINGDEMO-GreycliffCFExtraLightItalic.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFExtraLightItalic.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFItalic.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFItalic.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFThinRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFThinRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFThinRegular.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFLightItalic.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFLightItalic.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFLightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFThinItalic.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFThinItalic.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFHeavyItalic.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFHeavyItalic.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFHeavyItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFBoldItalic.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFBoldItalic.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFBoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF';
+    src: url('FONTSPRINGDEMO-GreycliffCFLightRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFLightRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFLightRegular.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF Extra';
+    src: url('FONTSPRINGDEMO-GreycliffCFExtraBoldItalic.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFExtraBoldItalic.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFExtraBoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF Demi';
+    src: url('FONTSPRINGDEMO-GreycliffCFDemiBoldRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFDemiBoldRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFDemiBoldRegular.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Greycliff CF Extra';
+    src: url('FONTSPRINGDEMO-GreycliffCFExtraLightRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-GreycliffCFExtraLightRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-GreycliffCFExtraLightRegular.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+

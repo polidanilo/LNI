@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Minork Sans';
+    src: url('MinorkSans-LightItalic.woff2') format('woff2'),
+        url('MinorkSans-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Minork Sans';
+    src: url('MinorkSans-ExtraboldItalic.woff2') format('woff2'),
+        url('MinorkSans-ExtraboldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Minork Sans';
+    src: url('MinorkSans-Extrabold.woff2') format('woff2'),
+        url('MinorkSans-Extrabold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Minork Sans';
+    src: url('MinorkSans-Light.woff2') format('woff2'),
+        url('MinorkSans-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+

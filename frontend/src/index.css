@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'MinorkSans';
+  src: url('/fonts/MinorkSans-Light.woff2') format('woff2'),
+       url('/fonts/MinorkSans-Light.woff') format('woff'),
+       url('/fonts/MinorkSans-Light.ttf') format('truetype');
+  font-weight: 400; /* ← Regular invece di Light */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MinorkSans';
+  src: url('/fonts/MinorkSans-Extrabold.woff2') format('woff2'),
+       url('/fonts/MinorkSans-Extrabold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MinorkSans';
+  src: url('/fonts/MinorkSans-LightItalic.woff2') format('woff2'),
+       url('/fonts/MinorkSans-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MinorkSans';
+  src: url('/fonts/MinorkSans-ExtraboldItalic.woff2') format('woff2'),
+       url('/fonts/MinorkSans-ExtraboldItalic.woff') format('woff');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Greycliff CF Font */
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFRegular.woff2') format('woff2'),
+       url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFRegular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFBold.woff2') format('woff2'),
+       url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFExtraBoldRegular.woff2') format('woff2'),
+       url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFExtraBoldRegular.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    height: 100%;
+    overflow: auto;
+  }
+
+  html, body, #root {
+    height: 100%;
+    width: 100%;
+  }
+
+  body {
+    font-family: 'Inter', 'MinorkSans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #FFFFFF !important;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: overlay; /* Scrollbar overlay invece che occupare spazio */
+  }
+
+  /* Nascondi scrollbar globale - Usiamo scrollbar custom nei componenti */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: none;
+  }
+
+  /* IE/Edge */
+  body {
+    -ms-overflow-style: none;
+  }
+}
+
+@layer components {
+  /* Gray out placeholder options in select dropdowns */
+  select option[value=""] {
+    color: #9CA3AF;
+  }
+  
+  select option:not([value=""]) {
+    color: #1F2937;
+  }
+  
+  /* Gray out select when placeholder is selected */
+  select:has(option[value=""]:checked) {
+    color: #9CA3AF;
+  }
+  
+  select:not(:has(option[value=""]:checked)) {
+    color: #1F2937;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(to right, rgb(59, 130, 246), rgb(147, 51, 234));
+    padding: 2px;
+    border-radius: 0.5rem;
+  }
+
+  .gradient-border-content {
+    background-color: white;
+    border-radius: calc(0.5rem - 2px);
+    padding: 1rem;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(to right, rgb(37, 99, 235), rgb(29, 78, 216));
+  }
+
+  .gradient-accent {
+    background: linear-gradient(to right, rgb(34, 197, 94), rgb(21, 128, 61));
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, rgb(37, 99, 235), rgb(30, 64, 175));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Layout utilities */
+  .container-grid {
+    display: grid;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .grid-cols-auto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .grid-cols-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-cols-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-cols-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .grid-cols-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .flex-evenly {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+
+  .space-x-4 > * + * {
+    margin-left: 1rem;
+  }
+
+  .p-6 {
+    padding: 1.5rem;
+  }
+
+  .m-4 {
+    margin: 1rem;
+  }
+
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .h-full {
+    height: 100%;
+  }
+}
+
+/* Animazioni fighe per i bottoni */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(15,66,149,0.4), 0 0 10px rgba(15,66,149,0.3), 0 0 15px rgba(15,66,149,0.2);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(15,66,149,0.6), 0 0 20px rgba(15,66,149,0.4), 0 0 30px rgba(15,66,149,0.3);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.btn-pulse {
+  animation: pulse-glow 2s infinite;
+}
+
+.btn-bounce {
+  animation: bounce-in 0.6s ease-out;
+}
+
+.btn-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Animazione bottone espansione */
+@keyframes expandButton {
+  0% {
+    width: 56px;
+  }
+  100% {
+    width: 280px;
+  }
+}
+
+@keyframes collapseButton {
+  0% {
+    width: 280px;
+  }
+  100% {
+    width: 56px;
+  }
+}
+
+.expand-on-hover {
+  animation: expandButton 0.5s ease-out forwards;
+}
+
+.collapse-on-hover {
+  animation: collapseButton 0.5s ease-out forwards;
+}

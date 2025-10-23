@@ -1,0 +1,200 @@
+import axios from 'axios';
+import type { Season, Shift, Order, Work, Boat, Problem, DashboardStats, User } from '../types';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Interceptor per aggiungere il token
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    console.log('🔑 Request headers:', config.headers);
+    console.log('📡 Request URL:', config.url);
+    console.log('📦 Request data:', config.data);
+    return config;
+  },
+  (error) => {
+    console.error('❌ Request error:', error);
+    return Promise.reject(error);
+  }
+);
+
+// Interceptor per gestire le risposte
+api.interceptors.response.use(
+  (response) => {
+    console.log('✅ Response status:', response.status);
+    console.log('📦 Response data:', response.data);
+    return response;
+  },
+  (error) => {
+    console.error('❌ Response error:', error);
+    console.error('❌ Error status:', error.response?.status);
+    console.error('❌ Error data:', error.response?.data);
+    return Promise.reject(error);
+  }
+);
+
+// AUTH
+export const authService = {
+  register: (username: string, password: string) =>
+    api.post('/auth/register', { username, password }),
+  login: (username: string, password: string) =>
+    api.post('/auth/login', { username, password }),
+  getUsers: () => api.get<Array<{ id: number; username: string }>>('/auth/users'),
+  getProfile: () => api.get<User>('/auth/profile'),
+};
+
+// SEASONS
+export const seasonService = {
+  getAll: () => api.get<Season[]>('/seasons/'),
+  getById: (id: number) => api.get<Season>(`/seasons/${id}`),
+  create: (data: Omit<Season, 'id'>) => api.post<Season>('/seasons/', data),
+};
+
+// SHIFTS
+export const shiftService = {
+  getBySeasonId: (seasonId: number) => api.get<Shift[]>(`/shifts/season/${seasonId}`),
+  getById: (id: number) => api.get<Shift>(`/shifts/${id}`),
+  create: (data: Omit<Shift, 'id'>) => api.post<Shift>('/shifts/', data),
+};
+
+// ORDERS
+export const orderService = {
+  getAll: (params?: {
+    status_filter?: 'completed' | 'pending';
+    shift_id?: number;
+    q?: string;
+    date_from?: string;
+    date_to?: string;
+    category?: string;
+    amount_min?: number;
+    amount_max?: number;
+    page?: number;
+    page_size?: number;
+    skip?: number;
+    limit?: number;
+    sort_by?: 'order_date' | 'amount' | 'created_at' | 'updated_at' | 'category' | 'status' | 'title';
+    order?: 'asc' | 'desc';
+  }) => api.get<Order[]>('/orders/', { params }),
+
+  getById: (id: number) => api.get<Order>(`/orders/${id}`),
+
+  create: (data: Omit<Order, 'id' | 'user_id' | 'created_at' | 'updated_at'>) =>
+    api.post<Order>('/orders/', data),
+
+  update: async (id: number, data: Partial<Order>) => {
+    return await api.put<Order>(`/orders/${id}`, data);
+  },
+
+  delete: (id: number) => api.delete(`/orders/${id}`),
+
+  export: (params?: {
+    status_filter?: 'completed' | 'pending';
+    shift_id?: number;
+    shift_ids?: number[];
+    q?: string;
+    date_from?: string;
+    date_to?: string;
+    category?: string;
+    amount_min?: number;
+    amount_max?: number;
+    sort_by?: 'order_date' | 'amount' | 'created_at' | 'updated_at' | 'category' | 'status' | 'title' | 'id';
+    order?: 'asc' | 'desc';
+  }) => {
+    // Converti shift_ids array in stringa separata da virgole
+    const exportParams = { ...params };
+    if (params?.shift_ids && Array.isArray(params.shift_ids)) {
+      exportParams.shift_ids = params.shift_ids.join(',') as any;
+    }
+    return api.get<Blob>('/orders/export', {
+      params: exportParams,
+      responseType: 'blob',
+    });
+  },
+};
+
+// WORKS
+export const workService = {
+  getAll: (params?: {
+    status_filter?: 'completed' | 'pending';
+    shift_id?: number;
+    q?: string;
+    date_from?: string;
+    date_to?: string;
+    category?: 'Campo' | 'Officina' | 'Servizi' | 'Gommoni' | 'Barche' | 'Vele' | 'Altro';
+    page?: number;
+    page_size?: number;
+    skip?: number;
+    limit?: number;
+    sort_by?: 'work_date' | 'created_at' | 'updated_at' | 'category' | 'status' | 'title';
+    order?: 'asc' | 'desc';
+  }) => api.get<Work[]>('/works/', { params }),
+
+  getById: (id: number) => api.get<Work>(`/works/${id}`),
+
+  create: (data: Omit<Work, 'id'>) => api.post<Work>('/works/', data),
+
+  update: (id: number, data: Partial<Work>) => api.put<Work>(`/works/${id}`, data),
+
+  delete: (id: number) => api.delete(`/works/${id}`),
+
+  export: (params?: {
+    status_filter?: 'completed' | 'pending';
+    shift_id?: number;
+    q?: string;
+    date_from?: string;
+    date_to?: string;
+    category?: 'Campo' | 'Officina' | 'Servizi' | 'Gommoni' | 'Barche' | 'Vele' | 'Altro';
+    sort_by?: 'work_date' | 'created_at' | 'updated_at' | 'category' | 'status' | 'title';
+    order?: 'asc' | 'desc';
+  }) =>
+    api.get<Blob>('/works/export', {
+      params,
+      responseType: 'blob',
+    }),
+};
+
+// BOATS
+export const boatService = {
+  getAll: (boat_type?: Boat['type']) => api.get<Boat[]>('/boats/', { params: { boat_type } }),
+  getByType: (type: Boat['type']) => api.get<Boat[]>('/boats/', { params: { boat_type: type } }),
+  getById: (id: number) => api.get<Boat>(`/boats/${id}`),
+  getPartsByType: (type: Boat['type']) => api.get<string[]>(`/boats/type/${type}/parts`),
+};
+
+// PROBLEMS
+export const problemService = {
+  list: (params?: { boat_id?: number; status_filter?: 'open' | 'closed'; shift_id?: number }) =>
+    api.get<Problem[]>('/problems/', { params }),
+  getById: (id: number) => api.get<Problem>(`/problems/${id}`),
+  create: (data: Omit<Problem, 'id' | 'reported_date' | 'resolved_date'>) => api.post<Problem>('/problems/', data),
+  // reported_date is required by backend ProblemCreate
+  createWithDate: (data: Omit<Problem, 'id' | 'resolved_date'>) => api.post<Problem>('/problems/', data),
+  update: (id: number, data: Partial<Problem>) => api.put<Problem>(`/problems/${id}`, data),
+  delete: (id: number) => api.delete(`/problems/${id}`),
+  toggleStatus: (id: number) => api.patch(`/problems/${id}/toggle-status`),
+};
+
+// DASHBOARD
+export const dashboardService = {
+  getStats: () => api.get('/dashboard/home'),
+};
+
+// REPORTS
+export const reportsService = {
+  getSeasonReport: (seasonId: number) => api.get(`/reports/season/${seasonId}`),
+  getShiftReport: (shiftId: number) => api.get(`/reports/shift/${shiftId}`),
+  exportSeasonExcel: (seasonId: number) =>
+    api.get<Blob>(`/reports/season/${seasonId}/export-excel`, { responseType: 'blob' }),
+};
+
+export default api;
