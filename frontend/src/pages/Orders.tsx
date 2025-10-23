@@ -10,13 +10,6 @@ import BottomNav from '../components/Layout/BottomNav';
 import { getShiftOrdinalName } from '../utils/shiftNames';
 import CustomScrollbar from '../components/CustomScrollbar';
 
-type OrderForm = {
-  title: string;
-  description: string;
-  amount: number;
-  category: string;
-};
-
 const Orders: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();

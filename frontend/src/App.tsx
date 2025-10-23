@@ -6,12 +6,7 @@ import MainLayout from './components/Layout/MainLayout';
 import Login from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Orders from './pages/Orders.tsx';
-import OrderDetail from './pages/OrderDetail.tsx';
-import WorkDetail from './pages/WorkDetail.tsx';
-import WorkNew from './pages/WorkNew.tsx';
-import Infirmary from './pages/Infirmary.tsx';
 import Works from './pages/Works.tsx';
-import OrderNew from './pages/OrderNew.tsx';
 import Boats from './pages/Boats.tsx';
 import BoatsDetails from './pages/BoatsDetails.tsx';
 import BoatsNew from './pages/BoatsNew.tsx';
@@ -48,52 +43,10 @@ const App: React.FC = () => {
               }
             />
             <Route
-              path="/orders/new"
-              element={
-                <ProtectedRoute>
-                  <OrderNew />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/orders/:id"
-              element={
-                <ProtectedRoute>
-                  <OrderDetail />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/infirmary"
-              element={
-                <ProtectedRoute>
-                  <MainLayout>
-                    <Infirmary />
-                  </MainLayout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
               path="/works"
               element={
                 <ProtectedRoute>
                   <Works />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/works/new"
-              element={
-                <ProtectedRoute>
-                  <WorkNew />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/works/:id"
-              element={
-                <ProtectedRoute>
-                  <WorkDetail />
                 </ProtectedRoute>
               }
             />

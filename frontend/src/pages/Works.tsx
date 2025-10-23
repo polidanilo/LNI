@@ -10,14 +10,6 @@ import BottomNav from '../components/Layout/BottomNav';
 import { getShiftOrdinalName } from '../utils/shiftNames';
 import CustomScrollbar from '../components/CustomScrollbar';
 
-const WORK_CATEGORIES: Work['category'][] = ['Campo', 'Officina', 'Servizi', 'Gommoni', 'Barche', 'Vele', 'Altro'];
-
-type WorkForm = {
-  title: string;
-  description: string;
-  category: string;
-};
-
 const Works: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();

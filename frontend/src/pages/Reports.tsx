@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { reportsService, seasonService, shiftService, orderService } from '../services/api';
-import type { Season, Shift, Order } from '../types';
+import type { Season, Shift } from '../types';
 import BottomNav from '../components/Layout/BottomNav';
 import { useAppContext } from '../context/AppContext';
 import { getShiftOrdinalName } from '../utils/shiftNames';
 
 const Reports: React.FC = () => {
   const navigate = useNavigate();
-  const { selectedSeason: contextSeason, setSelectedSeason: setContextSeason } = useAppContext();
+  const { selectedSeason: contextSeason } = useAppContext();
   const [seasons, setSeasons] = useState<Season[]>([]);
   const [seasonId, setSeasonId] = useState<number | ''>(contextSeason?.id || '');
   const [shifts, setShifts] = useState<Shift[]>([]);
@@ -108,8 +108,8 @@ const Reports: React.FC = () => {
       aVal = new Date(a.order_date).getTime();
       bVal = new Date(b.order_date).getTime();
     } else if (sortField === 'amount') {
-      aVal = parseFloat(a.amount);
-      bVal = parseFloat(b.amount);
+      aVal = parseFloat(String(a.amount));
+      bVal = parseFloat(String(b.amount));
     }
     
     if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1;
@@ -365,7 +365,7 @@ const Reports: React.FC = () => {
                         return (
                           <tr key={order.id} className="hover:bg-gray-50">
                             <td className="px-6 py-3 text-sm font-medium text-gray-800 w-[120px]">{order.title}</td>
-                            <td className="px-6 py-3 text-sm text-emerald-500 font-medium w-[120px]">€{parseFloat(order.amount).toFixed(2)}</td>
+                            <td className="px-6 py-3 text-sm text-emerald-500 font-medium w-[120px]">€{parseFloat(String(order.amount)).toFixed(2)}</td>
                             <td className="px-6 py-3 text-sm text-gray-600 w-[120px]">{new Date(order.order_date).toLocaleDateString('it-IT')}</td>
                             <td className="px-6 py-3 text-sm text-gray-800 w-[120px]">{order.category}</td>
                             <td className="px-6 py-3 text-sm text-gray-600 w-[120px]">{order.created_by || 'User'}</td>
@@ -380,7 +380,7 @@ const Reports: React.FC = () => {
                   <div className="px-6 py-3 border-t border-gray-200 bg-emerald-50">
                     <div className="flex items-center justify-between">
                       <div className="text-sm text-emerald-800">
-                        <div>Spese totali: €{sortedOrders.reduce((sum, order) => sum + parseFloat(order.amount), 0).toFixed(2)}</div>
+                        <div>Spese totali: €{sortedOrders.reduce((sum, order) => sum + parseFloat(String(order.amount)), 0).toFixed(2)}</div>
                         <div>Acquisti effettuati: {sortedOrders.length}</div>
                       </div>
                       

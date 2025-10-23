@@ -114,10 +114,7 @@ const Dashboard: React.FC = () => {
     queryFn: async () => {
       if (!selectedShift) return [];
       const response = await problemService.list({
-        shift_id: selectedShift.id,
-        page_size: 6,
-        sort_by: 'created_at',
-        order: 'desc',
+        shift_id: selectedShift.id
       });
       return response.data.slice(0, 6);
     },

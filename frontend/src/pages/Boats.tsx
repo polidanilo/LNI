@@ -10,13 +10,6 @@ import BottomNav from '../components/Layout/BottomNav';
 import { getShiftOrdinalName } from '../utils/shiftNames';
 import CustomScrollbar from '../components/CustomScrollbar';
 
-const BOAT_TYPES: Boat['type'][] = ['Gommone', 'Optimist', 'Fly', 'Equipe', 'Caravella', 'Trident'];
-
-type ProblemForm = {
-  description: string;
-  part_affected: string;
-};
-
 const Boats: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -26,9 +19,8 @@ const Boats: React.FC = () => {
   const modalType = searchParams.get('modal');
   const problemId = searchParams.get('id');
 
-  const [selectedType, setSelectedType] = useState<Boat['type'] | ''>('');
-  const [selectedBoat, setSelectedBoat] = useState<Boat | null>(null);
-  const [problemForm, setProblemForm] = useState<ProblemForm>({ description: '', part_affected: '' });
+  const [selectedType] = useState<Boat['type'] | ''>('');
+  const [selectedBoat] = useState<Boat | null>(null);
   const [searchText, setSearchText] = useState('');
   const [filterStatus, setFilterStatus] = useState<'all' | 'open' | 'closed'>('open');
 
@@ -80,16 +72,6 @@ const Boats: React.FC = () => {
     }
   }, [shifts, selectedShift, selectedSeason, setSelectedShift, hasAutoSelected]);
 
-  // Boats by selected type
-  useQuery({
-    queryKey: ['boats', selectedType],
-    queryFn: async () => {
-      const res = await (selectedType ? boatService.getByType(selectedType) : boatService.getAll());
-      return res.data;
-    },
-  });
-
-  // Parts by type
   const { data: parts } = useQuery({
     queryKey: ['boat-parts', selectedType],
     enabled: Boolean(selectedType),

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import BottomNav from './BottomNav.tsx';
 
 interface MainLayoutProps {
@@ -7,7 +6,6 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const location = useLocation();
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">

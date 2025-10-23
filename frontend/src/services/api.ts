@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Season, Shift, Order, Work, Boat, Problem, DashboardStats, User } from '../types';
+import type { Season, Shift, Order, Work, Boat, Problem, User } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
