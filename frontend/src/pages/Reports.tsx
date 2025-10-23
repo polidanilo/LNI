@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { reportsService, seasonService, shiftService, orderService } from '../services/api';
-import type { Season, Shift, Order } from '../types';
+import type { Season, Shift } from '../types';
 import BottomNav from '../components/Layout/BottomNav';
 import { useAppContext } from '../context/AppContext';
 import { getShiftOrdinalName } from '../utils/shiftNames';
 
 const Reports: React.FC = () => {
   const navigate = useNavigate();
-  const { selectedSeason: contextSeason, setSelectedSeason: setContextSeason } = useAppContext();
+  const { selectedSeason: contextSeason } = useAppContext();
   const [seasons, setSeasons] = useState<Season[]>([]);
   const [seasonId, setSeasonId] = useState<number | ''>(contextSeason?.id || '');
   const [shifts, setShifts] = useState<Shift[]>([]);
@@ -50,7 +50,7 @@ const Reports: React.FC = () => {
     if (contextSeason && seasonId !== contextSeason.id) {
       setSeasonId(contextSeason.id);
     }
-  }, [contextSeason]);
+  }, [contextSeason, seasonId]);
 
   const { data: seasonReport, isLoading } = useQuery({
     queryKey: ['season-report', seasonId],
