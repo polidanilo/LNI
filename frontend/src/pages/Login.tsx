@@ -20,10 +20,10 @@ const Login: React.FC = () => {
 
     try {
       if (isRegister) {
-        await api.post('/auth/register', { username, password });
+        await api.post('/api/auth/register', { username, password });
       }
 
-      const response = await api.post('/auth/login', { username, password });
+      const response = await api.post('/api/auth/login', { username, password });
       const token = response.data.access_token;
 
       setToken(token);
