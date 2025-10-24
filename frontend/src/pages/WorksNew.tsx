@@ -21,6 +21,11 @@ const WorksNew: React.FC = () => {
 
   const [workForm, setWorkForm] = useState<WorkForm>({ title: '', description: '', category: '' });
   const [workStatus, setWorkStatus] = useState<'pending' | 'completed'>('completed');
+  
+  // Swipe down to dismiss
+  const [dragY, setDragY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const startY = React.useRef(0);
 
   const createWorkMutation = useMutation({
     mutationFn: async (payload: Omit<Work, 'id'>) => {
@@ -35,6 +40,29 @@ const WorksNew: React.FC = () => {
 
   const handleClose = () => {
     navigate('/works');
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startY.current = e.touches[0].clientY;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - startY.current;
+    if (diff > 0) {
+      setDragY(diff);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    if (dragY > 100) {
+      handleClose();
+    } else {
+      setDragY(0);
+    }
   };
 
   const handleAddWork = () => {
@@ -73,25 +101,34 @@ const WorksNew: React.FC = () => {
       />
       
       <div 
-        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
+        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
         style={{
           height: '48vh',
-          animation: 'slideUp 0.1s ease-out'
+          animation: isDragging ? 'none' : 'slideUp 0.1s ease-out',
+          transform: `translateY(${dragY}px)`
         }}
       >
-        <div className="flex justify-center pt-2 pb-2">
+        <div 
+          className="flex justify-center pt-2 pb-2 cursor-grab active:cursor-grabbing"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="w-14 h-1.5 bg-gray-300 hover:bg-primary-ara transition-all duration-600 rounded-full"></div>
         </div>
 
         <div className="pl-7 pr-7 py-4" style={{borderColor: '#0F4295'}}>
-          <div className="flex items-center justify-between max-w-2xl mx-auto">
+          <div className="flex items-center justify-between max-w-2xl mx-auto mt-12">
             <div>
-              <h3 className="text-lg font-bold font-greycliff text-gray-800">
+              <h3 className="text-lg font-bold font-greycliff black">
                 Aggiungi lavoro
               </h3>
             </div>
             <button
-              onClick={() => setWorkStatus(workStatus === 'pending' ? 'completed' : 'pending')}
+              onClick={(e) => {
+                setWorkStatus(workStatus === 'pending' ? 'completed' : 'pending');
+                e.currentTarget.blur();
+              }}
               className="group w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
@@ -138,14 +175,14 @@ const WorksNew: React.FC = () => {
                 value={workForm.title}
                 onChange={(e) => setWorkForm({ ...workForm, title: e.target.value })}
                 placeholder="Lavoro"
-                className="w-full px-1 py-1 pb-1 bg-transparent border-0 border-b-2 text-sm text-gray-800 transition-all duration-200 focus:outline-none"
+                className="w-full px-1 py-1 pb-1 bg-transparent border-0 border-b-2 text-sm black transition-all duration-200 focus:outline-none"
                 style={{ borderColor: '#FF9151' }}
               />
 
               <select
                 value={workForm.category}
                 onChange={(e) => setWorkForm({ ...workForm, category: e.target.value })}
-                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none text-gray-800"
+                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none black"
                 style={{ borderColor: '#FF9151' }}
               >
                 <option value="">Seleziona categoria</option>
@@ -165,7 +202,7 @@ const WorksNew: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 text-sm text-gray-800 resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 text-sm black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -196,21 +233,21 @@ const WorksNew: React.FC = () => {
         </div>
 
         <div className="fixed bottom-2 left-0 right-0 bg-white backdrop-blur-sm px-6 py-3">
-          <div className="max-w-2xl mx-auto flex justify-start gap-4">
+          <div className="max-w-2xl mx-auto flex justify-between items-center">
             <button
               onClick={handleAddWork}
               disabled={createWorkMutation.isPending}
               className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
               style={{
                 width: '120px',
-                backgroundColor: '#FF9151',
+                backgroundColor: workStatus === 'completed' ? '#10B981' : '#FF9151',
                 color: 'white'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(241, 120, 65)';
+                e.currentTarget.style.backgroundColor = workStatus === 'completed' ? 'rgb(5, 150, 105)' : 'rgb(241, 120, 65)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#FF9151';
+                e.currentTarget.style.backgroundColor = workStatus === 'completed' ? '#10B981' : '#FF9151';
               }}
             >
               {createWorkMutation.isPending 
@@ -219,7 +256,7 @@ const WorksNew: React.FC = () => {
             </button>
             <button
               onClick={handleClose}
-              className="text-sm ml-0 font-semibold transition-all duration-300"
+              className="text-sm mr-1 font-semibold transition-all duration-300"
               style={{
                 backgroundColor: 'white',
                 color: '#6B7280'

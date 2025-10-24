@@ -21,6 +21,11 @@ const OrdersDetails: React.FC = () => {
   const [editOrderDate, setEditOrderDate] = useState('');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [users, setUsers] = useState<Array<{ id: number; username: string }>>([]);
+  
+  // Swipe down to dismiss
+  const [dragY, setDragY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const startY = React.useRef(0);
 
   const { data: order, isLoading } = useQuery({
     queryKey: ['order', id],
@@ -77,11 +82,35 @@ const OrdersDetails: React.FC = () => {
     navigate('/orders');
   };
 
-  const handleToggleStatus = () => {
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startY.current = e.touches[0].clientY;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - startY.current;
+    if (diff > 0) {
+      setDragY(diff);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    if (dragY > 100) {
+      handleClose();
+    } else {
+      setDragY(0);
+    }
+  };
+
+  const handleToggleStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!editingOrder) return;
     const newStatus = editingOrder.status === 'completed' ? 'pending' : 'completed';
     toggleOrderStatusMutation.mutate({ id: editingOrder.id, status: newStatus });
     setEditingOrder({ ...editingOrder, status: newStatus });
+    e.currentTarget.blur();
   };
 
   const handleSave = async () => {
@@ -148,20 +177,26 @@ const OrdersDetails: React.FC = () => {
       />
       
       <div 
-        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
+        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
         style={{
           height: '54vh',
-          animation: 'slideUp 0.1s ease-out'
+          animation: isDragging ? 'none' : 'slideUp 0.1s ease-out',
+          transform: `translateY(${dragY}px)`
         }}
       >
-        <div className="flex justify-center pt-2 pb-2">
+        <div 
+          className="flex justify-center pt-2 pb-2 cursor-grab active:cursor-grabbing"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="w-14 h-1.5 bg-gray-300 hover:bg-primary-azr transition-all duration-600 rounded-full"></div>
         </div>
 
         <div className="pl-7 pr-7 py-4" style={{borderColor: '#0F4295'}}>
-          <div className="flex items-center justify-between max-w-2xl mx-auto">
+          <div className="flex items-center justify-between max-w-2xl mx-auto mt-12">
             <div>
-              <h3 className="text-lg font-bold font-greycliff text-gray-800">
+              <h3 className="text-lg font-bold font-greycliff black">
                 Dettagli ordine
               </h3>
             </div>
@@ -215,11 +250,11 @@ const OrdersDetails: React.FC = () => {
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
                   placeholder="Ordine"
-                  className="flex-1 px-1 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm text-gray-800 transition-all duration-200 focus:outline-none"
+                  className="flex-1 px-1 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
                   style={{ width: '75%' }}
                 />
                 <div className="flex items-center gap-1" style={{ width: '25%', maxWidth: '120px' }}>
-                  <div className="text-sm pl-0 pt-0.5 text-gray-800 whitespace-nowrap">€</div>
+                  <div className="text-sm pl-0 pt-0.5 black whitespace-nowrap">€</div>
                   <input
                     type="text"
                     value={amountInput}
@@ -251,7 +286,7 @@ const OrdersDetails: React.FC = () => {
                       }
                     }}
                     placeholder="0.00"
-                    className="flex-1 pl-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-primary-azr text-sm text-gray-800 transition-all duration-200 focus:outline-none"
+                    className="flex-1 pl-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
                     style={{ maxWidth: '100px' }}
                   />
                 </div>
@@ -260,7 +295,7 @@ const OrdersDetails: React.FC = () => {
               <select
                 value={editCategory}
                 onChange={(e) => setEditCategory(e.target.value)}
-                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm transition-all duration-200 focus:outline-none text-gray-800"
+                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm transition-all duration-200 focus:outline-none black"
               >
                 <option value="">Seleziona categoria</option>
                 <option value="Attrezzatura">Attrezzatura</option>
@@ -273,11 +308,11 @@ const OrdersDetails: React.FC = () => {
               {/* Creato da e In data */}
               <div className="flex pt-4 gap-4">
                 <div className="flex-1 flex items-center gap-3">
-                  <div className="text-sm pl-1 text-gray-800 whitespace-nowrap">Aggiunto da</div>
+                  <div className="text-sm pl-1 black whitespace-nowrap">Aggiunto da</div>
                   <select
                     value={editCreatedBy || ''}
                     onChange={(e) => setEditCreatedBy(Number(e.target.value))}
-                    className="flex-1 px-0 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm text-gray-800 transition-all duration-200 focus:outline-none"
+                    className="flex-1 px-0 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
                   >
                     <option value="">Seleziona utente</option>
                     {users.map(user => (
@@ -286,12 +321,12 @@ const OrdersDetails: React.FC = () => {
                   </select>
                 </div>
                 <div className="flex-1 flex items-center gap-3">
-                  <div className="text-sm text-gray-800 whitespace-nowrap">In data</div>
+                  <div className="text-sm black whitespace-nowrap">In data</div>
                   <input
                     type="date"
                     value={editOrderDate}
                     onChange={(e) => setEditOrderDate(e.target.value)}
-                    className="flex-1 pl-1 pt-1 pb-0.5 bg-transparent border-0 border-b-2 border-primary-azr text-sm text-gray-800 transition-all duration-200 focus:outline-none"
+                    className="flex-1 pl-1 pt-1 pb-0.5 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
                   />
                 </div>
               </div>
@@ -309,7 +344,7 @@ const OrdersDetails: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm text-gray-800 resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -343,52 +378,54 @@ const OrdersDetails: React.FC = () => {
                 className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
                 style={{
                   width: '120px',
-                  backgroundColor: '#39A8FB',
+                  backgroundColor: editingOrder?.status === 'completed' ? '#39A8FB' : '#FF9151',
                   color: 'white'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgb(39, 152, 238)';
+                  e.currentTarget.style.backgroundColor = editingOrder?.status === 'completed' ? 'rgb(30, 140, 220)' : 'rgb(241, 120, 65)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#39A8FB';
+                  e.currentTarget.style.backgroundColor = editingOrder?.status === 'completed' ? '#39A8FB' : '#FF9151';
                 }}
               >
                 Salva
               </button>
-              <button
-                onClick={handleClose}
-                className="text-sm font-semibold transition-all duration-300"
-                style={{
-                  backgroundColor: 'white',
-                  color: '#6B7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#39A8FB';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = '#6B7280';
-                }}
-              >
-                Annulla
-              </button>
             </div>
 
             {!showDeleteConfirm ? (
-              <button
-                onClick={() => setShowDeleteConfirm(true)}
-                className="text-sm mr-1 font-semibold transition-all duration-300"
-                style={{ color: '#6B7280' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#39A8FB';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = '#6B7280';
-                }}
-              >
-                Elimina
-              </button>
+              <div className="flex gap-4">
+                <button
+                  onClick={handleClose}
+                  className="text-sm font-semibold transition-all duration-300"
+                  style={{
+                    backgroundColor: 'white',
+                    color: '#6B7280'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#39A8FB';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#6B7280';
+                  }}
+                >
+                  Annulla
+                </button>
+                <button
+                  onClick={() => setShowDeleteConfirm(true)}
+                  className="text-sm mr-1 font-semibold transition-all duration-300"
+                  style={{ color: '#6B7280' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#39A8FB';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#6B7280';
+                  }}
+                >
+                  Elimina
+                </button>
+              </div>
             ) : (
-              <div className="flex gap-2">
+              <div className="flex gap-2 mr-1">
                 <button
                   onClick={handleDelete}
                   className="text-sm font-semibold"

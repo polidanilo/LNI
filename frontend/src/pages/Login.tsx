@@ -77,7 +77,7 @@ const Login: React.FC = () => {
         >
           {/* Immagine protagonista */}
           <div className="px-8 pt-8 pb-2 bg-white flex items-center justify-center">
-            <img src="/logo.jpg.jpg" alt="LNINazioni" 
+            <img src="/logonotag.jpg" alt="LNINazioni" 
               className="w-full h-auto object-contain rounded-2xl"
               style={{maxHeight: '200px'}}
             />
@@ -85,7 +85,7 @@ const Login: React.FC = () => {
 
           {/* Form */}
           <div className="px-8 pb-6">
-            <h2 className="text-2xl font-bold font-greycliff text-gray-800 text-center mb-6">
+            <h2 className="text-2xl font-bold font-greycliff black text-center mb-6">
               {isRegister ? 'Registrati' : 'Accedi'}
             </h2>
 
@@ -115,8 +115,14 @@ const Login: React.FC = () => {
                   name="username"
                   autoComplete="off"
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-2 py-2 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme text-gray-800 placeholder-gray-400"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value.length <= 8) {
+                      setUsername(value);
+                    }
+                  }}
+                  maxLength={8}
+                  className="w-full px-2 py-2 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme black placeholder-gray-400"
                   placeholder="Username"
                   required
                 />
@@ -148,7 +154,7 @@ const Login: React.FC = () => {
                   autoComplete="off"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-2 py-2 pr-10 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme text-gray-800 placeholder-gray-400"
+                  className="w-full px-2 py-2 pr-10 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme black placeholder-gray-400"
                   placeholder="Password"
                   required
                 />
@@ -173,7 +179,7 @@ const Login: React.FC = () => {
 
               {/* Errore */}
               {error && (
-                <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded text-sm text-center">
+                <div className="mt-5 p-3 bg-red-50 border border-red-200 text-red-700 rounded text-sm text-center">
                   {error}
                 </div>
               )}
@@ -205,32 +211,19 @@ const Login: React.FC = () => {
             </form>
 
             {/* Switch Accesso/Registrazione */}
-            <div className="text-center mt-3 mb-6">
+            <div className="black text-center mt-3 mb-6">
               <button
                 type="button"
                 onClick={() => {
                   setIsRegister(!isRegister);
                   setError('');
                 }}
-                className="text-primary-ros hover:opacity-80 font-medium text-sm transition-all"
+                className="font-medium text-sm transition-all"
               >
                 {isRegister ? 'Hai già un account? Accedi' : 'Non hai un account? Registrati'}
               </button>
             </div>
 
-            {/* Credenziali di test */}
-            <div className="text-center pt-6 pb-2 border-t border-gray-200">
-                <p className="text-xs text-gray-500 mb-2">Credenziali di test:</p>
-                <div className="flex items-center justify-center gap-3 text-xs">
-                  <span className="text-gray-600">
-                    <span className="font-semibold">Username:</span> test
-                  </span>
-                  <span className="text-gray-400">|</span>
-                  <span className="text-gray-600">
-                    <span className="font-semibold">Password:</span> test123
-                  </span>
-                </div>
-              </div>
 
 
           </div>

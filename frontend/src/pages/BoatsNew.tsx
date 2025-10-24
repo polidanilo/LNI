@@ -22,6 +22,11 @@ const BoatsNew: React.FC = () => {
   const [selectedBoat, setSelectedBoat] = useState<Boat | null>(null);
   const [problemForm, setProblemForm] = useState<ProblemForm>({ description: '', part_affected: '' });
   const [problemStatus, setProblemStatus] = useState<'open' | 'closed'>('open');
+  
+  // Swipe down to dismiss
+  const [dragY, setDragY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const startY = React.useRef(0);
 
   const { data: boats } = useQuery({
     queryKey: ['boats', selectedType],
@@ -56,6 +61,29 @@ const BoatsNew: React.FC = () => {
     navigate('/boats');
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startY.current = e.touches[0].clientY;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - startY.current;
+    if (diff > 0) {
+      setDragY(diff);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    if (dragY > 100) {
+      handleClose();
+    } else {
+      setDragY(0);
+    }
+  };
+
   const handleAddProblem = () => {
     if (!selectedBoat?.id) {
       alert('Seleziona un\'imbarcazione');
@@ -87,26 +115,37 @@ const BoatsNew: React.FC = () => {
       />
       
       <div 
-        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
+        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
         style={{
           height: '54vh',
-          animation: 'slideUp 0.1s ease-out'
+          animation: isDragging ? 'none' : 'slideUp 0.2s ease-out',
+          background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
+          border: '2px solid transparent',
+          transform: `translateY(${dragY}px)`
         }}
       >
-        <div className="flex justify-center pt-2 pb-2">
+        <div 
+          className="flex justify-center pt-2 pb-2 cursor-grab active:cursor-grabbing"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="w-14 h-1.5 bg-gray-300 hover:bg-primary-ros transition-all duration-600 rounded-full"></div>
         </div>
 
         <div className="pl-7 pr-7 py-4" style={{borderColor: '#0F4295'}}>
-          <div className="flex items-center justify-between max-w-2xl mx-auto">
+          <div className="flex items-center justify-between max-w-2xl mx-auto mt-12">
             <div>
-              <h3 className="text-lg font-bold font-greycliff text-gray-800">
+              <h3 className="text-lg font-bold font-greycliff black">
                 Aggiungi problema
               </h3>
 
             </div>
             <button
-              onClick={() => setProblemStatus(problemStatus === 'open' ? 'closed' : 'open')}
+              onClick={(e) => {
+                setProblemStatus(problemStatus === 'open' ? 'closed' : 'open');
+                e.currentTarget.blur();
+              }}
               className="group w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
@@ -155,7 +194,7 @@ const BoatsNew: React.FC = () => {
                   setSelectedType(t);
                   setSelectedBoat(null);
                 }}
-                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm transition-all duration-200 focus:outline-none text-gray-800"
+                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm transition-all duration-200 focus:outline-none black"
               >
                 <option value="">Seleziona categoria</option>
                 {BOAT_TYPES.map((t) => (
@@ -171,7 +210,7 @@ const BoatsNew: React.FC = () => {
                   setSelectedBoat(b);
                 }}
                 disabled={!selectedType || !boats || boats.length === 0}
-                className={`w-full px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none text-gray-800 ${
+                className={`w-full px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none black ${
                   (!selectedType || !boats || boats.length === 0)
                     ? 'border-gray-400 opacity-50'
                     : 'border-primary-ros'
@@ -191,7 +230,7 @@ const BoatsNew: React.FC = () => {
                 value={problemForm.part_affected}
                 onChange={(e) => setProblemForm({ ...problemForm, part_affected: e.target.value })}
                 disabled={!selectedBoat}
-                className={`w-full px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none text-gray-800 ${
+                className={`w-full px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none black ${
                   !selectedBoat ? 'border-gray-400 opacity-50' : 'border-primary-ros'
                 }`}
               >
@@ -213,7 +252,7 @@ const BoatsNew: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm text-gray-800 resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -243,7 +282,7 @@ const BoatsNew: React.FC = () => {
         </div>
 
 <div className="fixed bottom-2 left-0 right-0 bg-white backdrop-blur-sm px-6 py-3">
-  <div className="max-w-2xl mx-auto flex justify-start gap-4">
+  <div className="max-w-2xl mx-auto flex justify-between items-center">
     <button
       onClick={() => {
         if (!selectedType) {
@@ -276,9 +315,8 @@ const BoatsNew: React.FC = () => {
     </button>
     <button
       onClick={handleClose}
-      className="text-sm ml-0 font-semibold transition-all duration-300"
+      className="text-sm mr-1 font-semibold transition-all duration-300"
       style={{
-        
         backgroundColor: 'white',
         color: '#6B7280'
       }}

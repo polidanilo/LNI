@@ -180,7 +180,7 @@ const Boats: React.FC = () => {
               className="relative overflow-hidden rounded-2xl shadow-sm mb-4"
               style={{
                 height: '80px',
-                backgroundImage: 'url(/public/boats.png)', // ← Modifica qui il nome dell'immagine
+                backgroundImage: 'url(/boats.png)', // ← Modifica qui il nome dell'immagine
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
@@ -211,7 +211,7 @@ const Boats: React.FC = () => {
             value={selectedSeason?.id || ''}
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 border-gray-300 text-sm transition-all duration-200 focus:outline-none focus:border-primary-ros disabled:opacity-50 text-gray-700"
+            className="px-0 py-1 bg-transparent border-b-2 border-primary-ros text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
             style={{backgroundColor: 'transparent'}}
           >
             <option value="">Seleziona stagione</option>
@@ -227,12 +227,12 @@ const Boats: React.FC = () => {
             value={selectedShift?.id || ''}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 border-gray-300 text-sm transition-all duration-200 focus:outline-none focus:border-primary-ros disabled:opacity-50 text-gray-700"
+            className="px-0 py-1 bg-transparent border-b-2 border-primary-ros text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
             style={{backgroundColor: 'transparent'}}
           >
             <option value="">
               {shiftsLoading ? 'Caricamento...' : 
-               !selectedSeason ? 'Seleziona prima stagione' :
+               !selectedSeason ? 'Seleziona turno' :
                !shifts || shifts.length === 0 ? 'Nessun turno' :
                'Seleziona turno'}
             </option>
@@ -430,55 +430,21 @@ const Boats: React.FC = () => {
         </div>
       </div>
       ) : (
-        /* Messaggio quando non è selezionato un turno */
-        <div>
-          <div style={{backgroundColor: '#FFF4EF'}} className="mx-8 px-4 py-1.5 mt-16">
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white shadow-sm p-6 rounded-xl text-center">
-                <p className="text-emerald-800 text-sm font-semibold">Seleziona una stagione e un turno per poterne visualizzare i dati</p>
-              </div>
+
+    /* Messaggio quando non è selezionato un turno */
+      <div>
+        <div style={{backgroundColor: '#F5F4ED'}} className="fixed inset-0 flex items-center justify-center mx-8 px-4 py-1.5">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white shadow-lg p-6 rounded-xl text-center" style={{
+            background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
+            border: '2px solid transparent'
+          }}>
+              <p className="text-gray-800 text-sm font-medium">Seleziona una stagione e un turno per poterne visualizzare i dati</p>
             </div>
           </div>
-          {/* cerchi deco messaggio non selezionato */}
-          <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{zIndex: 0}}>
-            <div 
-              className="absolute rounded-full shadow-sm"
-              style={{
-                width: '110px',
-                height: '20px',
-                backgroundColor: '#FF5958',
-                top: '30%',
-                right: '6%',
-                opacity: 1
-              }}
-            />
-
-            <div 
-              className="absolute rounded-full shadow-sm"
-              style={{
-                width: '180px',
-                height: '25px',
-                backgroundColor: '#FF9151',
-                top: '54%',
-                left: '4%',
-                opacity: 1
-              }}
-            />
-
-            <div 
-              className="absolute rounded-full shadow-sm"
-              style={{
-                width: '150px',
-                height: '25px',
-                backgroundColor: '#39A8FB',
-                top: '63%',
-                right: '14%',
-                opacity: 1
-              }}
-            />
-          </div>
         </div>
-      )}
+      </div>
+    )}
 
 
       <BottomNav />

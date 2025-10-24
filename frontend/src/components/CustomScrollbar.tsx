@@ -5,9 +5,10 @@ interface CustomScrollbarProps {
   className?: string;
   maxHeight?: string;
   onScroll?: (scrollTop: number) => void;
+  hideOnMobile?: boolean;
 }
 
-const CustomScrollbar: React.FC<CustomScrollbarProps> = ({ children, className = '', maxHeight = '400px', onScroll }) => {
+const CustomScrollbar: React.FC<CustomScrollbarProps> = ({ children, className = '', maxHeight = '400px', onScroll, hideOnMobile = false }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const scrollbarRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
@@ -116,7 +117,7 @@ const CustomScrollbar: React.FC<CustomScrollbarProps> = ({ children, className =
       {/* Custom Scrollbar Track */}
       <div
         ref={scrollbarRef}
-        className="absolute top-0 bottom-0 w-2 transition-opacity duration-200"
+        className={`absolute top-0 bottom-0 w-2 transition-opacity duration-200 ${hideOnMobile ? 'hidden md:block' : ''}`}
         style={{ right: '0px', zIndex:9 }}
       >
         {/* Scrollbar Thumb - Base Layer */}

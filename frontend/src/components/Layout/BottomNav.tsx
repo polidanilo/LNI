@@ -74,8 +74,8 @@ const BottomNav: React.FC = () => {
   };
 
   return (
-    <nav className="fixed bottom-5 left-5 right-5 z-50 flex justify-center items-center">
-      <div className="rounded-full shadow-sm px-0.5 py-1.5 w-full max-w-2xl mx-auto" style={{backgroundColor: 'rgb(17, 17, 17)'}}>
+    <nav className="fixed bottom-0 left-0 right-0 z-50 flex justify-center items-center">
+      <div className="shadow-sm px-2.5 py-1.5 w-full max-w-2xl mx-auto" style={{backgroundColor: 'rgb(17, 17, 17)'}}>
         <div className="flex items-center justify-around">
           {/* Dashboard */}
           <Link
@@ -113,7 +113,7 @@ const BottomNav: React.FC = () => {
               }`}
               style={
                 isAddButtonActive && activePageForAdd 
-                  ? {backgroundColor: activePageForAdd.color} 
+                  ? {backgroundColor: activePageForAdd.color, border: '2px solid white'} 
                   : {backgroundColor: ' #2a2a2a', border: '0px solid #047857'}
               }
             >

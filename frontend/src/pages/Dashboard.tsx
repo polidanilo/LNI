@@ -274,7 +274,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="h-screen overflow-hidden" style={{backgroundColor: '#FFF4EF'}}>
-      <CustomScrollbar maxHeight="100vh" onScroll={(scrollTop) => setScrollY(scrollTop)}>
+      <CustomScrollbar maxHeight="100vh" onScroll={(scrollTop) => setScrollY(scrollTop)} hideOnMobile={true}>
         <div className="pb-9" style={{backgroundColor: '#FFF4EF'}}>
       {/* Top Bar con Saluto e Logout */}
       <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-8 pb-0.5 relative">
@@ -285,7 +285,7 @@ const Dashboard: React.FC = () => {
               className="relative overflow-hidden rounded-2xl shadow-sm mb-4"
               style={{
                 height: '116px',
-                backgroundImage: 'url(/public/lake.png)', // ← Modifica qui il nome dell'immagine
+                backgroundImage: 'url(/lake.png)', // ← Modifica qui il nome dell'immagine
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 zIndex: 10
@@ -297,11 +297,11 @@ const Dashboard: React.FC = () => {
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
                 <h1 className="text-3xl font-bold font-greycliff text-white">
-                  Benvenutə alla Dashboard, {currentUser?.full_name || currentUser?.username || 'User'}                </h1>
+                  Ciao,<br></br>{currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
               </div>
             </div>
             
-            <p className="pl-2 pt-2 text-sm text-gray-600">
+            <p className="pl-2 pt-2 text-sm black">
               Ecco i dati del turno selezionato:
             </p>
           </div>
@@ -315,7 +315,7 @@ const Dashboard: React.FC = () => {
               setSelectedShift(null);
               navigate('/login');
             }}
-            className="pl-2 pr-1 py-1.5 mt-4 rounded-full"
+            className="pl-2 pr-1 py-1.5 mt-0.5 rounded-full"
             title="Logout"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -333,10 +333,10 @@ const Dashboard: React.FC = () => {
             value={selectedSeason?.id || ''}
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
-            style={{backgroundColor: 'transparent', borderColor: '#d1d5db'}}
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
+            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
-            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
           >
             <option value="">{seasonsLoading ? 'Caricamento...' : 'Seleziona stagione'}</option>
             {seasons?.map((season) => (
@@ -352,9 +352,9 @@ const Dashboard: React.FC = () => {
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
             className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
-            style={{backgroundColor: 'transparent', borderColor: '#d1d5db'}}
+            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
-            onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
           >
             <option value="">
               {shiftsLoading ? 'Caricamento...' : 
@@ -534,7 +534,7 @@ const Dashboard: React.FC = () => {
               borderRadius: '24px',
               height: '340px'
             }}>
-              <h3 className="text-lg font-bold font-greycliff text-gray-800 mb-3 pb-1 pl-4 flex items-center gap-2">
+              <h3 className="text-lg font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#FF5958'}} />
                 Ultimi problemi aggiunti
               </h3>
@@ -577,7 +577,7 @@ const Dashboard: React.FC = () => {
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="pt-0 text-base font-semibold text-gray-800 mb-0">
+                          <h4 className="pt-0 text-base font-semibold black mb-0">
                             {problem.boat_name || 'Barca'}
                           </h4>
                           <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
@@ -636,7 +636,7 @@ const Dashboard: React.FC = () => {
               borderRadius: '24px',
               height: '340px'
             }}>
-              <h3 className="text-lg font-bold font-greycliff text-gray-800 mb-3 pb-1 pl-4 flex items-center gap-2">
+              <h3 className="text-lg font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#FF9151'}} />
                 Ultimi lavori aggiunti
               </h3>
@@ -680,7 +680,7 @@ const Dashboard: React.FC = () => {
                       <div className="flex items-start justify-between">
                         {/* Sinistra: Titolo, user, categoria, data */}
                         <div className="flex-1">
-                          <h4 className="pt-0 text-base font-semibold text-gray-800 mb-0">
+                          <h4 className="pt-0 text-base font-semibold black mb-0">
                             {work.title}
                           </h4>
                           <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
@@ -737,7 +737,7 @@ const Dashboard: React.FC = () => {
               borderRadius: '24px',
               height: '340px'
             }}>
-              <h3 className="text-lg font-bold font-greycliff text-gray-800 mb-3 pb-1 pl-4 flex items-center gap-2">
+              <h3 className="text-lg font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#39A8FB'}} />
                 Ultimi ordini aggiunti
               </h3>
@@ -780,7 +780,7 @@ const Dashboard: React.FC = () => {
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="pt-0 text-base font-semibold text-gray-800 mb-0">
+                          <h4 className="pt-0 text-base font-semibold black mb-0">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
                           <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
@@ -835,53 +835,15 @@ const Dashboard: React.FC = () => {
       ) : (
         /* Messaggio quando non è selezionato un turno */
       <div>
-        <div style={{backgroundColor: '#F5F4ED'}} className="mx-8 px-4 py-1.5 mt-16">
+        <div style={{backgroundColor: '#F5F4ED'}} className="fixed inset-0 flex items-center justify-center mx-8 px-4 py-1.5">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white shadow-sm p-6 rounded-xl text-center">
-              <p className="text-emerald-800 text-sm font-semibold">Seleziona una stagione e un turno per poterne visualizzare i dati</p>
+            <div className="bg-white shadow-lg p-6 rounded-xl text-center" style={{
+            background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
+            border: '2px solid transparent'
+          }}>
+              <p className="black text-sm font-medium">Seleziona una stagione e un turno per poterne visualizzare i dati</p>
             </div>
           </div>
-        </div>
-        {/* cerchi deco messaggio non selezionato */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{zIndex: 0}}>
-            <div 
-              className="absolute rounded-full shadow-sm transition-transform duration-200"
-              style={{
-                width: '110px',
-                height: '20px',
-                backgroundColor: '#FF5958',
-                top: '30%',
-                right: '6%',
-                opacity: 1,
-                transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
-              }}
-            />
-
-            <div 
-              className="absolute rounded-full shadow-sm transition-transform duration-200"
-              style={{
-                width: '180px',
-                height: '25px',
-                backgroundColor: '#FF9151',
-                top: '54%',
-                left: '4%',
-                opacity: 1,
-                transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
-              }}
-            />
-
-            <div 
-              className="absolute rounded-full shadow-sm transition-transform duration-200"
-              style={{
-                width: '150px',
-                height: '25px',
-                backgroundColor: '#39A8FB',
-                top: '63%',
-                right: '14%',
-                opacity: 1,
-                transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
-              }}
-            />
         </div>
       </div>
       )}
@@ -890,12 +852,12 @@ const Dashboard: React.FC = () => {
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowDeleteConfirm(false)}>
           <div className="bg-white rounded-lg p-6 max-w-sm mx-4" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Conferma eliminazione</h3>
+            <h3 className="text-lg font-bold black mb-4">Conferma eliminazione</h3>
             <p className="text-gray-600 mb-6">Sei sicuro di voler eliminare questo lavoro? L'operazione non può essere annullata.</p>
             <div className="flex gap-3">
               <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="flex-1 py-2 px-4 rounded font-semibold text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 transition-colors"
+                className="flex-1 py-2 px-4 rounded font-semibold text-sm bg-gray-200 hover:bg-gray-300 black transition-colors"
               >
                 Annulla
               </button>
