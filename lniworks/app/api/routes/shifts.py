@@ -21,7 +21,7 @@ def create_shift(shift: ShiftCreate, db: Session = Depends(get_db), current_user
     return db_shift
 
 @router.get("/{shift_id}", response_model=ShiftResponse)
-def get_shift(shift_id: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def get_shift(shift_id: int, db: Session = Depends(get_db)):
     shift = db.query(Shift).filter(Shift.id == shift_id).first()
     if not shift:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Shift not found")

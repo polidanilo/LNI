@@ -32,7 +32,7 @@ def list_boats(boat_type: BoatType | None = None, db: Session = Depends(get_db),
     return query.all()
 
 @router.get("/type/{boat_type}/parts", response_model=list[str])
-def get_boat_parts(boat_type: BoatType, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def get_boat_parts(boat_type: BoatType, db: Session = Depends(get_db)):
     parts = db.query(BoatPart).filter(BoatPart.boat_type == boat_type).all()
     return [p.part_name for p in parts]
 

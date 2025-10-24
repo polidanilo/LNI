@@ -21,7 +21,7 @@ def create_season(season: SeasonCreate, db: Session = Depends(get_db), current_u
     return db_season
 
 @router.get("/{season_id}", response_model=SeasonResponse)
-def get_season(season_id: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def get_season(season_id: int, db: Session = Depends(get_db)):
     season = db.query(Season).filter(Season.id == season_id).first()
     if not season:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Season not found")
