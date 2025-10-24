@@ -297,7 +297,7 @@ const Dashboard: React.FC = () => {
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
                 <h1 className="text-3xl font-bold font-greycliff text-white">
-                  Ciao,<br></br>{currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
+                  Home: ciao, {currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
               </div>
             </div>
             
@@ -835,7 +835,7 @@ const Dashboard: React.FC = () => {
       ) : (
         /* Messaggio quando non è selezionato un turno */
       <div>
-        <div style={{backgroundColor: '#F5F4ED'}} className="fixed inset-0 flex items-center justify-center mx-8 px-4 py-1.5">
+        <div className="fixed inset-0 flex items-center justify-center mx-8 px-4 py-1.5">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white shadow-lg p-6 rounded-xl text-center" style={{
             background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
