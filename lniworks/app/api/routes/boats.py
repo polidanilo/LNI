@@ -16,14 +16,14 @@ def create_boat(boat: BoatCreate, db: Session = Depends(get_db), current_user = 
     return db_boat
 
 @router.get("/{boat_id}", response_model=BoatResponse)
-def get_boat(boat_id: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def get_boat(boat_id: int, db: Session = Depends(get_db)):
     boat = db.query(Boat).filter(Boat.id == boat_id).first()
     if not boat:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Boat not found")
     return boat
 
 @router.get("/", response_model=list[BoatResponse])
-def list_boats(boat_type: BoatType | None = None, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def list_boats(boat_type: BoatType | None = None, db: Session = Depends(get_db)):
     query = db.query(Boat)
     
     if boat_type:

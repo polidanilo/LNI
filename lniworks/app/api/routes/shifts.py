@@ -28,7 +28,7 @@ def get_shift(shift_id: int, db: Session = Depends(get_db)):
     return shift
 
 @router.get("/season/{season_id}", response_model=list[ShiftResponse])
-def list_shifts_by_season(season_id: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def list_shifts_by_season(season_id: int, db: Session = Depends(get_db)):
     season = db.query(Season).filter(Season.id == season_id).first()
     if not season:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Season not found")

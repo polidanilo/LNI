@@ -75,8 +75,7 @@ def list_works(
     limit: int = Query(50, ge=1),
     sort_by: str = "work_date",
     order: str = "desc",
-    db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    db: Session = Depends(get_db)
 ):
     query = db.query(Work).options(joinedload(Work.user))
     query = apply_filters(query, q, date_from, date_to, category, status_filter, shift_id)
@@ -143,7 +142,7 @@ def export_works(
     )
 
 @router.get("/{work_id}", response_model=WorkResponse)
-def get_work(work_id: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def get_work(work_id: int, db: Session = Depends(get_db)):
     work = db.query(Work).options(joinedload(Work.user)).filter(Work.id == work_id).first()
     if not work:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Work not found")

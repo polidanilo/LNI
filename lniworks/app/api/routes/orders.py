@@ -104,8 +104,7 @@ def list_orders(
     limit: int = Query(50, ge=1),
     sort_by: str = "order_date",
     order: str = "desc",
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    db: Session = Depends(get_db)
 ):
     query = db.query(Order)
     query = apply_filters(query, q, date_from, date_to, category, status_filter, shift_id, amount_min, amount_max)
@@ -255,7 +254,7 @@ def export_orders(
     )
 
 @router.get("/{order_id}", response_model=OrderResponse)
-def get_order(order_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def get_order(order_id: int, db: Session = Depends(get_db)):
     order = db.query(Order).filter(Order.id == order_id).first()
     if not order:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not found")

@@ -28,5 +28,5 @@ def get_season(season_id: int, db: Session = Depends(get_db)):
     return season
 
 @router.get("/", response_model=list[SeasonResponse])
-def list_seasons(db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def list_seasons(db: Session = Depends(get_db)):
     return db.query(Season).all()

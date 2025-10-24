@@ -26,14 +26,14 @@ def create_problem(problem: ProblemCreate, db: Session = Depends(get_db), curren
     return db_problem
 
 @router.get("/{problem_id}", response_model=ProblemResponse)
-def get_problem(problem_id: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def get_problem(problem_id: int, db: Session = Depends(get_db)):
     problem = db.query(BoatProblem).join(Boat).filter(BoatProblem.id == problem_id).first()
     if not problem:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Problem not found")
     return problem
 
 @router.get("/", response_model=list[ProblemResponse])
-def list_problems(boat_id: int | None = None, status_filter: ProblemStatus | None = None, shift_id: int | None = None, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+def list_problems(boat_id: int | None = None, status_filter: ProblemStatus | None = None, shift_id: int | None = None, db: Session = Depends(get_db)):
     query = db.query(BoatProblem).join(Boat)
     
     if boat_id:
