@@ -1,23 +1,8 @@
 import os
 from app.db.session import SessionLocal, engine
-from app.db.models import Season, Shift, Boat, BoatPart
+from app.db.models import Season, Shift, Boat, BoatPart, BoatType
 from app.db.base import Base
-from sqlalchemy import Enum
-import enum
-
-# Assumo che tu abbia un enum BoatType nei tuoi models
-# Se non ce l'hai, commentalo e usa stringhe
-try:
-    from app.db.models import BoatType
-except ImportError:
-    # Se non hai l'enum, crealo qui temporaneamente
-    class BoatType(str, enum.Enum):
-        GOMMONE = "gommone"
-        OPTIMIST = "optimist"
-        FLY = "fly"
-        EQUIPE = "equipe"
-        CARAVELLE = "caravelle"
-        TRIDENT = "trident"
+from datetime import date
 
 def seed_database():
     print("🌱 Inizio popolamento database...")
@@ -31,7 +16,6 @@ def seed_database():
         # ========== STAGIONI ==========
         print("📅 Creazione stagione 2025...")
         
-        # Controlla se esiste già
         existing_season = db.query(Season).filter(Season.year == 2025).first()
         if existing_season:
             print("⚠️  Stagione 2025 già esistente, salto...")
@@ -39,13 +23,10 @@ def seed_database():
         else:
             season_2025 = Season(
                 name="2025",
-                year=2025,
-                start_date="2025-01-01",
-                end_date="2025-12-31",
-                is_active=True
+                year=2025
             )
             db.add(season_2025)
-            db.flush()  # Per ottenere l'ID
+            db.flush()
             print("✅ Stagione 2025 creata!")
         
         # ========== TURNI ==========
@@ -55,12 +36,21 @@ def seed_database():
         if existing_shifts > 0:
             print("⚠️  Turni già esistenti, salto...")
         else:
-            for i in range(1, 7):
+            shifts_data = [
+                (1, date(2025, 6, 1), date(2025, 6, 14)),
+                (2, date(2025, 6, 15), date(2025, 6, 28)),
+                (3, date(2025, 6, 29), date(2025, 7, 12)),
+                (4, date(2025, 7, 13), date(2025, 7, 26)),
+                (5, date(2025, 7, 27), date(2025, 8, 9)),
+                (6, date(2025, 8, 10), date(2025, 8, 23)),
+            ]
+            
+            for shift_num, start, end in shifts_data:
                 shift = Shift(
                     season_id=season_2025.id,
-                    shift_number=i,
-                    start_date=f"2025-0{(i-1)//2 + 1}-{15 if i % 2 == 1 else 1}",
-                    end_date=f"2025-0{(i-1)//2 + 1}-{28 if i % 2 == 0 else 14}"
+                    shift_number=shift_num,
+                    start_date=start,
+                    end_date=end
                 )
                 db.add(shift)
             print("✅ 6 turni creati!")
@@ -68,7 +58,6 @@ def seed_database():
         # ========== IMBARCAZIONI ==========
         print("⛵ Creazione imbarcazioni...")
         
-        # Controlla se già esistono
         gommoni_count = db.query(Boat).filter(Boat.type == BoatType.GOMMONE).count()
         if gommoni_count > 0:
             print("⚠️  Imbarcazioni già esistenti, salto...")
@@ -82,7 +71,7 @@ def seed_database():
                 "Marshall",
                 "Staff Only (Honda 2)",
                 "Arancio 1 (Suzuki 1)",
-                "Arancio 1 (Evinrude)",
+                "Arancio 2 (Evinrude)",
                 "Arancio 3 (Johnson)",
             ]
             
@@ -90,7 +79,7 @@ def seed_database():
             optimist = [f"Optimist {i}" for i in range(1, 21)]
             optimist.append("Openbic")
             
-            # Fly (A-T excluding J, K + Ultimo, X, Y, Z, Anna F, K + N1-N11)
+            # Fly (A-T escludendo J, K + speciali)
             fly_names = [chr(65 + i) for i in range(20) if chr(65 + i) not in ['J', 'K']]
             fly_names.extend(["Ultimo", "X", "Y", "Z", "Anna F", "K"])
             fly_names.extend([f"N{i}" for i in range(1, 12)])
@@ -104,7 +93,7 @@ def seed_database():
             # Trident (1-4)
             trident = [f"Trident {i}" for i in range(1, 5)]
             
-            # Combine all boats with their types
+            # Combine all boats
             boats_data = [
                 (name, BoatType.GOMMONE) for name in gommoni
             ] + [
@@ -119,7 +108,6 @@ def seed_database():
                 (name, BoatType.TRIDENT) for name in trident
             ]
             
-            # Insert boats
             for name, boat_type in boats_data:
                 boat = Boat(name=name, type=boat_type)
                 db.add(boat)
@@ -136,10 +124,10 @@ def seed_database():
             boat_parts = {
                 BoatType.GOMMONE: ["Battello", "Motore", "Altro"],
                 BoatType.OPTIMIST: ["Albero", "Circuito", "Deriva", "Picco", "Randa", "Scafo", "Timone", "Altro"],
-                BoatType.FLY: ["Albero", "Crocette", "Deriva", "Drizza Fiocco", "Drizza Randa", "Fiocco Randa", "Sartiame", "Scafo", "Scotta Fiocco", "Scotta Randa", "Stecche", "Timone", "Altro"],
-                BoatType.EQUIPE: ["Albero", "Crocette", "Deriva", "Drizza Fiocco", "Drizza Randa", "Fiocco Randa", "Sartiame", "Scafo", "Scotta Fiocco", "Scotta Randa", "Stecche", "Timone", "Altro"],
-                BoatType.CARAVELLE: ["Albero", "Crocette", "Deriva", "Drizza Fiocco", "Drizza Randa", "Fiocco Randa", "Sartiame", "Scafo", "Scotta Fiocco", "Scotta Randa", "Stecche", "Timone", "Altro"],
-                BoatType.TRIDENT: ["Albero", "Crocette", "Deriva", "Drizza Fiocco", "Drizza Randa", "Fiocco Randa", "Sartiame", "Scafo", "Scotta Fiocco", "Scotta Randa", "Stecche", "Timone", "Altro"],
+                BoatType.FLY: ["Albero", "Crocette", "Deriva", "Drizza Fiocco", "Drizza Randa", "Fiocco", "Randa", "Sartiame", "Scafo", "Scotta Fiocco", "Scotta Randa", "Stecche", "Timone", "Altro"],
+                BoatType.EQUIPE: ["Albero", "Crocette", "Deriva", "Drizza Fiocco", "Drizza Randa", "Fiocco", "Randa", "Sartiame", "Scafo", "Scotta Fiocco", "Scotta Randa", "Stecche", "Timone", "Altro"],
+                BoatType.CARAVELLE: ["Albero", "Crocette", "Deriva", "Drizza Fiocco", "Drizza Randa", "Fiocco", "Randa", "Sartiame", "Scafo", "Scotta Fiocco", "Scotta Randa", "Stecche", "Timone", "Altro"],
+                BoatType.TRIDENT: ["Albero", "Crocette", "Deriva", "Drizza Fiocco", "Drizza Randa", "Fiocco", "Randa", "Sartiame", "Scafo", "Scotta Fiocco", "Scotta Randa", "Stecche", "Timone", "Altro"],
             }
             
             total_parts = 0
@@ -151,14 +139,13 @@ def seed_database():
             
             print(f"✅ {total_parts} parti create!")
         
-        # Commit finale
         db.commit()
         
         print("\n✅ Database popolato con successo!")
         print("   - 1 stagione (2025)")
         print("   - 6 turni")
         print("   - ~80 imbarcazioni")
-        print("   - ~100 parti imbarcazioni")
+        print("   - ~70 parti imbarcazioni")
         
     except Exception as e:
         print(f"❌ Errore: {e}")
