@@ -105,12 +105,12 @@ const OrdersDetails: React.FC = () => {
     }
   };
 
-  const handleToggleStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleToggleStatus = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!editingOrder) return;
     const newStatus = editingOrder.status === 'completed' ? 'pending' : 'completed';
-    toggleOrderStatusMutation.mutate({ id: editingOrder.id, status: newStatus });
     setEditingOrder({ ...editingOrder, status: newStatus });
-    e.currentTarget.blur();
+    toggleOrderStatusMutation.mutate({ id: editingOrder.id, status: newStatus });
+    setTimeout(() => e.currentTarget.blur(), 0);
   };
 
   const handleSave = async () => {

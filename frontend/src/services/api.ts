@@ -46,11 +46,11 @@ api.interceptors.response.use(
 // AUTH
 export const authService = {
   register: (username: string, password: string) =>
-    api.post('/auth/register', { username, password }),
+    api.post('/api/auth/register', { username, password }),
   login: (username: string, password: string) =>
-    api.post('/auth/login', { username, password }),
-  getUsers: () => api.get<Array<{ id: number; username: string }>>('/auth/users'),
-  getProfile: () => api.get<User>('/auth/profile'),
+    api.post('/api/auth/login', { username, password }),
+  getUsers: () => api.get<Array<{ id: number; username: string }>>('/api/auth/users'),
+  getProfile: () => api.get<User>('/api/auth/profile'),
 };
 
 // SEASONS
@@ -84,18 +84,18 @@ export const orderService = {
     limit?: number;
     sort_by?: 'order_date' | 'amount' | 'created_at' | 'updated_at' | 'category' | 'status' | 'title';
     order?: 'asc' | 'desc';
-  }) => api.get<Order[]>('/orders/', { params }),
+  }) => api.get<Order[]>('/api/orders/', { params }),
 
-  getById: (id: number) => api.get<Order>(`/orders/${id}`),
+  getById: (id: number) => api.get<Order>(`/api/orders/${id}`),
 
   create: (data: Omit<Order, 'id' | 'user_id' | 'created_at' | 'updated_at'>) =>
-    api.post<Order>('/orders/', data),
+    api.post<Order>('/api/orders/', data),
 
   update: async (id: number, data: Partial<Order>) => {
-    return await api.put<Order>(`/orders/${id}`, data);
+    return await api.put<Order>(`/api/orders/${id}`, data);
   },
 
-  delete: (id: number) => api.delete(`/orders/${id}`),
+  delete: (id: number) => api.delete(`/api/orders/${id}`),
 
   export: (params?: {
     status_filter?: 'completed' | 'pending';
@@ -115,7 +115,7 @@ export const orderService = {
     if (params?.shift_ids && Array.isArray(params.shift_ids)) {
       exportParams.shift_ids = params.shift_ids.join(',') as any;
     }
-    return api.get<Blob>('/orders/export', {
+    return api.get<Blob>('/api/orders/export', {
       params: exportParams,
       responseType: 'blob',
     });
@@ -137,15 +137,15 @@ export const workService = {
     limit?: number;
     sort_by?: 'work_date' | 'created_at' | 'updated_at' | 'category' | 'status' | 'title';
     order?: 'asc' | 'desc';
-  }) => api.get<Work[]>('/works/', { params }),
+  }) => api.get<Work[]>('/api/works/', { params }),
 
-  getById: (id: number) => api.get<Work>(`/works/${id}`),
+  getById: (id: number) => api.get<Work>(`/api/works/${id}`),
 
-  create: (data: Omit<Work, 'id'>) => api.post<Work>('/works/', data),
+  create: (data: Omit<Work, 'id'>) => api.post<Work>('/api/works/', data),
 
-  update: (id: number, data: Partial<Work>) => api.put<Work>(`/works/${id}`, data),
+  update: (id: number, data: Partial<Work>) => api.put<Work>(`/api/works/${id}`, data),
 
-  delete: (id: number) => api.delete(`/works/${id}`),
+  delete: (id: number) => api.delete(`/api/works/${id}`),
 
   export: (params?: {
     status_filter?: 'completed' | 'pending';
@@ -157,7 +157,7 @@ export const workService = {
     sort_by?: 'work_date' | 'created_at' | 'updated_at' | 'category' | 'status' | 'title';
     order?: 'asc' | 'desc';
   }) =>
-    api.get<Blob>('/works/export', {
+    api.get<Blob>('/api/works/export', {
       params,
       responseType: 'blob',
     }),
@@ -165,36 +165,36 @@ export const workService = {
 
 // BOATS
 export const boatService = {
-  getAll: (boat_type?: Boat['type']) => api.get<Boat[]>('/boats/', { params: { boat_type } }),
-  getByType: (type: Boat['type']) => api.get<Boat[]>('/boats/', { params: { boat_type: type } }),
-  getById: (id: number) => api.get<Boat>(`/boats/${id}`),
-  getPartsByType: (type: Boat['type']) => api.get<string[]>(`/boats/type/${type}/parts`),
+  getAll: (boat_type?: Boat['type']) => api.get<Boat[]>('/api/boats/', { params: { boat_type } }),
+  getByType: (type: Boat['type']) => api.get<Boat[]>('/api/boats/', { params: { boat_type: type } }),
+  getById: (id: number) => api.get<Boat>(`/api/boats/${id}`),
+  getPartsByType: (type: Boat['type']) => api.get<string[]>(`/api/boats/type/${type}/parts`),
 };
 
 // PROBLEMS
 export const problemService = {
   list: (params?: { boat_id?: number; status_filter?: 'open' | 'closed'; shift_id?: number }) =>
-    api.get<Problem[]>('/problems/', { params }),
-  getById: (id: number) => api.get<Problem>(`/problems/${id}`),
-  create: (data: Omit<Problem, 'id' | 'reported_date' | 'resolved_date'>) => api.post<Problem>('/problems/', data),
+    api.get<Problem[]>('/api/problems/', { params }),
+  getById: (id: number) => api.get<Problem>(`/api/problems/${id}`),
+  create: (data: Omit<Problem, 'id' | 'reported_date' | 'resolved_date'>) => api.post<Problem>('/api/problems/', data),
   // reported_date is required by backend ProblemCreate
-  createWithDate: (data: Omit<Problem, 'id' | 'resolved_date'>) => api.post<Problem>('/problems/', data),
-  update: (id: number, data: Partial<Problem>) => api.put<Problem>(`/problems/${id}`, data),
-  delete: (id: number) => api.delete(`/problems/${id}`),
-  toggleStatus: (id: number) => api.patch(`/problems/${id}/toggle-status`),
+  createWithDate: (data: Omit<Problem, 'id' | 'resolved_date'>) => api.post<Problem>('/api/problems/', data),
+  update: (id: number, data: Partial<Problem>) => api.put<Problem>(`/api/problems/${id}`, data),
+  delete: (id: number) => api.delete(`/api/problems/${id}`),
+  toggleStatus: (id: number) => api.patch(`/api/problems/${id}/toggle-status`),
 };
 
 // DASHBOARD
 export const dashboardService = {
-  getStats: () => api.get('/dashboard/home'),
+  getStats: () => api.get('/api/dashboard/home'),
 };
 
 // REPORTS
 export const reportsService = {
-  getSeasonReport: (seasonId: number) => api.get(`/reports/season/${seasonId}`),
-  getShiftReport: (shiftId: number) => api.get(`/reports/shift/${shiftId}`),
+  getSeasonReport: (seasonId: number) => api.get(`/api/reports/season/${seasonId}`),
+  getShiftReport: (shiftId: number) => api.get(`/api/reports/shift/${shiftId}`),
   exportSeasonExcel: (seasonId: number) =>
-    api.get<Blob>(`/reports/season/${seasonId}/export-excel`, { responseType: 'blob' }),
+    api.get<Blob>(`/api/reports/season/${seasonId}/export-excel`, { responseType: 'blob' }),
 };
 
 export default api;

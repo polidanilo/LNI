@@ -36,6 +36,10 @@ const WorksNew: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: ['all-works'] });
       navigate('/works');
     },
+    onError: (error) => {
+      console.error('Error creating work:', error);
+      alert('Errore durante la creazione del lavoro');
+    },
   });
 
   const handleClose = () => {
@@ -126,8 +130,9 @@ const WorksNew: React.FC = () => {
             </div>
             <button
               onClick={(e) => {
-                setWorkStatus(workStatus === 'pending' ? 'completed' : 'pending');
-                e.currentTarget.blur();
+                const newStatus = workStatus === 'pending' ? 'completed' : 'pending';
+                setWorkStatus(newStatus);
+                setTimeout(() => e.currentTarget.blur(), 0);
               }}
               className="group w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{

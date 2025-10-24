@@ -112,9 +112,10 @@ const BoatsDetails: React.FC = () => {
   const handleToggleStatus = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!editingProblem) return;
     const newStatus = editingProblem.status === 'closed' ? 'open' : 'closed';
-    toggleProblemStatusMutation.mutate({ id: editingProblem.id, status: newStatus });
     setEditingProblem({ ...editingProblem, status: newStatus });
-    e.currentTarget.blur();
+    toggleProblemStatusMutation.mutate({ id: editingProblem.id, status: newStatus });
+    // Forza re-render immediato prima del blur
+    setTimeout(() => e.currentTarget.blur(), 0);
   };
 
   const handleSave = async () => {

@@ -55,6 +55,10 @@ const BoatsNew: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: ['all-problems'] });
       navigate('/boats');
     },
+    onError: (error) => {
+      console.error('Error creating problem:', error);
+      alert('Errore durante la creazione del problema');
+    },
   });
 
   const handleClose = () => {
@@ -143,8 +147,10 @@ const BoatsNew: React.FC = () => {
             </div>
             <button
               onClick={(e) => {
-                setProblemStatus(problemStatus === 'open' ? 'closed' : 'open');
-                e.currentTarget.blur();
+                const newStatus = problemStatus === 'open' ? 'closed' : 'open';
+                setProblemStatus(newStatus);
+                // Forza re-render immediato
+                setTimeout(() => e.currentTarget.blur(), 0);
               }}
               className="group w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{

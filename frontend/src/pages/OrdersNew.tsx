@@ -36,6 +36,10 @@ const OrdersNew: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: ['all-orders'] });
       navigate('/orders');
     },
+    onError: (error) => {
+      console.error('Error creating order:', error);
+      alert('Errore durante la creazione dell\'ordine');
+    },
   });
 
   const handleClose = () => {
@@ -129,8 +133,9 @@ const OrdersNew: React.FC = () => {
             </div>
             <button
               onClick={(e) => {
-                setOrderStatus(orderStatus === 'pending' ? 'completed' : 'pending');
-                e.currentTarget.blur();
+                const newStatus = orderStatus === 'pending' ? 'completed' : 'pending';
+                setOrderStatus(newStatus);
+                setTimeout(() => e.currentTarget.blur(), 0);
               }}
               className="group w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{

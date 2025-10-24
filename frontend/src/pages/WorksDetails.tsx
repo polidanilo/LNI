@@ -103,12 +103,12 @@ const WorksDetails: React.FC = () => {
     }
   };
 
-  const handleToggleStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleToggleStatus = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!editingWork) return;
     const newStatus = editingWork.status === 'completed' ? 'pending' : 'completed';
-    toggleWorkStatusMutation.mutate({ id: editingWork.id, status: newStatus });
     setEditingWork({ ...editingWork, status: newStatus });
-    e.currentTarget.blur();
+    toggleWorkStatusMutation.mutate({ id: editingWork.id, status: newStatus });
+    setTimeout(() => e.currentTarget.blur(), 0);
   };
 
   const handleSave = async () => {
