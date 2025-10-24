@@ -55,16 +55,16 @@ export const authService = {
 
 // SEASONS
 export const seasonService = {
-  getAll: () => api.get<Season[]>('/seasons/'),
-  getById: (id: number) => api.get<Season>(`/seasons/${id}`),
-  create: (data: Omit<Season, 'id'>) => api.post<Season>('/seasons/', data),
+  getAll: () => api.get<Season[]>('/api/seasons/'),
+  getById: (id: number) => api.get<Season>(`/api/seasons/${id}`),
+  create: (data: Omit<Season, 'id'>) => api.post<Season>('/api/seasons/', data),
 };
 
 // SHIFTS
 export const shiftService = {
-  getBySeasonId: (seasonId: number) => api.get<Shift[]>(`/shifts/season/${seasonId}`),
-  getById: (id: number) => api.get<Shift>(`/shifts/${id}`),
-  create: (data: Omit<Shift, 'id'>) => api.post<Shift>('/shifts/', data),
+  getBySeasonId: (seasonId: number) => api.get<Shift[]>(`/api/shifts/season/${seasonId}`),
+  getById: (id: number) => api.get<Shift>(`/api/shifts/${id}`),
+  create: (data: Omit<Shift, 'id'>) => api.post<Shift>('/api/shifts/', data),
 };
 
 // ORDERS
