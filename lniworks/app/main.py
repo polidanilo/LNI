@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db.base import Base
 
-from app.api.routes import auth, orders, works, boats, problems, seasons, shifts, reports, dashboard
+from app.api.routes import auth, orders, works, boats, problems, seasons, shifts, reports, dashboard, admin
 
 app = FastAPI(title="LNI Works API", description="Gestione centro nautico", version="1.0.0")
 
@@ -48,6 +48,7 @@ app.include_router(seasons.router)
 app.include_router(shifts.router)
 app.include_router(reports.router)
 app.include_router(dashboard.router)
+app.include_router(admin.router)
 
 @app.get("/")
 def read_root():
