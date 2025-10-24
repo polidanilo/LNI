@@ -6,7 +6,7 @@ from app.schemas.problem import ProblemCreate, ProblemUpdate, ProblemResponse
 from app.api.dependencies import get_current_user
 from datetime import datetime
 
-router = APIRouter(prefix="/problems", tags=["problems"])
+router = APIRouter(prefix="/api/problems", tags=["problems"])
 
 @router.post("/", response_model=ProblemResponse, status_code=status.HTTP_201_CREATED)
 def create_problem(problem: ProblemCreate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):

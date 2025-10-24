@@ -166,7 +166,7 @@ const Reports: React.FC = () => {
                 onClick={() => navigate('/')}
                 className="px-4 py-2 rounded-lg hover:transition-all duration-600 group"
               >
-                <h1 className="text-xl font-bold font-display text-gray-800 group-hover:text-emerald-500 transition-colors duration-200">
+                <h1 className="text-xl font-bold font-display black group-hover:text-emerald-500 transition-colors duration-200">
                   Resoconto
                 </h1>
               </button>
@@ -319,7 +319,7 @@ const Reports: React.FC = () => {
                     <tbody className="divide-y divide-gray-200">
                       {sortedCat.map(([cat, amt]) => (
                         <tr key={cat}>
-                          <td className="px-6 py-6 text-sm text-gray-800">{cat}</td>
+                          <td className="px-6 py-6 text-sm black">{cat}</td>
                           <td className="px-6 py-6 text-sm text-emerald-500 font-medium">€{(amt as number).toFixed(2)}</td>
                         </tr>
                       ))}
@@ -364,12 +364,12 @@ const Reports: React.FC = () => {
                         const shift = shifts.find(s => s.id === order.shift_id);
                         return (
                           <tr key={order.id} className="hover:bg-gray-50">
-                            <td className="px-6 py-3 text-sm font-medium text-gray-800 w-[120px]">{order.title}</td>
+                            <td className="px-6 py-3 text-sm font-medium black w-[120px]">{order.title}</td>
                             <td className="px-6 py-3 text-sm text-emerald-500 font-medium w-[120px]">€{parseFloat(String(order.amount)).toFixed(2)}</td>
                             <td className="px-6 py-3 text-sm text-gray-600 w-[120px]">{new Date(order.order_date).toLocaleDateString('it-IT')}</td>
-                            <td className="px-6 py-3 text-sm text-gray-800 w-[120px]">{order.category}</td>
+                            <td className="px-6 py-3 text-sm black w-[120px]">{order.category}</td>
                             <td className="px-6 py-3 text-sm text-gray-600 w-[120px]">{order.created_by || 'User'}</td>
-                            <td className="px-6 py-3 text-sm text-gray-800 w-[120px]">{shift ? getShiftOrdinalName(shift.shift_number) : 'N/A'}</td>
+                            <td className="px-6 py-3 text-sm black w-[120px]">{shift ? getShiftOrdinalName(shift.shift_number) : 'N/A'}</td>
                           </tr>
                         );
                       })}

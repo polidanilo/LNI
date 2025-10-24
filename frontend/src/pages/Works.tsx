@@ -370,7 +370,7 @@ const Works: React.FC = () => {
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="pt-0 text-base font-semibold text-gray-800 mb-0">
+                        <h4 className="pt-0 text-base font-semibold black mb-0">
                           {work.title || 'N/A'}
                         </h4>
                         <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
@@ -427,7 +427,7 @@ const Works: React.FC = () => {
             background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
             border: '2px solid transparent'
           }}>
-              <p className="text-gray-800 text-sm font-medium">Seleziona una stagione e un turno per poterne visualizzare i dati</p>
+              <p className="black text-sm font-medium">Seleziona una stagione e un turno per poterne visualizzare i dati</p>
             </div>
           </div>
         </div>

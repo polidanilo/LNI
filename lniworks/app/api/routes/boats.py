@@ -5,7 +5,7 @@ from app.db.models import Boat, BoatPart, BoatType
 from app.schemas.boat import BoatCreate, BoatResponse
 from app.api.dependencies import get_current_user
 
-router = APIRouter(prefix="/boats", tags=["boats"])
+router = APIRouter(prefix="/api/boats", tags=["boats"])
 
 @router.post("/", response_model=BoatResponse, status_code=status.HTTP_201_CREATED)
 def create_boat(boat: BoatCreate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):

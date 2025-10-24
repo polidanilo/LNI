@@ -5,7 +5,7 @@ from app.db.models import Season
 from app.schemas.season import SeasonCreate, SeasonResponse
 from app.api.dependencies import get_current_user
 
-router = APIRouter(prefix="/seasons", tags=["seasons"])
+router = APIRouter(prefix="/api/seasons", tags=["seasons"])
 
 @router.post("/", response_model=SeasonResponse, status_code=status.HTTP_201_CREATED)
 def create_season(season: SeasonCreate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):

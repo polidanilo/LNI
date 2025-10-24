@@ -297,7 +297,7 @@ const Dashboard: React.FC = () => {
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
                 <h1 className="text-3xl font-bold font-greycliff text-white">
-                  Home: ciao,<br></br>{currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
+                  Ciao,<br></br>{currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
               </div>
             </div>
             
@@ -484,7 +484,7 @@ const Dashboard: React.FC = () => {
                   transform: 'translate(-50%, -50%)',
                   zIndex: 10
                 }}
-                onClick={() => navigate('/api/boats')}
+                onClick={() => navigate('/boats')}
               >
                 <div 
                   className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-52 h-52 rounded-full flex flex-col items-center justify-center"
@@ -573,7 +573,7 @@ const Dashboard: React.FC = () => {
                           e.currentTarget.style.backgroundColor = 'rgba(255, 89, 88, 0.5)';
                         }
                       }}
-                      onClick={() => navigate(`/api/boats?id=${problem.id}`)}
+                      onClick={() => navigate(`/boats?id=${problem.id}`)}
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">

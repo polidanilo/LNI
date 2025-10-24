@@ -11,7 +11,7 @@ from io import BytesIO
 import pandas as pd
 from openpyxl.styles import PatternFill, Font
 
-router = APIRouter(prefix="/orders", tags=["orders"])
+router = APIRouter(prefix="/api/orders", tags=["orders"])
 
 # Helper per convertire numero turno in nome ordinale
 def get_shift_ordinal_name(shift_number: int) -> str:

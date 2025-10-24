@@ -21,9 +21,9 @@ const BottomNav: React.FC = () => {
     },
     { 
       name: 'Imbarcazioni', 
-      path: '/api/boats', 
+      path: '/boats', 
       color: '#FF5958', // Rosso LNI
-      newPath: '/api/boats?modal=new',
+      newPath: '/boats?modal=new',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -58,7 +58,7 @@ const BottomNav: React.FC = () => {
   // Determina quale pagina è attiva per il pulsante +
   const getActivePageForAdd = () => {
     const currentPath = location.pathname;
-    if (currentPath.startsWith('/api/boats')) return navItems.find(item => item.path === '/api/boats');
+    if (currentPath.startsWith('/boats')) return navItems.find(item => item.path === '/boats');
     if (currentPath.startsWith('/works')) return navItems.find(item => item.path === '/works');
     if (currentPath.startsWith('/orders')) return navItems.find(item => item.path === '/orders');
     return null;
@@ -93,7 +93,7 @@ const BottomNav: React.FC = () => {
           <Link
             to={navItems[1].path}
             className={`flex-1 flex items-center justify-center p-3 transition-all duration-200 ${
-              location.pathname.startsWith('/api/boats')
+              location.pathname.startsWith('/boats')
                 ? 'text-white'
                 : 'text-gray-400 hover:text-white'
             }`}

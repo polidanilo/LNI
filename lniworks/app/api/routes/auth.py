@@ -8,7 +8,7 @@ from app.api.dependencies import get_current_user
 from app.core.security import hash_password, verify_password, create_access_token
 from app.core.config import settings
 
-router = APIRouter(prefix="/auth", tags=["auth"])
+router = APIRouter(prefix="/api/auth", tags=["auth"])
 
 @router.get("/users", response_model=list[UserListItem])
 def list_users(db: Session = Depends(get_db), current_user = Depends(get_current_user)):

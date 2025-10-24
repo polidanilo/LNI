@@ -11,7 +11,7 @@ from app.db.models import Order, Work, BoatProblem, Season, Shift, OrderStatus, 
 from app.schemas.report import SeasonReport, OrderSummary, WorkSummary, ProblemSummary
 from app.api.dependencies import get_current_user
 
-router = APIRouter(prefix="/reports", tags=["reports"])
+router = APIRouter(prefix="/api/reports", tags=["reports"])
 
 @router.get("/season/{season_id}", response_model=SeasonReport)
 def get_season_report(season_id: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):

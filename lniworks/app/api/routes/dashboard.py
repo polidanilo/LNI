@@ -4,7 +4,7 @@ from app.db.session import get_db
 from app.db.models import Order, Work, BoatProblem, ProblemStatus, OrderStatus
 from app.api.dependencies import get_current_user
 
-router = APIRouter(prefix="/dashboard", tags=["dashboard"])
+router = APIRouter(prefix="/api/dashboard", tags=["dashboard"])
 
 @router.get("/home")
 def get_home_dashboard(db: Session = Depends(get_db), current_user = Depends(get_current_user)):

@@ -10,7 +10,7 @@ from datetime import date
 from io import BytesIO
 import pandas as pd
 
-router = APIRouter(prefix="/works", tags=["works"])
+router = APIRouter(prefix="/api/works", tags=["works"])
 
 @router.post("/", response_model=WorkResponse, status_code=status.HTTP_201_CREATED)
 def create_work(work: WorkCreate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):

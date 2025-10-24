@@ -5,7 +5,7 @@ from app.db.models import Shift, Season
 from app.schemas.shift import ShiftCreate, ShiftResponse
 from app.api.dependencies import get_current_user
 
-router = APIRouter(prefix="/shifts", tags=["shifts"])
+router = APIRouter(prefix="/api/shifts", tags=["shifts"])
 
 @router.post("/", response_model=ShiftResponse, status_code=status.HTTP_201_CREATED)
 def create_shift(shift: ShiftCreate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
