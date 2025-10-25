@@ -384,13 +384,13 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
+                        <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
-                          <span>•</span>
+                          <span className="text-lg font-bold">•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>
                           {problem.part_affected && (
                             <>
-                              <span>•</span>
+                              <span className="text-lg font-bold">•</span>
                               <span>{problem.part_affected}</span>
                             </>
                           )}

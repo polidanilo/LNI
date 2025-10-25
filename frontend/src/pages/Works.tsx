@@ -377,11 +377,11 @@ const Works: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
+                        <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
                           <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
-                          <span>•</span>
+                          <span className="text-lg font-bold">•</span>
                           <span>{work.category || 'Categoria'}</span>
-                          <span>•</span>
+                          <span className="text-lg font-bold">•</span>
                           <span className="break-words">{work.created_by || 'N/A'}</span>
                         </div>
                       </div>

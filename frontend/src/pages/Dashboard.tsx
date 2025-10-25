@@ -297,7 +297,7 @@ const Dashboard: React.FC = () => {
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
                 <h1 className="text-3xl font-bold font-greycliff text-white">
-                  Benvenut* alla Home, {currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
+                  Benvenutə alla Home, {currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
               </div>
             </div>
             
@@ -386,7 +386,7 @@ const Dashboard: React.FC = () => {
                 top: '64%',
                 right: '4%',
                 opacity: 0.9,
-                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -399,7 +399,7 @@ const Dashboard: React.FC = () => {
                 top: '54%',
                 right: '10%',
                 opacity: 0.9,
-                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -412,7 +412,7 @@ const Dashboard: React.FC = () => {
                 top: '70%',
                 left: '55%',
                 opacity: 0.6,
-                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -426,7 +426,7 @@ const Dashboard: React.FC = () => {
                 top: '50%',
                 left: '6%',
                 opacity: 0.4,
-                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -440,7 +440,7 @@ const Dashboard: React.FC = () => {
                 top: '34%',
                 right: '13%',
                 opacity: 0,
-                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -470,7 +470,7 @@ const Dashboard: React.FC = () => {
                     <div className="text-2xl font-bold font-greycliff">
                       €{recentOrders?.filter(o => o.status === 'completed').reduce((sum, o) => sum + parseFloat(String(o.amount)), 0).toFixed(0) || '0'}
                     </div>
-                    <div className="text-xs font-medium mt-0 uppercase">Di spese <br /> totali</div>
+                    <div className="text-xs font-bold font-greycliff mt-0 uppercase">Di spese <br /> totali</div>
                   </div>
                 </div>
               </div>
@@ -494,7 +494,7 @@ const Dashboard: React.FC = () => {
                     <div className="text-4xl font-bold font-greycliff">
                       {openProblems?.filter(p => p.status === 'open').length || 0}
                     </div>
-                    <div className="text-sm font-medium mt-0 uppercase">Imbarcazioni  <br /> danneggiate</div>
+                    <div className="text-sm font-bold font-greycliff mt-0 uppercase">Imbarcazioni  <br /> danneggiate</div>
                   </div>
                 </div>
               </div>
@@ -518,7 +518,7 @@ const Dashboard: React.FC = () => {
                     <div className="text-2xl font-bold font-greycliff">
                       {recentWorks?.filter(w => w.status === 'completed').length || 0}
                     </div>
-                    <div className="text-xs font-medium mt-0 uppercase">Lavori  <br /> fatti</div>
+                    <div className="text-xs font-bold font-greycliff mt-0 uppercase">Lavori  <br /> fatti</div>
                   </div>
                 </div>
               </div>
@@ -580,13 +580,13 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
-                            <span>•</span>
+                            <span className="text-lg font-bold">•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
                             {problem.part_affected && (
                               <>
-                                <span>•</span>
+                                <span className="text-lg font-bold">•</span>
                                 <span>{problem.part_affected}</span>
                               </>
                             )}
@@ -683,11 +683,11 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
-                            <span>•</span>
+                            <span className="text-lg font-bold">•</span>
                             <span>{work.category}</span>
-                            <span>•</span>
+                            <span className="text-lg font-bold">•</span>
                             <span className="break-words">{work.created_by || 'N/A'}</span>
                           </div>
                         </div>
@@ -783,11 +783,11 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
-                            <span>•</span>
+                            <span className="text-lg font-bold">•</span>
                             <span>{order.category}</span>
-                            <span>•</span>
+                            <span className="text-lg font-bold">•</span>
                             <span className="break-words truncate">{order.title.length > 25 ? order.title.substring(0, 25) : order.title}</span>
                           </div>
                         </div>
