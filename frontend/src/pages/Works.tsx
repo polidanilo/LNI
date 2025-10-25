@@ -344,14 +344,14 @@ const Works: React.FC = () => {
                 <div className="text-gray-500 text-sm">Nessun lavoro corrisponde ai filtri selezionati</div>
               </div>
             ) : (
-              <div className="space-y-2 mr-2 pb-1">
+              <div className="space-y-2 mr-2">
                 {filteredWorks.map((work) => (
                   <div
                     key={work.id}
-                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
+                    className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
-                      backgroundColor: work.status === 'completed' 
-                        ? 'rgba(16, 185, 129, 0.3)'
+                      backgroundColor: work.status === 'completed'
+                        ? 'rgba(16, 185, 129, 0.4)'
                         : 'rgba(255, 145, 81, 0.5)'
                     }}
                     onMouseEnter={(e) => {
@@ -377,7 +377,7 @@ const Works: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
                           <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{work.category || 'Categoria'}</span>

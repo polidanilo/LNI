@@ -126,7 +126,7 @@ icon: (
             </button>
             {/* Tooltip quando disabled */}
             {!isAddButtonActive && (
-              <div className="absolute bottom-full mb-2 text-center hidden group-hover:block bg-primary-tip bg-opacity-80 text-white text-xs rounded py-2 px-2 whitespace-nowrap">
+              <div className="absolute bottom-full mb-4 text-center hidden group-hover:block bg-primary-tip bg-opacity-80 text-white text-xs rounded pt-2 pb-1.5 px-3 whitespace-nowrap">
                 Passa alle altre pagine per poter <br></br> aggiungere problemi / lavori / ordini
               </div>
             )}

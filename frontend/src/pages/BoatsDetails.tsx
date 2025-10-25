@@ -162,7 +162,7 @@ const BoatsDetails: React.FC = () => {
 
         <div className="pl-7 pr-4 py-4" style={{borderColor: '#0F4295'}}>
           <div className="flex items-center justify-between max-w-2xl mx-auto mt-2">
-            <h3 className="text-lg font-bold font-greycliff black">
+            <h3 className="text-xl font-bold font-greycliff black">
               Dettagli problema
             </h3>
             <button

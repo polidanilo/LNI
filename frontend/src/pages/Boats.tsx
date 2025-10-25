@@ -351,15 +351,15 @@ const Boats: React.FC = () => {
                 <div className="text-gray-500 text-sm">Nessun problema corrisponde ai filtri selezionati</div>
               </div>
             ) : (
-              <div className="space-y-2 mr-2 pb-1">
+              <div className="space-y-2 mr-2">
                 {filteredProblems.map((problem) => (
                   <div
                     key={problem.id}
-                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
+                    className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
-                      backgroundColor: problem.status === 'closed' 
-                        ? 'rgba(16, 185, 129, 0.3)'
-                        : 'rgba(255, 89, 88, 0.5)'
+                      backgroundColor: problem.status === 'open'
+                        ? 'rgba(255, 89, 88, 0.5)'
+                        : 'rgba(16, 185, 129, 0.4)'
                     }}
                     onMouseEnter={(e) => {
                       if (problem.status === 'closed') {
@@ -384,7 +384,7 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>

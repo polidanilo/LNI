@@ -56,7 +56,7 @@ const Login: React.FC = () => {
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center py-9 relative"
+      className="h-screen flex items-center justify-center overflow-hidden relative"
       style={{
         backgroundColor: '#FFF4EF'
       }}
@@ -76,23 +76,23 @@ const Login: React.FC = () => {
       <div className="w-full max-w-md px-4 relative z-10">
         {/* Card Login con Gradient Border */}
         <div 
-          className="bg-white rounded-3xl shadow-lg overflow-hidden my-9"
+          className="bg-white rounded-3xl shadow-lg overflow-hidden"
           style={{
             background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
             border: '2px solid transparent'
           }}
         >
           {/* Immagine protagonista */}
-          <div className="pr-5 pt-7 pb-2 bg-white flex items-center justify-center">
+          <div className="pr-5 pt-6 pb-1 bg-white flex items-center justify-center">
             <img src="/logonotag.jpg" alt="LNINazioni" 
               className="w-full h-auto object-contain rounded-2xl"
-              style={{maxHeight: '200px'}}
+              style={{maxHeight: '180px'}}
             />
           </div>
 
           {/* Form */}
-          <div className="px-8 pb-6">
-            <h2 className="text-2xl font-bold font-greycliff black text-center mb-6">
+          <div className="px-8 pb-5">
+            <h2 className="text-2xl font-bold font-greycliff black text-center mb-5">
               {isRegister ? 'Registrati' : 'Accedi'}
             </h2>
 
@@ -129,7 +129,7 @@ const Login: React.FC = () => {
                     }
                   }}
                   maxLength={8}
-                  className="w-full px-2 py-2 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme black placeholder-gray-400"
+                  className="w-full px-2 py-2 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-ara black placeholder-gray-400"
                   placeholder="Username"
                   required
                 />
@@ -161,7 +161,7 @@ const Login: React.FC = () => {
                   autoComplete="off"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-2 py-2 pr-10 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme black placeholder-gray-400"
+                  className="w-full px-2 py-2 pr-10 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-azr black placeholder-gray-400"
                   placeholder="Password"
                   required
                 />

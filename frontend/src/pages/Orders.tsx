@@ -389,11 +389,11 @@ const Orders: React.FC = () => {
                 <div className="text-gray-500 text-sm">Nessun ordine corrisponde ai filtri selezionati</div>
               </div>
             ) : (
-              <div className="space-y-2 mr-2 pb-1">
+              <div className="space-y-2 mr-2">
                 {filteredOrders.map((order) => (
                   <div
                     key={order.id}
-                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
+                    className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: order.status === 'completed' 
                         ? 'rgb(57, 168, 251, 0.4)'
@@ -422,7 +422,7 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
                           <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{order.category || 'Categoria'}</span>

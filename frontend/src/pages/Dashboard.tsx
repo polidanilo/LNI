@@ -301,7 +301,7 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
             
-            <p className="pl-2 pt-2 text-sm black">
+            <p className="pl-2 pt-2 text-base black">
               Ecco i dati del turno selezionato:
             </p>
           </div>
@@ -334,7 +334,7 @@ const Dashboard: React.FC = () => {
             value={selectedSeason?.id || ''}
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 disabled:opacity-50 text-gray-700"
             style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
             onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
@@ -352,7 +352,7 @@ const Dashboard: React.FC = () => {
             value={selectedShift?.id || ''}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
             style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
             onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
@@ -425,7 +425,7 @@ const Dashboard: React.FC = () => {
                 height: '25px',
                 backgroundColor: '#10B981',
                 top: '50%',
-                left: '7%',
+                left: '8%',
                 opacity: 0.4,
                 transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
               }}
@@ -550,11 +550,11 @@ const Dashboard: React.FC = () => {
                 </div>
               ) : (
                 <CustomScrollbar maxHeight="232px">
-                  <div className="space-y-2 mr-2 pb-1">
+                  <div className="space-y-2 mr-2">
                   {openProblems.slice(0, 6).map((problem) => (
                     <div
                       key={problem.id}
-                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
+                      className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: problem.status === 'closed' 
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -581,7 +581,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
@@ -637,9 +637,9 @@ const Dashboard: React.FC = () => {
               borderRadius: '24px',
               height: '340px'
             }}>
-              <h3 className="text-lg font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
+              <h3 className="text-xl font-bold font-greycliff black mb-3 pl-4 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#FF9151'}} />
-                Ultimi lavori aggiunti
+                Ultimi lavori
               </h3>
               
               {worksLoading ? (
@@ -652,11 +652,11 @@ const Dashboard: React.FC = () => {
                 </div>
               ) : (
                 <CustomScrollbar maxHeight="232px">
-                  <div className="space-y-2 mr-2 pb-1">
+                  <div className="space-y-2 mr-2">
                   {recentWorks.map((work) => (
                     <div
                       key={work.id}
-                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
+                      className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: work.status === 'completed'
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -684,7 +684,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{work.category}</span>
@@ -738,9 +738,9 @@ const Dashboard: React.FC = () => {
               borderRadius: '24px',
               height: '340px'
             }}>
-              <h3 className="text-lg font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
+              <h3 className="text-xl font-bold font-greycliff black mb-3 pl-4 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#39A8FB'}} />
-                Ultimi ordini aggiunti
+                Ultimi ordini
               </h3>
               
               {ordersLoading ? (
@@ -753,11 +753,11 @@ const Dashboard: React.FC = () => {
                 </div>
               ) : (
                 <CustomScrollbar maxHeight="232px">
-                  <div className="space-y-2 mr-2 pb-1">
+                  <div className="space-y-2 mr-2">
                   {recentOrders.map((order) => (
                     <div
                       key={order.id}
-                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
+                      className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: order.status === 'completed'
                           ? 'rgb(57, 168, 251, 0.4)'
@@ -784,7 +784,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{order.category}</span>
