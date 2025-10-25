@@ -178,8 +178,8 @@ const BoatsDetails: React.FC = () => {
       linear-gradient(135deg, #FF5958, #39A8FB 33%, #FF9151 66%, #10B981) border-box
     `,
     border: '2px solid transparent',
-    WebkitMask: 'linear-gradient(to bottom, black 95%, transparent 100%)',
-    mask: 'linear-gradient(to bottom, black 95%, transparent 100%)',
+    WebkitMask: 'linear-gradient(to bottom, white 99%, white 100%)',
+    mask: 'linear-gradient(to bottom, white 98%, transparent 100%)',
     transform: `translateY(${dragY}px)`
   }}
   onTouchStart={handleTouchStart}

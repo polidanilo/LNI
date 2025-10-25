@@ -277,7 +277,7 @@ const Dashboard: React.FC = () => {
       <CustomScrollbar maxHeight="100vh" onScroll={(scrollTop) => setScrollY(scrollTop)} hideOnMobile={false}>
         <div className="pb-9" style={{backgroundColor: '#FFF4EF'}}>
       {/* Top Bar con Saluto e Logout */}
-      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-8 pb-0.5 relative">
+      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-12 pb-0.5 relative">
         <div className="max-w-4xl mx-auto flex items-start justify-between">
           {/* Riquadro Dashboard con immagine di sfondo */}
           <div className="flex-1">
@@ -447,15 +447,15 @@ const Dashboard: React.FC = () => {
         
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-4 mt-3 relative" style={{zIndex: 1}}>
+          <div className="max-w-4xl mx-auto space-y-4 mt-4 relative" style={{zIndex: 1}}>
 
             {/* Cerchi Sovrapposti */}
-            <div className="ml-5 mb-9 relative h-64 flex items-center justify-center">
+            <div className="ml-3 mb-7 relative h-64 flex items-center justify-center">
               {/* Cerchio Blu (Spese) - Sinistra, sopra rosso */}
               <div 
                 className="absolute cursor-pointer transition-transform hover:scale-105"
                 style={{
-                  left: '14%',
+                  left: '12%',
                   top: '70%',
                   transform: 'translate(-50%, -50%)',
                   zIndex: 20
@@ -463,7 +463,7 @@ const Dashboard: React.FC = () => {
                 onClick={() => navigate('/orders')}
               >
                 <div 
-                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-26 h-26 rounded-full flex flex-col items-center justify-center"
+                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-28 h-28 rounded-full flex flex-col items-center justify-center"
                   style={{backgroundColor: '#39A8FB'}}
                 >
                   <div className="text-white text-center">
@@ -479,7 +479,7 @@ const Dashboard: React.FC = () => {
               <div 
                 className="absolute cursor-pointer transition-transform hover:scale-105"
                 style={{
-                  left: '50%',
+                  left: '48%',
                   top: '50%',
                   transform: 'translate(-50%, -50%)',
                   zIndex: 10
@@ -503,7 +503,7 @@ const Dashboard: React.FC = () => {
               <div 
                 className="absolute cursor-pointer transition-transform hover:scale-105"
                 style={{
-                  right: '14%',
+                  right: '16%',
                   top: '30%',
                   transform: 'translate(50%, -50%)',
                   zIndex: 20
@@ -511,7 +511,7 @@ const Dashboard: React.FC = () => {
                 onClick={() => navigate('/works')}
               >
                 <div 
-                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-26 h-26 rounded-full flex flex-col items-center justify-center"
+                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-28 h-28 rounded-full flex flex-col items-center justify-center"
                   style={{backgroundColor: ' rgb(255, 145, 81)'}}
                 >
                   <div className="text-white text-center">

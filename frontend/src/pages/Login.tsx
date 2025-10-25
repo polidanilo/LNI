@@ -76,7 +76,7 @@ const Login: React.FC = () => {
           }}
         >
           {/* Immagine protagonista */}
-          <div className="pl-5 pt-8 pb-2 bg-white flex items-center justify-center">
+          <div className="pr-6 pt-8 pb-2 bg-white flex items-center justify-center">
             <img src="/logonotag.jpg" alt="LNINazioni" 
               className="w-full h-auto object-contain rounded-2xl"
               style={{maxHeight: '200px'}}

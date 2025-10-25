@@ -165,7 +165,7 @@ const Works: React.FC = () => {
       <CustomScrollbar maxHeight="100vh">
         <div className="pb-9" style={{backgroundColor: '#FFF4EF'}}>
       {/* Top Bar con Saluto e Logout */}
-      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-8 pb-0.5">
+      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-12 pb-0.5">
         <div className="max-w-4xl mx-auto flex items-start justify-between">
           {/* Riquadro Imbarcazioni con immagine di sfondo */}
           <div className="flex-1">
