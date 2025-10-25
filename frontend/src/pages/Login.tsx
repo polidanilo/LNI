@@ -230,14 +230,14 @@ const Login: React.FC = () => {
                 {isRegister ? (
                   <>
                     Hai già un account?{' '}
-                    <span className="text-primary-eme underline hover:text-emerald-800 transition-colors">
+                    <span className="text-primary-eme underline hover:text-primary-eme transition-colors">
                       Accedi
                     </span>
                   </>
                 ) : (
                   <>
                     Non hai un account?{' '}
-                    <span className="text-primary-eme underline hover:text-emerald-800 transition-colors">
+                    <span className="text-primary-eme underline hover:text-primary-eme transition-colors">
                       Registrati
                     </span>
                   </>

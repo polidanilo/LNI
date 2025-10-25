@@ -286,7 +286,7 @@ const Boats: React.FC = () => {
                     }
                   }}
                 >
-                  Aperti
+                  APERTI
                 </button>
                 <button
                   onClick={() => setFilterStatus('closed')}
@@ -311,7 +311,7 @@ const Boats: React.FC = () => {
                     }
                   }}
                 >
-                  Archiviati
+                  ARCHIVIATI
                 </button>
               </div>
             </div>
@@ -384,7 +384,7 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3 pb-0 flex-wrap">
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>

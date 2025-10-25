@@ -277,7 +277,7 @@ const Dashboard: React.FC = () => {
       <CustomScrollbar maxHeight="100vh" onScroll={(scrollTop) => setScrollY(scrollTop)} hideOnMobile={false}>
         <div className="pb-9" style={{backgroundColor: '#FFF4EF'}}>
       {/* Top Bar con Saluto e Logout */}
-      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-10 pb-0.5 relative">
+      <div style={{backgroundColor: '#FFF4EF', zIndex: 20}} className="px-4 pt-10 pb-0.5 relative">
         <div className="max-w-4xl mx-auto flex items-start justify-between">
           {/* Riquadro Dashboard con immagine di sfondo */}
           <div className="flex-1">
@@ -315,7 +315,8 @@ const Dashboard: React.FC = () => {
               setSelectedShift(null);
               navigate('/login');
             }}
-            className="pl-2 pr-0 py-1.5 mt-0.5 rounded-full"
+            className="pl-2 pr-0 py-1.5 mt-0.5 rounded-full relative"
+            style={{zIndex: 30}}
             title="Logout"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary-ros" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -326,7 +327,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Selettori Stagione e Turno */}
-      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pb-2 relative">
+      <div style={{backgroundColor: '#FFF4EF', zIndex: 20}} className="px-4 pb-2 relative">
         <div className="px-1 max-w-4xl mx-auto flex gap-3">
           {/* Stagione */}
           <select
@@ -580,7 +581,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
@@ -683,7 +684,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{work.category}</span>
@@ -783,7 +784,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{order.category}</span>

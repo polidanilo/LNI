@@ -279,7 +279,7 @@ const Works: React.FC = () => {
                   }
                 }}
               >
-                Completati
+                COMPLETATI
               </button>
               <button
                 onClick={() => setFilterStatus('pending')}
@@ -304,7 +304,7 @@ const Works: React.FC = () => {
                   }
                 }}
               >
-                In corso
+                IN CORSO
               </button>
             </div>
           </div>
@@ -377,7 +377,7 @@ const Works: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
                           <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{work.category || 'Categoria'}</span>

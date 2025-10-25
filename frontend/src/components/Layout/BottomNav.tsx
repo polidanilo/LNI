@@ -77,7 +77,7 @@ icon: (
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 flex justify-center items-center">
-      <div className="shadow-sm px-2.5 py-2.5 w-full max-w-2xl mx-auto" style={{backgroundColor: 'rgb(17, 17, 17)'}}>
+      <div className="shadow-sm px-2.5 py-2 w-full max-w-2xl mx-auto" style={{backgroundColor: 'rgb(17, 17, 17)'}}>
         <div className="flex items-center justify-around">
           {/* Dashboard */}
           <Link

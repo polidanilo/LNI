@@ -191,18 +191,18 @@ const BoatsDetails: React.FC = () => {
         <div className="pl-6 pr-3.5 py-4 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
             <div className="space-y-4 max-w-2xl mx-auto">
-              <div className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-sm black">
+              <div className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-base black">
                 {editingProblem.boat_type || 'Categoria'}
               </div>
 
-              <div className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-sm black">
+              <div className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-base black">
                 {editingProblem.boat_name || 'Imbarcazione'}
               </div>
 
               <select
                 value={editPartAffected}
                 onChange={(e) => setEditPartAffected(e.target.value)}
-                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
+                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-ros text-base black transition-all duration-200 focus:outline-none"
               >
                 <option value="">Seleziona parte - Opzionale</option>
                 {parts?.map((part) => (
@@ -212,11 +212,11 @@ const BoatsDetails: React.FC = () => {
 
               {/* Segnalato da */}
               <div className="flex items-center gap-3">
-                <div className="text-sm pl-1 black whitespace-nowrap">Segnalato da</div>
+                <div className="text-base pl-1 black whitespace-nowrap">Segnalato da</div>
                 <select
                   value={editReportedBy || ''}
                   onChange={(e) => setEditReportedBy(Number(e.target.value))}
-                  className="flex-1 px-0 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 px-0 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-base black transition-all duration-200 focus:outline-none"
                 >
                   <option value="">Seleziona utente</option>
                   {users.map(user => (
@@ -227,12 +227,12 @@ const BoatsDetails: React.FC = () => {
 
               {/* In data */}
               <div className="flex items-center gap-3">
-                <div className="text-sm pl-1 black whitespace-nowrap">In data</div>
+                <div className="text-base pl-1 black whitespace-nowrap">In data</div>
                 <input
                   type="date"
                   value={editReportedDate}
                   onChange={(e) => setEditReportedDate(e.target.value)}
-                  className="flex-1 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-base black transition-all duration-200 focus:outline-none"
                 />
               </div>
 
@@ -247,7 +247,7 @@ const BoatsDetails: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-base black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -281,7 +281,7 @@ const BoatsDetails: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
-                className="py-2 rounded-full text-sm font-semibold transition-all duration-300 py-1"
+                className="py-2 rounded-full text-base font-semibold transition-all duration-300 py-1"
                 style={{
                   width: '120px',
                   backgroundColor: editingProblem?.status === 'closed' ? '#10B981' : '#FF5958',
@@ -302,7 +302,7 @@ const BoatsDetails: React.FC = () => {
               <div className="flex gap-4">
                 <button
                   onClick={() => setShowDeleteConfirm(true)}
-                  className="text-sm font-semibold transition-all duration-300"
+                  className="text-base font-semibold transition-all duration-300"
                   style={{ color: '#000000' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = '#FF5958';
@@ -315,7 +315,7 @@ const BoatsDetails: React.FC = () => {
                 </button>
                 <button
                   onClick={handleClose}
-                  className="text-sm mr-1 font-semibold transition-all duration-300"
+                  className="text-base mr-1 font-semibold transition-all duration-300"
                   style={{
                     backgroundColor: 'white',
                     color: '#000000'
@@ -334,14 +334,14 @@ const BoatsDetails: React.FC = () => {
               <div className="flex gap-2 mr-1">
                 <button
                   onClick={handleDelete}
-                  className="text-sm font-semibold"
+                  className="text-base font-semibold"
                   style={{ color: '#FF5958' }}
                 >
                   Conferma
                 </button>
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
-                  className="text-sm font-semibold"
+                  className="text-base font-semibold"
                   style={{ color: '#000000' }}
                 >
                   Annulla

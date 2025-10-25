@@ -207,11 +207,11 @@ const OrdersDetails: React.FC = () => {
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
                   placeholder="Ordine"
-                  className="flex-1 px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-primary-azr text-base black transition-all duration-200 focus:outline-none"
                   style={{ width: '75%' }}
                 />
                 <div className="flex items-center gap-1 overflow-hidden" style={{ width: '25%', maxWidth: '110px' }}>
-                  <div className="text-sm pl-0 pt-0.5 black whitespace-nowrap">€</div>
+                  <div className="text-base pl-0 pt-0.5 black whitespace-nowrap">€</div>
                   <input
                     type="text"
                     value={amountInput}
@@ -243,7 +243,7 @@ const OrdersDetails: React.FC = () => {
                       }
                     }}
                     placeholder="0.00"
-                    className="flex-1 pl-0 pt-1.5 pb-0.5 pr-0 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
+                    className="flex-1 pl-0 pt-1.5 pb-0.5 pr-0 bg-transparent border-0 border-b-2 border-primary-azr text-base black transition-all duration-200 focus:outline-none"
                     style={{ maxWidth: '82px' }}
                   />
                 </div>
@@ -252,7 +252,7 @@ const OrdersDetails: React.FC = () => {
               <select
                 value={editCategory}
                 onChange={(e) => setEditCategory(e.target.value)}
-                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm transition-all duration-200 focus:outline-none black"
+                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-base transition-all duration-200 focus:outline-none black"
               >
                 <option value="">Seleziona categoria</option>
                 <option value="Attrezzatura">Attrezzatura</option>
@@ -264,11 +264,11 @@ const OrdersDetails: React.FC = () => {
 
               {/* Aggiunto da */}
               <div className="flex items-center gap-3">
-                <div className="text-sm pl-1 black whitespace-nowrap">Aggiunto da</div>
+                <div className="text-base pl-1 black whitespace-nowrap">Aggiunto da</div>
                 <select
                   value={editCreatedBy || ''}
                   onChange={(e) => setEditCreatedBy(Number(e.target.value))}
-                  className="flex-1 px-0 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 px-0 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-base black transition-all duration-200 focus:outline-none"
                 >
                   <option value="">Seleziona utente</option>
                   {users.map(user => (
@@ -279,12 +279,12 @@ const OrdersDetails: React.FC = () => {
 
               {/* In data */}
               <div className="flex items-center gap-3">
-                <div className="text-sm pl-1 black whitespace-nowrap">In data</div>
+                <div className="text-base pl-1 black whitespace-nowrap">In data</div>
                 <input
                   type="date"
                   value={editOrderDate}
                   onChange={(e) => setEditOrderDate(e.target.value)}
-                  className="flex-1 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-base black transition-all duration-200 focus:outline-none"
                 />
               </div>
 
@@ -300,7 +300,7 @@ const OrdersDetails: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-base black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -334,7 +334,7 @@ const OrdersDetails: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
-                className="py-2 rounded-full text-sm font-semibold transition-all duration-300 py-1"
+                className="py-2 rounded-full text-base font-semibold transition-all duration-300 py-1"
                 style={{
                   width: '120px',
                   backgroundColor: editingOrder?.status === 'completed' ? '#39A8FB' : '#FF9151',
@@ -355,7 +355,7 @@ const OrdersDetails: React.FC = () => {
               <div className="flex gap-4">
                 <button
                   onClick={() => setShowDeleteConfirm(true)}
-                  className="text-sm font-semibold transition-all duration-300"
+                  className="text-base font-semibold transition-all duration-300"
                   style={{ color: '#000000' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = '#39A8FB';
@@ -368,7 +368,7 @@ const OrdersDetails: React.FC = () => {
                 </button>
                 <button
                   onClick={handleClose}
-                  className="text-sm mr-1 font-semibold transition-all duration-300"
+                  className="text-base mr-1 font-semibold transition-all duration-300"
                   style={{
                     backgroundColor: 'white',
                     color: '#000000'
@@ -387,14 +387,14 @@ const OrdersDetails: React.FC = () => {
               <div className="flex gap-2 mr-1">
                 <button
                   onClick={handleDelete}
-                  className="text-sm font-semibold"
+                  className="text-base font-semibold"
                   style={{ color: '#39A8FB' }}
                 >
                   Conferma
                 </button>
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
-                  className="text-sm font-semibold"
+                  className="text-base font-semibold"
                   style={{ color: '#000000' }}
                 >
                   Annulla

@@ -279,7 +279,7 @@ const Orders: React.FC = () => {
                   }
                 }}
               >
-                Effettuati
+                EFFETTUATI
               </button>
               <button
                 onClick={() => setFilterStatus('pending')}
@@ -304,7 +304,7 @@ const Orders: React.FC = () => {
                   }
                 }}
               >
-                Programmati
+                PROGRAMMATI
               </button>
             </div>
 
@@ -422,7 +422,7 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-4 pb-0 flex-wrap">
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 pb-1 flex-wrap" style={{lineHeight: '1.3'}}>
                           <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{order.category || 'Categoria'}</span>

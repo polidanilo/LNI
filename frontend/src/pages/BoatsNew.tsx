@@ -154,7 +154,7 @@ const BoatsNew: React.FC = () => {
                   setSelectedType(t);
                   setSelectedBoat(null);
                 }}
-                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm transition-all duration-200 focus:outline-none black"
+                className="w-full px-0 py-1 bg-transparent border-0 border-b-2 border-primary-ros text-base transition-all duration-200 focus:outline-none black"
               >
                 <option value="">Seleziona categoria</option>
                 {BOAT_TYPES.map((t) => (
@@ -170,7 +170,7 @@ const BoatsNew: React.FC = () => {
                   setSelectedBoat(b);
                 }}
                 disabled={!selectedType || !boats || boats.length === 0}
-                className={`w-full px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none black ${
+                className={`w-full px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 focus:outline-none black ${
                   (!selectedType || !boats || boats.length === 0)
                     ? 'border-gray-400 opacity-50'
                     : 'border-primary-ros'
@@ -190,7 +190,7 @@ const BoatsNew: React.FC = () => {
                 value={problemForm.part_affected}
                 onChange={(e) => setProblemForm({ ...problemForm, part_affected: e.target.value })}
                 disabled={!selectedBoat}
-                className={`w-full px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none black ${
+                className={`w-full px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 focus:outline-none black ${
                   !selectedBoat ? 'border-gray-400 opacity-50' : 'border-primary-ros'
                 }`}
               >
@@ -212,7 +212,7 @@ const BoatsNew: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-base black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -256,7 +256,7 @@ const BoatsNew: React.FC = () => {
         handleAddProblem();
       }}
       disabled={createProblemMutation.isPending}
-      className="py-2 rounded-full text-sm font-semibold transition-all duration-300 py-1"
+      className="py-2 rounded-full text-base font-semibold transition-all duration-300 py-1"
       style={{
         width: '120px',
         backgroundColor: problemStatus === 'closed' ? '#10B981' : '#FF5958',
@@ -275,7 +275,7 @@ const BoatsNew: React.FC = () => {
     </button>
     <button
       onClick={handleClose}
-      className="text-sm mr-1 font-semibold transition-all duration-300"
+      className="text-base mr-1 font-semibold transition-all duration-300"
       style={{
         backgroundColor: 'white',
         color: '#000000'
