@@ -47,6 +47,11 @@ const OrdersNew: React.FC = () => {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    const scrollableElement = (e.target as HTMLElement).closest('[data-scrollable="true"]');
+    if (scrollableElement) {
+      const isAtTop = scrollableElement.scrollTop === 0;
+      if (!isAtTop) return; // Allow normal scrolling if not at top
+    }
     startY.current = e.touches[0].clientY;
     setIsDragging(true);
   };
@@ -110,7 +115,7 @@ const OrdersNew: React.FC = () => {
       <div 
         className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
         style={{
-          height: '48vh',
+          height: '56vh',
           animation: isDragging ? 'none' : 'slideUp 0.1s ease-out',
           transform: `translateY(${dragY}px)`
         }}
@@ -160,7 +165,7 @@ const OrdersNew: React.FC = () => {
 
         <div className="pl-6 pr-5 py-4 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
-            <div className="space-y-4 max-w-2xl mx-auto">
+            <div className="space-y-4 max-w-2xl mx-auto" data-scrollable="true">
               {/* Titolo e Importo sulla stessa riga */}
               <div className="flex items-center gap-3">
                 <input
@@ -171,7 +176,7 @@ const OrdersNew: React.FC = () => {
                   className="flex-1 px-1 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
                   style={{ width: '75%' }}
                 />
-                <div className="flex items-center gap-1" style={{ width: '25%', maxWidth: '120px' }}>
+                <div className="flex items-center gap-1 overflow-hidden" style={{ width: '25%', maxWidth: '110px' }}>
                   <div className="text-sm pl-0 pt-0.5 black whitespace-nowrap">€</div>
                   <input
                     type="text"
@@ -204,8 +209,8 @@ const OrdersNew: React.FC = () => {
                       }
                     }}
                     placeholder="0.00"
-                    className="flex-1 pl-1 pt-1.5 pb-0.5 pr-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
-                    style={{ maxWidth: '95px' }}
+                    className="flex-1 pl-0 pt-1.5 pb-0.5 pr-0 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
+                    style={{ maxWidth: '82px' }}
                   />
                 </div>
               </div>

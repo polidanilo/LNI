@@ -81,6 +81,11 @@ const WorksDetails: React.FC = () => {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    const scrollableElement = (e.target as HTMLElement).closest('[data-scrollable="true"]');
+    if (scrollableElement) {
+      const isAtTop = scrollableElement.scrollTop === 0;
+      if (!isAtTop) return;
+    }
     startY.current = e.touches[0].clientY;
     setIsDragging(true);
   };
@@ -168,7 +173,7 @@ const WorksDetails: React.FC = () => {
       <div 
         className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
         style={{
-          height: '60vh',
+          height: '68vh',
           animation: isDragging ? 'none' : 'slideUp 0.1s ease-out',
           transform: `translateY(${dragY}px)`
         }}
@@ -214,7 +219,7 @@ const WorksDetails: React.FC = () => {
 
         <div className="pl-6 pr-5 py-4 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
-            <div className="space-y-4 max-w-2xl mx-auto">
+            <div className="space-y-4 max-w-2xl mx-auto" data-scrollable="true">
               <input
                 type="text"
                 value={editTitle}

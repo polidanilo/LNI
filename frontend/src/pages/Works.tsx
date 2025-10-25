@@ -165,14 +165,14 @@ const Works: React.FC = () => {
       <CustomScrollbar maxHeight="100vh">
         <div className="pb-9" style={{backgroundColor: '#FFF4EF'}}>
       {/* Top Bar con Saluto e Logout */}
-      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-12 pb-0.5">
+      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-10 pb-0.5">
         <div className="max-w-4xl mx-auto flex items-start justify-between">
           {/* Riquadro Imbarcazioni con immagine di sfondo */}
           <div className="flex-1">
             <div 
               className="relative overflow-hidden rounded-2xl shadow-sm mb-4"
               style={{
-                height: '100px',
+                height: '90px',
                 backgroundImage: 'url(/works3.png)', // ← Modifica qui il nome dell'immagine
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -205,9 +205,9 @@ const Works: React.FC = () => {
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
             className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
-            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
-            onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
-            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
+            style={{backgroundColor: 'transparent', borderColor: '#FF9151'}}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#FF9151'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#FF9151'}
           >
             <option value="">Seleziona stagione</option>
             {seasons?.map((season) => (
@@ -374,15 +374,17 @@ const Works: React.FC = () => {
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="pt-0 text-base font-semibold black mb-0">
+                        <h4 className="pt-0 text-base font-semibold black mb-1">
                           {work.title || 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
-                          <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
-                          <span>•</span>
-                          <span>{work.category || 'Categoria'}</span>
-                          <span>•</span>
-                          <span>{work.created_by || 'User'}</span>
+                        <div className="flex flex-col gap-0.5 text-xs text-gray-700 pl-0.5" style={{fontWeight: 500}}>
+                          <div className="flex items-center gap-1">
+                            <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                            <span>•</span>
+                            <span>{work.category || 'Categoria'}</span>
+                          </div>
+                          <div>{work.description || 'N/A'}</div>
+                          {work.notes && <div className="text-gray-600 italic">{work.notes.substring(0, 40)}{work.notes.length > 40 ? '...' : ''}</div>}
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

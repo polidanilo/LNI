@@ -66,6 +66,11 @@ const BoatsNew: React.FC = () => {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    const scrollableElement = (e.target as HTMLElement).closest('[data-scrollable="true"]');
+    if (scrollableElement) {
+      const isAtTop = scrollableElement.scrollTop === 0;
+      if (!isAtTop) return;
+    }
     startY.current = e.touches[0].clientY;
     setIsDragging(true);
   };
@@ -174,7 +179,7 @@ const BoatsNew: React.FC = () => {
 
         <div className="pl-6 pr-5 py-4 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
-            <div className="space-y-4 max-w-2xl mx-auto">
+            <div className="space-y-4 max-w-2xl mx-auto" data-scrollable="true">
               <select
                 value={selectedType}
                 onChange={(e) => {

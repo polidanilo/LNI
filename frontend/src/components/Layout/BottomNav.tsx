@@ -24,6 +24,10 @@ icon: (
       mask: 'url(/homesvg.svg) no-repeat center',
       maskSize: 'contain',
       backgroundColor: 'currentColor',
+      stroke: 'white',
+      strokeWidth: '2px',
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round'
     }}
   />
 )

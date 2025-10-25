@@ -172,14 +172,14 @@ const Boats: React.FC = () => {
       <CustomScrollbar maxHeight="100vh">
         <div className="pb-9" style={{backgroundColor: '#FFF4EF'}}>
       {/* Top Bar con Saluto e Logout */}
-      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-12 pb-0.5">
+      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-10 pb-0.5">
         <div className="max-w-4xl mx-auto flex items-start justify-between">
           {/* Riquadro Imbarcazioni con immagine di sfondo */}
           <div className="flex-1">
             <div 
               className="relative overflow-hidden rounded-2xl shadow-sm mb-4"
               style={{
-                height: '100px',
+                height: '90px',
                 backgroundImage: 'url(/boats.png)', // ← Modifica qui il nome dell'immagine
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -212,9 +212,9 @@ const Boats: React.FC = () => {
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
             className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
-            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
-            onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
-            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
+            style={{backgroundColor: 'transparent', borderColor: '#FF5958'}}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#FF5958'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#FF5958'}
           >
             <option value="">Seleziona stagione</option>
             {seasons?.map((season) => (
@@ -381,19 +381,17 @@ const Boats: React.FC = () => {
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="pt-0 text-base font-semibold black mb-0">
+                        <h4 className="pt-0 text-base font-semibold black mb-1">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
-                          <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
-                          <span>•</span>
-                          <span>{problem.boat_type || 'Categoria'}</span>
-                          {problem.part_affected && (
-                            <>
-                              <span>•</span>
-                              <span>{problem.part_affected}</span>
-                            </>
-                          )}
+                        <div className="flex flex-col gap-0.5 text-xs text-gray-700 pl-0.5" style={{fontWeight: 500}}>
+                          <div className="flex items-center gap-1">
+                            <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                            <span>•</span>
+                            <span>{problem.boat_type || 'Categoria'}</span>
+                          </div>
+                          {problem.part_affected && <div>Parte: {problem.part_affected}</div>}
+                          <div className="text-gray-600">{problem.description ? (problem.description.substring(0, 40) + (problem.description.length > 40 ? '...' : '')) : 'N/A'}</div>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

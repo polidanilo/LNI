@@ -277,7 +277,7 @@ const Dashboard: React.FC = () => {
       <CustomScrollbar maxHeight="100vh" onScroll={(scrollTop) => setScrollY(scrollTop)} hideOnMobile={false}>
         <div className="pb-9" style={{backgroundColor: '#FFF4EF'}}>
       {/* Top Bar con Saluto e Logout */}
-      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-12 pb-0.5 relative">
+      <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-10 pb-0.5 relative">
         <div className="max-w-4xl mx-auto flex items-start justify-between">
           {/* Riquadro Dashboard con immagine di sfondo */}
           <div className="flex-1">
@@ -383,7 +383,7 @@ const Dashboard: React.FC = () => {
                 width: '180px',
                 height: '30px',
                 backgroundColor: '#10B981',
-                top: '59%',
+                top: '63%',
                 right: '4%',
                 opacity: 0.9,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -396,7 +396,7 @@ const Dashboard: React.FC = () => {
                 width: '190px',
                 height: '20px',
                 backgroundColor: '#10B981',
-                top: '50%',
+                top: '54%',
                 right: '10%',
                 opacity: 0.9,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -409,7 +409,7 @@ const Dashboard: React.FC = () => {
                 width: '35px',
                 height: '15px',
                 backgroundColor: '#10B981',
-                top: '65%',
+                top: '69%',
                 left: '55%',
                 opacity: 0.6,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -423,7 +423,7 @@ const Dashboard: React.FC = () => {
                 width: '65px',
                 height: '25px',
                 backgroundColor: '#10B981',
-                top: '54%',
+                top: '58%',
                 left: '6%',
                 opacity: 0.4,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -437,7 +437,7 @@ const Dashboard: React.FC = () => {
                 width: '45px',
                 height: '20px',
                 backgroundColor: '#10B981',
-                top: '30%',
+                top: '34%',
                 right: '13%',
                 opacity: 0,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -450,7 +450,7 @@ const Dashboard: React.FC = () => {
           <div className="max-w-4xl mx-auto space-y-4 mt-4 relative" style={{zIndex: 1}}>
 
             {/* Cerchi Sovrapposti */}
-            <div className="ml-3 mb-7 relative h-64 flex items-center justify-center">
+            <div className="ml-3 mb-6 relative h-64 flex items-center justify-center">
               {/* Cerchio Blu (Spese) - Sinistra, sopra rosso */}
               <div 
                 className="absolute cursor-pointer transition-transform hover:scale-105"
@@ -470,7 +470,7 @@ const Dashboard: React.FC = () => {
                     <div className="text-2xl font-bold font-greycliff">
                       €{recentOrders?.filter(o => o.status === 'completed').reduce((sum, o) => sum + parseFloat(String(o.amount)), 0).toFixed(0) || '0'}
                     </div>
-                    <div className="text-xs font-medium mt-0 uppercase">Spese <br /> totali</div>
+                    <div className="text-xs font-medium mt-0 uppercase">Di spese <br /> totali</div>
                   </div>
                 </div>
               </div>
@@ -544,7 +544,7 @@ const Dashboard: React.FC = () => {
                   <div className="text-gray-500 text-sm">Caricamento...</div>
                 </div>
               ) : !openProblems || openProblems.length === 0 ? (
-                <div className="text-center py-8">
+                <div className="text-center py-16">
                   <div className="text-gray-500 text-sm">Nessun problema disponibile</div>
                 </div>
               ) : (
@@ -646,7 +646,7 @@ const Dashboard: React.FC = () => {
                   <div className="text-gray-500 text-sm">Caricamento...</div>
                 </div>
               ) : !recentWorks || recentWorks.length === 0 ? (
-                <div className="text-center py-8">
+                <div className="text-center py-16">
                   <div className="text-gray-500 text-sm">Nessun lavoro disponibile</div>
                 </div>
               ) : (
@@ -747,8 +747,8 @@ const Dashboard: React.FC = () => {
                   <div className="text-gray-500 text-sm">Caricamento...</div>
                 </div>
               ) : !recentOrders || recentOrders.length === 0 ? (
-                <div className="text-center py-8">
-                  <div className="text-gray-500 text-sm">Nessun acquisto disponibile</div>
+                <div className="text-center py-16">
+                  <div className="text-gray-500 text-sm">Nessun ordine disponibile</div>
                 </div>
               ) : (
                 <CustomScrollbar maxHeight="232px">
@@ -780,15 +780,17 @@ const Dashboard: React.FC = () => {
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="pt-0 text-base font-semibold black mb-0">
+                          <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
-                            <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
-                            <span>•</span>
-                            <span>{order.category}</span>
-                            <span>•</span>
-                            <span>{order.title}</span>
+                          <div className="flex flex-col gap-0.5 text-xs text-gray-700 pl-0.5" style={{fontWeight: 500}}>
+                            <div className="flex items-center gap-1">
+                              <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
+                              <span>•</span>
+                              <span>{order.category}</span>
+                            </div>
+                            <div>{order.title}</div>
+                            {order.notes && <div className="text-gray-600 italic">{order.notes.substring(0, 40)}{order.notes.length > 40 ? '...' : ''}</div>}
                           </div>
                         </div>
 
