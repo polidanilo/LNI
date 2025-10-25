@@ -256,7 +256,7 @@ const BoatsNew: React.FC = () => {
         handleAddProblem();
       }}
       disabled={createProblemMutation.isPending}
-      className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300 py-1"
+      className="py-2.5 rounded-full text-sm font-semibold transition-all duration-300 py-1"
       style={{
         width: '120px',
         backgroundColor: problemStatus === 'closed' ? '#10B981' : '#FF5958',
@@ -278,13 +278,13 @@ const BoatsNew: React.FC = () => {
       className="text-sm mr-1 font-semibold transition-all duration-300"
       style={{
         backgroundColor: 'white',
-        color: '#6B7280'
+        color: '#000000'
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.color = '#FF5958';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.color = '#6B7280';
+        e.currentTarget.style.color = '#000000';
       }}
     >
       Annulla

@@ -223,9 +223,9 @@ const Orders: React.FC = () => {
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
             className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 black"
-            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
-            onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
-            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
+            style={{backgroundColor: 'transparent', borderColor: '#39A8FB'}}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#39A8FB'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#39A8FB'}
           >
             <option value="">
               {shiftsLoading ? 'Caricamento...' : 
@@ -422,7 +422,7 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
+                        <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
                           <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span>•</span>
                           <span>{order.category || 'Categoria'}</span>

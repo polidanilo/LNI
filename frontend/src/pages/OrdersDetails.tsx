@@ -331,7 +331,7 @@ const OrdersDetails: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
-                className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300 py-1"
+                className="py-2.5 rounded-full text-sm font-semibold transition-all duration-300 py-1"
                 style={{
                   width: '120px',
                   backgroundColor: editingOrder?.status === 'completed' ? '#39A8FB' : '#FF9151',

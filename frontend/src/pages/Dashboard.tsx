@@ -580,7 +580,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span>•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
@@ -683,7 +683,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span>•</span>
                             <span>{work.category}</span>
@@ -783,7 +783,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
                             <span>•</span>
                             <span>{order.category}</span>

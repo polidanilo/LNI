@@ -230,9 +230,9 @@ const Boats: React.FC = () => {
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
             className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
-            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
-            onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
-            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
+            style={{backgroundColor: 'transparent', borderColor: '#FF5958'}}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#FF5958'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#FF5958'}
           >
             <option value="">
               {shiftsLoading ? 'Caricamento...' : 
@@ -384,7 +384,7 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
+                        <div className="flex items-center gap-1 text-sm black mt-6 pb-1 flex-wrap">
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span>•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>

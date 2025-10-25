@@ -242,7 +242,7 @@ const OrdersNew: React.FC = () => {
             <button
               onClick={handleAddOrder}
               disabled={createOrderMutation.isPending}
-              className="py-1 text-sm font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="py-2.5 text-sm font-semibold rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 width: '120px',
                 backgroundColor: orderStatus === 'completed' ? '#39A8FB' : '#FF9151',
