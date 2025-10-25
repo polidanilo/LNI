@@ -575,12 +575,12 @@ const Dashboard: React.FC = () => {
                       }}
                       onClick={() => navigate(`/boats?id=${problem.id}`)}
                     >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
+                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span>•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
@@ -677,18 +677,18 @@ const Dashboard: React.FC = () => {
                       }}
                       onClick={() => navigate(`/works?id=${work.id}`)}
                     >
-                      <div className="flex items-start justify-between">
+                      <div className="flex items-start justify-between gap-3">
                         {/* Sinistra: Titolo, categoria, data */}
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
+                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span>•</span>
                             <span>{work.category}</span>
                             <span>•</span>
-                            <span>{work.description || 'N/A'}</span>
+                            <span className="break-words">{work.description || 'N/A'}</span>
                           </div>
                         </div>
 
@@ -778,17 +778,17 @@ const Dashboard: React.FC = () => {
                       }}
                       onClick={() => navigate(`/orders?id=${order.id}`)}
                     >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
+                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
                             <span>•</span>
                             <span>{order.category}</span>
                             <span>•</span>
-                            <span>{order.title}</span>
+                            <span className="break-words">{order.title}</span>
                           </div>
                         </div>
 

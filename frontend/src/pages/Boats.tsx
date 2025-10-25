@@ -379,12 +379,12 @@ const Boats: React.FC = () => {
                       navigate(`/boats?id=${problem.id}`);
                     }}
                   >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
+                        <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span>•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>

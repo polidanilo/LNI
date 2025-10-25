@@ -372,17 +372,17 @@ const Works: React.FC = () => {
                       navigate(`/works?id=${work.id}`);
                     }}
                   >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           {work.title || 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
+                        <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
                           <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span>•</span>
                           <span>{work.category || 'Categoria'}</span>
                           <span>•</span>
-                          <span>{work.description || 'N/A'}</span>
+                          <span className="break-words">{work.description || 'N/A'}</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

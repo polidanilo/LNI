@@ -150,8 +150,7 @@ const BoatsDetails: React.FC = () => {
       linear-gradient(135deg, #FF5958, #39A8FB 33%, #FF9151 66%, #10B981) border-box
     `,
     border: '2px solid transparent',
-    WebkitMask: 'linear-gradient(to bottom, white 98%, white 100%)',
-    mask: 'linear-gradient(to bottom, white 98%, transparent 100%)'
+    borderBottom: '0'
   }}
 >
 
@@ -315,7 +314,7 @@ const BoatsDetails: React.FC = () => {
                     e.currentTarget.style.color = '#6B7280';
                   }}
                 >
-                  Annulla
+                  Chiudi
                 </button>
                 <button
                   onClick={() => setShowDeleteConfirm(true)}
@@ -343,7 +342,7 @@ const BoatsDetails: React.FC = () => {
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
                   className="text-sm font-semibold"
-                  style={{ color: '#6B7280' }}
+                  style={{ color: '#000000' }}
                 >
                   Annulla
                 </button>

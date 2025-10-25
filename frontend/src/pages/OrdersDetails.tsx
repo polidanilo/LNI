@@ -151,8 +151,14 @@ const OrdersDetails: React.FC = () => {
       <div 
         className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
         style={{
-          height: '62vh',
-          animation: 'slideUp 0.1s ease-out'
+          height: '74vh',
+          animation: 'slideUp 0.1s ease-out',
+          background: `
+            linear-gradient(white, white) padding-box,
+            linear-gradient(135deg, #FF5958, #39A8FB 33%, #FF9151 66%, #10B981) border-box
+          `,
+          border: '2px solid transparent',
+          borderBottom: '0'
         }}
       >
         <div 
@@ -358,7 +364,7 @@ const OrdersDetails: React.FC = () => {
                     e.currentTarget.style.color = '#6B7280';
                   }}
                 >
-                  Annulla
+                  Chiudi
                 </button>
                 <button
                   onClick={() => setShowDeleteConfirm(true)}
@@ -386,7 +392,7 @@ const OrdersDetails: React.FC = () => {
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
                   className="text-sm font-semibold"
-                  style={{ color: '#6B7280' }}
+                  style={{ color: '#000000' }}
                 >
                   Annulla
                 </button>
