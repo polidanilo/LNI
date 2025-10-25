@@ -93,7 +93,7 @@ const BoatsNew: React.FC = () => {
       <div 
         className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
         style={{
-          height: '74vh',
+          height: '70vh',
           animation: 'slideUp 0.2s ease-out',
           background: `
             linear-gradient(white, white) padding-box,
@@ -110,7 +110,7 @@ const BoatsNew: React.FC = () => {
         </div>
 
         <div className="pl-7 pr-7 py-4" style={{borderColor: '#0F4295'}}>
-          <div className="flex items-center justify-between max-w-2xl mx-auto mt-6">
+          <div className="flex items-center justify-between max-w-2xl mx-auto mt-2">
             <div>
               <h3 className="text-lg font-bold font-greycliff black">
                 Aggiungi problema

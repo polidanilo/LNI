@@ -143,7 +143,7 @@ const BoatsDetails: React.FC = () => {
 <div
   className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
   style={{
-    height: '82vh',
+    height: '80vh',
     animation: 'slideUp 0.2s ease-out',
     background: `
       linear-gradient(white, white) padding-box,
@@ -161,7 +161,7 @@ const BoatsDetails: React.FC = () => {
         </div>
 
         <div className="pl-7 pr-4 py-4" style={{borderColor: '#0F4295'}}>
-          <div className="flex items-center justify-between max-w-2xl mx-auto mt-6">
+          <div className="flex items-center justify-between max-w-2xl mx-auto mt-2">
             <h3 className="text-lg font-bold font-greycliff black">
               Dettagli problema
             </h3>
@@ -216,7 +216,7 @@ const BoatsDetails: React.FC = () => {
                 <select
                   value={editReportedBy || ''}
                   onChange={(e) => setEditReportedBy(Number(e.target.value))}
-                  className="flex-1 px-0 py-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 px-0 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
                 >
                   <option value="">Seleziona utente</option>
                   {users.map(user => (
@@ -232,7 +232,7 @@ const BoatsDetails: React.FC = () => {
                   type="date"
                   value={editReportedDate}
                   onChange={(e) => setEditReportedDate(e.target.value)}
-                  className="flex-1 pl-1 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
                 />
               </div>
 
