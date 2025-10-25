@@ -168,21 +168,27 @@ const BoatsDetails: React.FC = () => {
         onClick={handleClose}
       />
       
-      <div 
-        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
-        style={{
-          height: '60vh',
-          animation: isDragging ? 'none' : 'slideUp 0.2s ease-out',
-          background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
-          border: '2px solid transparent',
-          transform: `translateY(${dragY}px)`
-        }}
-      >
+<div
+  className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
+  style={{
+    height: '74vh',
+    animation: isDragging ? 'none' : 'slideUp 0.2s ease-out',
+    background: `
+      linear-gradient(white, white) padding-box,
+      linear-gradient(135deg, #FF5958, #39A8FB 33%, #FF9151 66%, #10B981) border-box
+    `,
+    border: '2px solid transparent',
+    WebkitMask: 'linear-gradient(to bottom, black 95%, transparent 100%)',
+    mask: 'linear-gradient(to bottom, black 95%, transparent 100%)',
+    transform: `translateY(${dragY}px)`
+  }}
+  onTouchStart={handleTouchStart}
+  onTouchMove={handleTouchMove}
+  onTouchEnd={handleTouchEnd}
+>
+
         <div 
           className="flex justify-center pt-2 pb-2 cursor-grab active:cursor-grabbing"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
         >
           <div className="w-14 h-1.5 bg-gray-300 hover:bg-primary-ros transition-all duration-600 rounded-full"></div>
         </div>
@@ -194,38 +200,21 @@ const BoatsDetails: React.FC = () => {
             </h3>
             <button
               onClick={handleToggleStatus}
-              className="group mr-2 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="mr-2 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
                 borderColor: editingProblem.status === 'closed' ? '#10B981' : '#FF5958'
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#F3F4F6';
-                e.currentTarget.style.borderColor = editingProblem.status === 'closed' ? '#FF5958' : '#10B981';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'white';
-                e.currentTarget.style.borderColor = editingProblem.status === 'closed' ? '#10B981' : '#FF5958';
-              }}
               title={editingProblem.status === 'closed' ? 'Segna come aperto' : 'Segna come risolto'}
             >
               {editingProblem.status === 'closed' ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600 group-hover:hidden" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:hidden" viewBox="0 0 20 20" fill="#FF5958">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="#FF5958">
                   <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-              )}
-              {editingProblem.status === 'closed' ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 hidden group-hover:block" viewBox="0 0 20 20" fill="#FF5958">
-                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600 hidden group-hover:block" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               )}
             </button>

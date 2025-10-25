@@ -114,12 +114,12 @@ const OrdersNew: React.FC = () => {
           animation: isDragging ? 'none' : 'slideUp 0.1s ease-out',
           transform: `translateY(${dragY}px)`
         }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <div 
           className="flex justify-center pt-2 pb-2 cursor-grab active:cursor-grabbing"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
         >
           <div className="w-14 h-1.5 bg-gray-300 hover:bg-primary-azr transition-all duration-600 rounded-full"></div>
         </div>
@@ -137,38 +137,21 @@ const OrdersNew: React.FC = () => {
                 setOrderStatus(newStatus);
                 setTimeout(() => e.currentTarget.blur(), 0);
               }}
-              className="group w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
                 borderColor: orderStatus === 'completed' ? '#39A8FB' : '#FF9151'
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#F3F4F6';
-                e.currentTarget.style.borderColor = orderStatus === 'completed' ? '#FF9151' : '#39A8FB';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'white';
-                e.currentTarget.style.borderColor = orderStatus === 'completed' ? '#39A8FB' : '#FF9151';
-              }}
               title={orderStatus === 'completed' ? 'Segna come programmato' : 'Segna come effettuato'}
             >
               {orderStatus === 'completed' ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-azr group-hover:hidden" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-azr" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:hidden" viewBox="0 0 20 20" fill="#FF9151">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="#FF9151">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                </svg>
-              )}
-              {orderStatus === 'completed' ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 hidden group-hover:block" viewBox="0 0 20 20" fill="#FF9151">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600 hidden group-hover:block" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               )}
             </button>
@@ -221,8 +204,8 @@ const OrdersNew: React.FC = () => {
                       }
                     }}
                     placeholder="0.00"
-                    className="flex-1 pl-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
-                    style={{ maxWidth: '100px' }}
+                    className="flex-1 pl-1 pt-1.5 pb-0.5 pr-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
+                    style={{ maxWidth: '95px' }}
                   />
                 </div>
               </div>

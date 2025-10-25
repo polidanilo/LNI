@@ -76,7 +76,7 @@ const Login: React.FC = () => {
           }}
         >
           {/* Immagine protagonista */}
-          <div className="px-8 pt-8 pb-2 bg-white flex items-center justify-center">
+          <div className="pl-5 pt-8 pb-2 bg-white flex items-center justify-center">
             <img src="/logonotag.jpg" alt="LNINazioni" 
               className="w-full h-auto object-contain rounded-2xl"
               style={{maxHeight: '200px'}}
@@ -211,7 +211,7 @@ const Login: React.FC = () => {
             </form>
 
             {/* Switch Accesso/Registrazione */}
-            <div className="black text-center mt-3 mb-6">
+            <div className="black text-center mt-5 mb-8">
               <button
                 type="button"
                 onClick={() => {

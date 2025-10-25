@@ -58,14 +58,14 @@ const Orders: React.FC = () => {
     }
   }, [seasons, selectedSeason, setSelectedSeason, hasAutoSelected]);
 
-  // Auto-select shift "Primo" (shift_number 1) when shifts are loaded
+  // Auto-select shift "Sesto" (shift_number 6) when shifts are loaded
   React.useEffect(() => {
     if (shifts && shifts.length > 0 && !selectedShift && selectedSeason && hasAutoSelected) {
-      const shiftPrimo = shifts.find(s => s.shift_number === 1);
-      if (shiftPrimo) {
-        setSelectedShift(shiftPrimo);
+      const shiftSesto = shifts.find(s => s.shift_number === 6);
+      if (shiftSesto) {
+        setSelectedShift(shiftSesto);
       } else {
-        setSelectedShift(shifts[0]);
+        setSelectedShift(shifts[shifts.length - 1]);
       }
     }
   }, [shifts, selectedShift, selectedSeason, setSelectedShift, hasAutoSelected]);
@@ -172,14 +172,14 @@ const Orders: React.FC = () => {
             <div 
               className="relative overflow-hidden rounded-2xl shadow-sm mb-4"
               style={{
-                height: '80px',
-                backgroundImage: 'url(/orders3.png)', // ← Modifica qui il nome dell'immagine
+                height: '100px',
+                backgroundImage: 'url(/orders4.png)', // ← Modifica qui il nome dell'immagine
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
             >
               {/* Overlay scuro per oscurare l'immagine */}
-              <div className="absolute inset-0 bg-black opacity-35"></div>
+              <div className="absolute inset-0 bg-black opacity-30"></div>
               
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
@@ -204,8 +204,10 @@ const Orders: React.FC = () => {
             value={selectedSeason?.id || ''}
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
-            className="px-0 py-1 bg-transparent border-b-2 border-primary-azr text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
-            style={{backgroundColor: 'transparent'}}
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
+            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
           >
             <option value="">Seleziona stagione</option>
             {seasons?.map((season) => (
@@ -220,8 +222,10 @@ const Orders: React.FC = () => {
             value={selectedShift?.id || ''}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
-            className="px-0 py-1 bg-transparent border-b-2 border-primary-azr text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
-            style={{backgroundColor: 'transparent'}}
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
+            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
           >
             <option value="">
               {shiftsLoading ? 'Caricamento...' : 
@@ -240,7 +244,7 @@ const Orders: React.FC = () => {
 
       {/* Tab Ordini o Messaggio Empty State */}
       {selectedShift ? (
-        <div style={{backgroundColor: '#FFF4EF', zIndex: 1, position: 'relative'}} className="px-4 pb-9 mt-16" >
+        <div style={{backgroundColor: '#FFF4EF', zIndex: 1, position: 'relative'}} className="px-4 pb-9 mt-8" >
         <div className="bg-white rounded-3xl px-4 pb-10 mt-6 mb-8 shadow-sm relative" style={{paddingBottom: '15px',
           background: 'linear-gradient(white, white) padding-box, linear-gradient(45deg, #39A8FB 0%, #39A8FB 85%, #FF9151 85%) border-box',
           border: '0px solid transparent',

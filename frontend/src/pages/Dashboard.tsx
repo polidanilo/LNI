@@ -78,18 +78,18 @@ const Dashboard: React.FC = () => {
     }
   }, [seasons, selectedSeason, setSelectedSeason, hasAutoSelected]);
 
-  // Auto-select shift "Primo" (shift_number 1) when shifts are loaded
+  // Auto-select shift "Sesto" (shift_number 6) when shifts are loaded
   useEffect(() => {
     if (shifts && shifts.length > 0 && !selectedShift && selectedSeason && hasAutoSelected) {
-      // Try to find shift with shift_number 1 (Primo)
-      const shiftPrimo = shifts.find(s => s.shift_number === 1);
-      if (shiftPrimo) {
-        console.log('🎯 Auto-selecting shift Primo:', shiftPrimo);
-        setSelectedShift(shiftPrimo);
+      // Try to find shift with shift_number 6 (Sesto)
+      const shiftSesto = shifts.find(s => s.shift_number === 6);
+      if (shiftSesto) {
+        console.log('🎯 Auto-selecting shift Sesto:', shiftSesto);
+        setSelectedShift(shiftSesto);
       } else {
-        // Fallback to first shift if Primo not found
-        console.log('⚠️ Shift Primo not found, selecting first shift:', shifts[0]);
-        setSelectedShift(shifts[0]);
+        // Fallback to last shift if Sesto not found
+        console.log('⚠️ Shift Sesto not found, selecting last shift:', shifts[shifts.length - 1]);
+        setSelectedShift(shifts[shifts.length - 1]);
       }
     }
   }, [shifts, selectedShift, selectedSeason, setSelectedShift, hasAutoSelected]);
@@ -274,7 +274,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="h-screen overflow-hidden" style={{backgroundColor: '#FFF4EF'}}>
-      <CustomScrollbar maxHeight="100vh" onScroll={(scrollTop) => setScrollY(scrollTop)} hideOnMobile={true}>
+      <CustomScrollbar maxHeight="100vh" onScroll={(scrollTop) => setScrollY(scrollTop)} hideOnMobile={false}>
         <div className="pb-9" style={{backgroundColor: '#FFF4EF'}}>
       {/* Top Bar con Saluto e Logout */}
       <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pt-8 pb-0.5 relative">
@@ -297,7 +297,7 @@ const Dashboard: React.FC = () => {
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
                 <h1 className="text-3xl font-bold font-greycliff text-white">
-                  Ciao,<br></br>{currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
+                  Home: ciao,<br></br>{currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
               </div>
             </div>
             
@@ -315,7 +315,7 @@ const Dashboard: React.FC = () => {
               setSelectedShift(null);
               navigate('/login');
             }}
-            className="pl-2 pr-1 py-1.5 mt-0.5 rounded-full"
+            className="pl-2 pr-0 py-1.5 mt-0.5 rounded-full"
             title="Logout"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -383,7 +383,7 @@ const Dashboard: React.FC = () => {
                 width: '180px',
                 height: '30px',
                 backgroundColor: '#10B981',
-                top: '54%',
+                top: '59%',
                 right: '4%',
                 opacity: 0.9,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -396,7 +396,7 @@ const Dashboard: React.FC = () => {
                 width: '190px',
                 height: '20px',
                 backgroundColor: '#10B981',
-                top: '45%',
+                top: '50%',
                 right: '10%',
                 opacity: 0.9,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -409,7 +409,7 @@ const Dashboard: React.FC = () => {
                 width: '35px',
                 height: '15px',
                 backgroundColor: '#10B981',
-                top: '60%',
+                top: '65%',
                 left: '55%',
                 opacity: 0.6,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -423,7 +423,7 @@ const Dashboard: React.FC = () => {
                 width: '65px',
                 height: '25px',
                 backgroundColor: '#10B981',
-                top: '49%',
+                top: '54%',
                 left: '6%',
                 opacity: 0.4,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -437,7 +437,7 @@ const Dashboard: React.FC = () => {
                 width: '45px',
                 height: '20px',
                 backgroundColor: '#10B981',
-                top: '25%',
+                top: '30%',
                 right: '13%',
                 opacity: 0,
                 transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
@@ -455,7 +455,7 @@ const Dashboard: React.FC = () => {
               <div 
                 className="absolute cursor-pointer transition-transform hover:scale-105"
                 style={{
-                  left: '18%',
+                  left: '14%',
                   top: '70%',
                   transform: 'translate(-50%, -50%)',
                   zIndex: 20
@@ -463,14 +463,14 @@ const Dashboard: React.FC = () => {
                 onClick={() => navigate('/orders')}
               >
                 <div 
-                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-32 h-32 rounded-full flex flex-col items-center justify-center"
+                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-26 h-26 rounded-full flex flex-col items-center justify-center"
                   style={{backgroundColor: '#39A8FB'}}
                 >
                   <div className="text-white text-center">
                     <div className="text-2xl font-bold font-greycliff">
-                      €{shiftStats?.total_orders_amount?.toFixed(0) || '0'}
+                      €{recentOrders?.filter(o => o.status === 'completed').reduce((sum, o) => sum + parseFloat(String(o.amount)), 0).toFixed(0) || '0'}
                     </div>
-                    <div className="text-xs font-medium mt-0 uppercase"> di Spese <br /> totali</div>
+                    <div className="text-xs font-medium mt-0 uppercase">Spese <br /> totali</div>
                   </div>
                 </div>
               </div>
@@ -479,7 +479,7 @@ const Dashboard: React.FC = () => {
               <div 
                 className="absolute cursor-pointer transition-transform hover:scale-105"
                 style={{
-                  left: '49%',
+                  left: '50%',
                   top: '50%',
                   transform: 'translate(-50%, -50%)',
                   zIndex: 10
@@ -503,7 +503,7 @@ const Dashboard: React.FC = () => {
               <div 
                 className="absolute cursor-pointer transition-transform hover:scale-105"
                 style={{
-                  right: '22%',
+                  right: '14%',
                   top: '30%',
                   transform: 'translate(50%, -50%)',
                   zIndex: 20
@@ -511,12 +511,12 @@ const Dashboard: React.FC = () => {
                 onClick={() => navigate('/works')}
               >
                 <div 
-                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-28 h-28 rounded-full flex flex-col items-center justify-center"
+                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-26 h-26 rounded-full flex flex-col items-center justify-center"
                   style={{backgroundColor: ' rgb(255, 145, 81)'}}
                 >
                   <div className="text-white text-center">
                     <div className="text-2xl font-bold font-greycliff">
-                      {shiftStats?.total_works_count || 0}
+                      {recentWorks?.filter(w => w.status === 'completed').length || 0}
                     </div>
                     <div className="text-xs font-medium mt-0 uppercase">Lavori  <br /> fatti</div>
                   </div>
@@ -791,6 +791,7 @@ const Dashboard: React.FC = () => {
                             <span>{order.title}</span>
                           </div>
                         </div>
+
                         <div className="flex flex-col items-center gap-2">
                           <button
                             onClick={(e) => handleToggleOrderStatus(e, order)}

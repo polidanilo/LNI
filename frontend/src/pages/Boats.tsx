@@ -59,14 +59,14 @@ const Boats: React.FC = () => {
     }
   }, [seasons, selectedSeason, setSelectedSeason, hasAutoSelected]);
 
-  // Auto-select shift "Primo" (shift_number 1) when shifts are loaded
+  // Auto-select shift "Sesto" (shift_number 6) when shifts are loaded
   React.useEffect(() => {
     if (shifts && shifts.length > 0 && !selectedShift && selectedSeason && hasAutoSelected) {
-      const shiftPrimo = shifts.find(s => s.shift_number === 1);
-      if (shiftPrimo) {
-        setSelectedShift(shiftPrimo);
+      const shiftSesto = shifts.find(s => s.shift_number === 6);
+      if (shiftSesto) {
+        setSelectedShift(shiftSesto);
       } else {
-        setSelectedShift(shifts[0]);
+        setSelectedShift(shifts[shifts.length - 1]);
       }
     }
   }, [shifts, selectedShift, selectedSeason, setSelectedShift, hasAutoSelected]);
@@ -179,7 +179,7 @@ const Boats: React.FC = () => {
             <div 
               className="relative overflow-hidden rounded-2xl shadow-sm mb-4"
               style={{
-                height: '80px',
+                height: '100px',
                 backgroundImage: 'url(/boats.png)', // ← Modifica qui il nome dell'immagine
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -211,8 +211,10 @@ const Boats: React.FC = () => {
             value={selectedSeason?.id || ''}
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
-            className="px-0 py-1 bg-transparent border-b-2 border-primary-ros text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
-            style={{backgroundColor: 'transparent'}}
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
+            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
           >
             <option value="">Seleziona stagione</option>
             {seasons?.map((season) => (
@@ -227,8 +229,10 @@ const Boats: React.FC = () => {
             value={selectedShift?.id || ''}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
-            className="px-0 py-1 bg-transparent border-b-2 border-primary-ros text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
-            style={{backgroundColor: 'transparent'}}
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
+            style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
           >
             <option value="">
               {shiftsLoading ? 'Caricamento...' : 
@@ -247,7 +251,7 @@ const Boats: React.FC = () => {
 
       {/* Tab Problemi o Messaggio Empty State */}
       {selectedShift ? (
-        <div style={{backgroundColor: '#FFF4EF', zIndex: 1, position: 'relative'}} className="px-4 pb-9 mt-16" >
+        <div style={{backgroundColor: '#FFF4EF', zIndex: 1, position: 'relative'}} className="px-4 pb-9 mt-8" >
           <div className="bg-white rounded-3xl px-4 pb-10 mt-6 mb-8 shadow-sm relative" style={{paddingBottom: '15px',
             background: 'linear-gradient(white, white) padding-box, linear-gradient(45deg, #FF5958 0%, #FF5958 85%, #39A8FB 85%) border-box',
             border: '0px solid transparent',
