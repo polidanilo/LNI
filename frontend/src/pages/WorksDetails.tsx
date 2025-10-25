@@ -282,7 +282,7 @@ const WorksDetails: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
-                className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
+                className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300 py-1"
                 style={{
                   width: '120px',
                   backgroundColor: editingWork?.status === 'completed' ? '#10B981' : '#FF9151',
@@ -302,8 +302,21 @@ const WorksDetails: React.FC = () => {
             {!showDeleteConfirm ? (
               <div className="flex gap-4">
                 <button
-                  onClick={handleClose}
+                  onClick={() => setShowDeleteConfirm(true)}
                   className="text-sm font-semibold transition-all duration-300"
+                  style={{ color: '#6B7280' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#FF9151';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#6B7280';
+                  }}
+                >
+                  Elimina
+                </button>
+                <button
+                  onClick={handleClose}
+                  className="text-sm mr-1 font-semibold transition-all duration-300"
                   style={{
                     backgroundColor: 'white',
                     color: '#6B7280'
@@ -316,19 +329,6 @@ const WorksDetails: React.FC = () => {
                   }}
                 >
                   Chiudi
-                </button>
-                <button
-                  onClick={() => setShowDeleteConfirm(true)}
-                  className="text-sm mr-1 font-semibold transition-all duration-300"
-                  style={{ color: '#6B7280' }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#FF9151';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#6B7280';
-                  }}
-                >
-                  Elimina
                 </button>
               </div>
             ) : (

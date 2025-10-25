@@ -553,7 +553,7 @@ const Dashboard: React.FC = () => {
                   {openProblems.slice(0, 6).map((problem) => (
                     <div
                       key={problem.id}
-                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-5 pt-3 pr-3"
+                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
                       style={{
                         backgroundColor: problem.status === 'closed' 
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -580,7 +580,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span>•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
@@ -655,7 +655,7 @@ const Dashboard: React.FC = () => {
                   {recentWorks.map((work) => (
                     <div
                       key={work.id}
-                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-5 pt-3 pr-3"
+                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
                       style={{
                         backgroundColor: work.status === 'completed'
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -680,10 +680,10 @@ const Dashboard: React.FC = () => {
                       <div className="flex items-start justify-between gap-3">
                         {/* Sinistra: Titolo, categoria, data */}
                         <div className="flex-1 min-w-0">
-                          <h4 className="pt-0 text-base font-semibold black mb-1">
-                            {work.title}
+                          <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
+                            {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span>•</span>
                             <span>{work.category}</span>
@@ -756,7 +756,7 @@ const Dashboard: React.FC = () => {
                   {recentOrders.map((order) => (
                     <div
                       key={order.id}
-                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-5 pt-3 pr-3"
+                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
                       style={{
                         backgroundColor: order.status === 'completed'
                           ? 'rgb(57, 168, 251, 0.4)'
@@ -783,12 +783,12 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
+                          <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
                             <span>•</span>
                             <span>{order.category}</span>
                             <span>•</span>
-                            <span className="break-words">{order.title}</span>
+                            <span className="break-words truncate">{order.title.length > 25 ? order.title.substring(0, 25) : order.title}</span>
                           </div>
                         </div>
 

@@ -189,7 +189,7 @@ const Works: React.FC = () => {
               </div>
             </div>
             
-            <p className="pl-2 pt-2 text-sm text-gray-600">
+            <p className="pl-2 pt-2 text-sm black">
               Ecco i lavori effettuati nel turno selezionato:
             </p>
           </div>
@@ -348,7 +348,7 @@ const Works: React.FC = () => {
                 {filteredWorks.map((work) => (
                   <div
                     key={work.id}
-                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-5 pt-3 pr-3"
+                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
                     style={{
                       backgroundColor: work.status === 'completed' 
                         ? 'rgba(16, 185, 129, 0.3)'
@@ -374,10 +374,10 @@ const Works: React.FC = () => {
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
-                        <h4 className="pt-0 text-base font-semibold black mb-1">
-                          {work.title || 'N/A'}
+                        <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
+                          {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
+                        <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
                           <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span>•</span>
                           <span>{work.category || 'Categoria'}</span>

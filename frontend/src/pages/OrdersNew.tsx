@@ -86,7 +86,7 @@ const OrdersNew: React.FC = () => {
           animation: 'slideUp 0.1s ease-out',
           background: `
             linear-gradient(white, white) padding-box,
-            linear-gradient(135deg, #FF5958, #39A8FB 33%, #FF9151 66%, #10B981) border-box
+            linear-gradient(135deg, #FF5958, #FF9151 33%, #39A8FB 66%, #10B981) border-box
           `,
           border: '2px solid transparent',
           borderBottom: '0'
@@ -242,7 +242,7 @@ const OrdersNew: React.FC = () => {
             <button
               onClick={handleAddOrder}
               disabled={createOrderMutation.isPending}
-              className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
+              className="py-1 text-sm font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 width: '120px',
                 backgroundColor: orderStatus === 'completed' ? '#39A8FB' : '#FF9151',

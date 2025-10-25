@@ -189,7 +189,7 @@ const Orders: React.FC = () => {
               </div>
             </div>
             
-            <p className="pl-2 pt-2 text-sm text-gray-600">
+            <p className="pl-2 pt-2 text-sm black">
               Ecco gli ordini effettuati nel turno selezionato:
             </p>
           </div>
@@ -204,7 +204,7 @@ const Orders: React.FC = () => {
             value={selectedSeason?.id || ''}
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 black"
             style={{backgroundColor: 'transparent', borderColor: '#39A8FB'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#39A8FB'}
             onBlur={(e) => e.currentTarget.style.borderColor = '#39A8FB'}
@@ -222,7 +222,7 @@ const Orders: React.FC = () => {
             value={selectedShift?.id || ''}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 black"
             style={{backgroundColor: 'transparent', borderColor: '#10B981'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#10B981'}
             onBlur={(e) => e.currentTarget.style.borderColor = '#10B981'}
@@ -360,7 +360,7 @@ const Orders: React.FC = () => {
               <input
                 type="text"
                 placeholder="Cerca ordini"
-                className="w-full pl-8 pr-4 pb-1.5 pt-2 bg-transparent border-0 border-b-2 border-gray-300 text-sm transition-all duration-200 focus:outline-none focus:border-primary-azr text-gray-700"
+                className="w-full pl-8 pr-4 pb-1.5 pt-2 bg-transparent border-0 border-b-2 border-gray-300 text-sm transition-all duration-200 focus:outline-none focus:border-primary-azr black"
                 style={{backgroundColor: 'transparent', color: '#6B7280'}}
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
@@ -393,7 +393,7 @@ const Orders: React.FC = () => {
                 {filteredOrders.map((order) => (
                   <div
                     key={order.id}
-                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-5 pt-3 pr-3"
+                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
                     style={{
                       backgroundColor: order.status === 'completed' 
                         ? 'rgb(57, 168, 251, 0.4)'
@@ -422,12 +422,12 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black pl-0.5 mt-4 flex-wrap">
+                        <div className="flex items-center gap-1 text-sm black pl-0.5 mt-8 flex-wrap">
                           <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span>•</span>
                           <span>{order.category || 'Categoria'}</span>
                           <span>•</span>
-                          <span className="break-words">{order.title || 'N/A'}</span>
+                          <span className="break-words truncate">{order.title ? (order.title.length > 25 ? order.title.substring(0, 25) : order.title) : 'N/A'}</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">
