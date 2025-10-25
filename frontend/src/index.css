@@ -46,8 +46,8 @@
 /* Greycliff CF Font */
 @font-face {
   font-family: 'Greycliff CF';
-  src: url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff2') format('woff2'),
-       url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff') format('woff');
+  src: url('/fonts/Greycliff Heavy/GreycliffCF-Regular.woff2') format('woff2'),
+       url('/fonts/Greycliff Heavy/GreycliffCF-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -55,8 +55,8 @@
 
 @font-face {
   font-family: 'Greycliff CF';
-  src: url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff2') format('woff2'),
-       url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff') format('woff');
+  src: url('/fonts/Greycliff Heavy/GreycliffCF-Bold.woff2') format('woff2'),
+       url('/fonts/Greycliff Heavy/GreycliffCF-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -64,8 +64,8 @@
 
 @font-face {
   font-family: 'Greycliff CF';
-  src: url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff2') format('woff2'),
-       url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff') format('woff');
+  src: url('/fonts/Greycliff Heavy/GreycliffCF-Bold.woff2') format('woff2'),
+       url('/fonts/Greycliff Heavy/GreycliffCF-Bold.woff') format('woff');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -90,7 +90,7 @@
   }
 
   body {
-    font-family: 'Inter', 'MinorkSans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Greycliff CF', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: #FFFFFF !important;

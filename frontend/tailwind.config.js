@@ -75,8 +75,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Varela Round', 'system-ui', 'sans-serif'],
-        display: ['Racing Sans One', 'system-ui', 'sans-serif'],
+        sans: ['Greycliff CF', 'system-ui', 'sans-serif'],
+        display: ['Greycliff CF', 'system-ui', 'sans-serif'],
         greycliff: ['Greycliff CF', 'system-ui', 'sans-serif'],
       },
       boxShadow: {

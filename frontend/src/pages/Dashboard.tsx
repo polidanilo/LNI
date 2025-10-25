@@ -297,7 +297,7 @@ const Dashboard: React.FC = () => {
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
                 <h1 className="text-3xl font-bold font-greycliff text-white">
-                  Home: ciao,<br></br>{currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
+                  Benvenut* alla Home, {currentUser?.full_name || currentUser?.username || 'User'}!                </h1>
               </div>
             </div>
             

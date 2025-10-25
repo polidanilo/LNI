@@ -140,7 +140,7 @@ const WorksDetails: React.FC = () => {
       <div 
         className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
         style={{
-          height: '77vh',
+          height: '71vh',
           animation: 'slideUp 0.1s ease-out',
           background: `
             linear-gradient(white, white) padding-box,
