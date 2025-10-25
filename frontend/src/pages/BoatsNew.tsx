@@ -110,7 +110,7 @@ const BoatsNew: React.FC = () => {
         </div>
 
         <div className="pl-7 pr-7 py-4" style={{borderColor: '#0F4295'}}>
-          <div className="flex items-center justify-between max-w-2xl mx-auto mt-12">
+          <div className="flex items-center justify-between max-w-2xl mx-auto mt-6">
             <div>
               <h3 className="text-lg font-bold font-greycliff black">
                 Aggiungi problema
@@ -212,7 +212,7 @@ const BoatsNew: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -256,7 +256,7 @@ const BoatsNew: React.FC = () => {
         handleAddProblem();
       }}
       disabled={createProblemMutation.isPending}
-      className="py-2.5 rounded-full text-sm font-semibold transition-all duration-300 py-1"
+      className="py-2 rounded-full text-sm font-semibold transition-all duration-300 py-1"
       style={{
         width: '120px',
         backgroundColor: problemStatus === 'closed' ? '#10B981' : '#FF5958',

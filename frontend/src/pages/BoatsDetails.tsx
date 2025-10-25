@@ -143,7 +143,7 @@ const BoatsDetails: React.FC = () => {
 <div
   className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
   style={{
-    height: '74vh',
+    height: '82vh',
     animation: 'slideUp 0.2s ease-out',
     background: `
       linear-gradient(white, white) padding-box,
@@ -161,7 +161,7 @@ const BoatsDetails: React.FC = () => {
         </div>
 
         <div className="pl-7 pr-4 py-4" style={{borderColor: '#0F4295'}}>
-          <div className="flex items-center justify-between max-w-2xl mx-auto mt-12">
+          <div className="flex items-center justify-between max-w-2xl mx-auto mt-6">
             <h3 className="text-lg font-bold font-greycliff black">
               Dettagli problema
             </h3>
@@ -232,7 +232,7 @@ const BoatsDetails: React.FC = () => {
                   type="date"
                   value={editReportedDate}
                   onChange={(e) => setEditReportedDate(e.target.value)}
-                  className="flex-1 pl-1 pt-1 pb-0.5 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 pl-1 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
                 />
               </div>
 
@@ -247,7 +247,7 @@ const BoatsDetails: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -281,7 +281,7 @@ const BoatsDetails: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
-                className="py-2.5 rounded-full text-sm font-semibold transition-all duration-300 py-1"
+                className="py-2 rounded-full text-sm font-semibold transition-all duration-300 py-1"
                 style={{
                   width: '120px',
                   backgroundColor: editingProblem?.status === 'closed' ? '#10B981' : '#FF5958',
