@@ -154,7 +154,7 @@ const Dashboard: React.FC = () => {
   });
 
   // Fetch statistiche turno
-  const { data: shiftStats } = useQuery({
+  useQuery({
     queryKey: ['shift-stats', selectedShift?.id],
     queryFn: async () => {
       if (!selectedShift) return null;
