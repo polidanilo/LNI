@@ -23,11 +23,6 @@ const BoatsNew: React.FC = () => {
   const [problemForm, setProblemForm] = useState<ProblemForm>({ description: '', part_affected: '' });
   const [problemStatus, setProblemStatus] = useState<'open' | 'closed'>('open');
   
-  // Swipe down to dismiss
-  const [dragY, setDragY] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const startY = React.useRef(0);
-
   const { data: boats } = useQuery({
     queryKey: ['boats', selectedType],
     queryFn: async () => {
@@ -65,34 +60,6 @@ const BoatsNew: React.FC = () => {
     navigate('/boats');
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const scrollableElement = (e.target as HTMLElement).closest('[data-scrollable="true"]');
-    if (scrollableElement) {
-      const isAtTop = scrollableElement.scrollTop === 0;
-      if (!isAtTop) return;
-    }
-    startY.current = e.touches[0].clientY;
-    setIsDragging(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const currentY = e.touches[0].clientY;
-    const diff = currentY - startY.current;
-    if (diff > 0) {
-      setDragY(diff);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    if (dragY > 100) {
-      handleClose();
-    } else {
-      setDragY(0);
-    }
-  };
-
   const handleAddProblem = () => {
     if (!selectedBoat?.id) {
       alert('Seleziona un\'imbarcazione');
@@ -124,22 +91,16 @@ const BoatsNew: React.FC = () => {
       />
       
       <div 
-        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
+        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
         style={{
-          height: '68vh',
-          animation: isDragging ? 'none' : 'slideUp 0.2s ease-out',
-          background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
-          border: '2px solid transparent',
-          transform: `translateY(${dragY}px)`
+          height: '48vh',
+          animation: 'slideUp 0.2s ease-out'
         }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
       >
         <div 
-          className="flex justify-center pt-2 pb-2 cursor-grab active:cursor-grabbing"
+          className="flex justify-center pt-2 pb-2"
         >
-          <div className="w-14 h-1.5 bg-gray-300 hover:bg-primary-ros transition-all duration-600 rounded-full"></div>
+          <div className="w-14 h-1.5 bg-gray-300 rounded-full"></div>
         </div>
 
         <div className="pl-7 pr-7 py-4" style={{borderColor: '#0F4295'}}>
@@ -179,7 +140,7 @@ const BoatsNew: React.FC = () => {
 
         <div className="pl-6 pr-5 py-4 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
-            <div className="space-y-4 max-w-2xl mx-auto" data-scrollable="true">
+            <div className="space-y-4 max-w-2xl mx-auto">
               <select
                 value={selectedType}
                 onChange={(e) => {

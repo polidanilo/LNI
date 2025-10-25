@@ -377,14 +377,12 @@ const Works: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           {work.title || 'N/A'}
                         </h4>
-                        <div className="flex flex-col gap-0.5 text-xs text-gray-700 pl-0.5" style={{fontWeight: 500}}>
-                          <div className="flex items-center gap-1">
-                            <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
-                            <span>•</span>
-                            <span>{work.category || 'Categoria'}</span>
-                          </div>
-                          <div>{work.description || 'N/A'}</div>
-                          {work.notes && <div className="text-gray-600 italic">{work.notes.substring(0, 40)}{work.notes.length > 40 ? '...' : ''}</div>}
+                        <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
+                          <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                          <span>•</span>
+                          <span>{work.category || 'Categoria'}</span>
+                          <span>•</span>
+                          <span>{work.description || 'N/A'}</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

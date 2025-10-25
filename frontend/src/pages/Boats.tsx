@@ -384,14 +384,16 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex flex-col gap-0.5 text-xs text-gray-700 pl-0.5" style={{fontWeight: 500}}>
-                          <div className="flex items-center gap-1">
-                            <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
-                            <span>•</span>
-                            <span>{problem.boat_type || 'Categoria'}</span>
-                          </div>
-                          {problem.part_affected && <div>Parte: {problem.part_affected}</div>}
-                          <div className="text-gray-600">{problem.description ? (problem.description.substring(0, 40) + (problem.description.length > 40 ? '...' : '')) : 'N/A'}</div>
+                        <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
+                          <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                          <span>•</span>
+                          <span>{problem.boat_type || 'Categoria'}</span>
+                          {problem.part_affected && (
+                            <>
+                              <span>•</span>
+                              <span>{problem.part_affected}</span>
+                            </>
+                          )}
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

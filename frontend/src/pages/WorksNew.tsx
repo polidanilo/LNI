@@ -12,6 +12,7 @@ type WorkForm = {
   title: string;
   description: string;
   category: string;
+  notes: string;
 };
 
 const WorksNew: React.FC = () => {
@@ -19,13 +20,8 @@ const WorksNew: React.FC = () => {
   const queryClient = useQueryClient();
   const { selectedShift } = useAppContext();
 
-  const [workForm, setWorkForm] = useState<WorkForm>({ title: '', description: '', category: '' });
-  const [workStatus, setWorkStatus] = useState<'pending' | 'completed'>('completed');
-  
-  // Swipe down to dismiss
-  const [dragY, setDragY] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const startY = React.useRef(0);
+  const [workForm, setWorkForm] = useState<WorkForm>({ title: '', description: '', category: 'Campo', notes: '' });
+  const [workStatus, setWorkStatus] = useState<'pending' | 'completed'>('pending');
 
   const createWorkMutation = useMutation({
     mutationFn: async (payload: Omit<Work, 'id'>) => {
@@ -44,34 +40,6 @@ const WorksNew: React.FC = () => {
 
   const handleClose = () => {
     navigate('/works');
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const scrollableElement = (e.target as HTMLElement).closest('[data-scrollable="true"]');
-    if (scrollableElement) {
-      const isAtTop = scrollableElement.scrollTop === 0;
-      if (!isAtTop) return;
-    }
-    startY.current = e.touches[0].clientY;
-    setIsDragging(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const currentY = e.touches[0].clientY;
-    const diff = currentY - startY.current;
-    if (diff > 0) {
-      setDragY(diff);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    if (dragY > 100) {
-      handleClose();
-    } else {
-      setDragY(0);
-    }
   };
 
   const handleAddWork = () => {
@@ -110,20 +78,16 @@ const WorksNew: React.FC = () => {
       />
       
       <div 
-        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
+        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
         style={{
           height: '56vh',
-          animation: isDragging ? 'none' : 'slideUp 0.1s ease-out',
-          transform: `translateY(${dragY}px)`
+          animation: 'slideUp 0.1s ease-out'
         }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
       >
         <div 
-          className="flex justify-center pt-2 pb-2 cursor-grab active:cursor-grabbing"
+          className="flex justify-center pt-2 pb-2"
         >
-          <div className="w-14 h-1.5 bg-gray-300 hover:bg-primary-ara transition-all duration-600 rounded-full"></div>
+          <div className="w-14 h-1.5 bg-gray-300 rounded-full"></div>
         </div>
 
         <div className="pl-7 pr-7 py-4" style={{borderColor: '#0F4295'}}>
@@ -162,7 +126,7 @@ const WorksNew: React.FC = () => {
 
         <div className="pl-6 pr-5 py-4 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
-            <div className="space-y-4 max-w-2xl mx-auto" data-scrollable="true">
+            <div className="space-y-4 max-w-2xl mx-auto">
               <input
                 type="text"
                 value={workForm.title}

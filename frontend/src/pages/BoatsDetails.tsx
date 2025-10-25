@@ -20,11 +20,6 @@ const BoatsDetails: React.FC = () => {
   const [parts, setParts] = useState<string[]>([]);
   const [users, setUsers] = useState<Array<{ id: number; username: string }>>([]);
   
-  // Swipe down to dismiss
-  const [dragY, setDragY] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const startY = React.useRef(0);
-
   const { data: problem, isLoading } = useQuery({
     queryKey: ['problem', id],
     queryFn: async () => {
@@ -84,34 +79,6 @@ const BoatsDetails: React.FC = () => {
 
   const handleClose = () => {
     navigate('/boats');
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const scrollableElement = (e.target as HTMLElement).closest('[data-scrollable="true"]');
-    if (scrollableElement) {
-      const isAtTop = scrollableElement.scrollTop === 0;
-      if (!isAtTop) return;
-    }
-    startY.current = e.touches[0].clientY;
-    setIsDragging(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const currentY = e.touches[0].clientY;
-    const diff = currentY - startY.current;
-    if (diff > 0) {
-      setDragY(diff);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    if (dragY > 100) {
-      handleClose();
-    } else {
-      setDragY(0);
-    }
   };
 
   const handleToggleStatus = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -174,28 +141,24 @@ const BoatsDetails: React.FC = () => {
       />
       
 <div
-  className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3 transition-transform"
+  className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
   style={{
     height: '74vh',
-    animation: isDragging ? 'none' : 'slideUp 0.2s ease-out',
+    animation: 'slideUp 0.2s ease-out',
     background: `
       linear-gradient(white, white) padding-box,
       linear-gradient(135deg, #FF5958, #39A8FB 33%, #FF9151 66%, #10B981) border-box
     `,
     border: '2px solid transparent',
-    WebkitMask: 'linear-gradient(to bottom, white 99%, white 100%)',
-    mask: 'linear-gradient(to bottom, white 98%, transparent 100%)',
-    transform: `translateY(${dragY}px)`
+    WebkitMask: 'linear-gradient(to bottom, white 98%, white 100%)',
+    mask: 'linear-gradient(to bottom, white 98%, transparent 100%)'
   }}
-  onTouchStart={handleTouchStart}
-  onTouchMove={handleTouchMove}
-  onTouchEnd={handleTouchEnd}
 >
 
         <div 
-          className="flex justify-center pt-2 pb-2 cursor-grab active:cursor-grabbing"
+          className="flex justify-center pt-2 pb-2"
         >
-          <div className="w-14 h-1.5 bg-gray-300 hover:bg-primary-ros transition-all duration-600 rounded-full"></div>
+          <div className="w-14 h-1.5 bg-gray-300 rounded-full"></div>
         </div>
 
         <div className="pl-7 pr-4 py-4" style={{borderColor: '#0F4295'}}>
@@ -228,7 +191,7 @@ const BoatsDetails: React.FC = () => {
 
         <div className="pl-6 pr-3.5 py-4 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
-            <div className="space-y-4 max-w-2xl mx-auto" data-scrollable="true">
+            <div className="space-y-4 max-w-2xl mx-auto">
               <div className="w-full px-1 py-1 bg-transparent border-0 border-b-2 border-gray-300 text-sm black">
                 {editingProblem.boat_type || 'Categoria'}
               </div>
@@ -248,33 +211,34 @@ const BoatsDetails: React.FC = () => {
                 ))}
               </select>
 
-              {/* Segnalato da e In data */}
-              <div className="flex pt-4 gap-4">
-                <div className="flex-1 flex items-center gap-3">
-                  <div className="text-sm pl-1 black whitespace-nowrap">Segnalato da</div>
-                  <select
-                    value={editReportedBy || ''}
-                    onChange={(e) => setEditReportedBy(Number(e.target.value))}
-                    className="flex-1 px-0 py-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
-                  >
-                    <option value="">Seleziona utente</option>
-                    {users.map(user => (
-                      <option key={user.id} value={user.id}>{user.username}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="flex-1 flex items-center gap-3">
-                  <div className="text-sm black whitespace-nowrap">In data</div>
-                  <input
-                    type="date"
-                    value={editReportedDate}
-                    onChange={(e) => setEditReportedDate(e.target.value)}
-                    className="flex-1 pl-1 pt-1 pb-0.5 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
-                  />
-                </div>
+              {/* Segnalato da */}
+              <div className="flex items-center gap-3">
+                <div className="text-sm pl-1 black whitespace-nowrap">Segnalato da</div>
+                <select
+                  value={editReportedBy || ''}
+                  onChange={(e) => setEditReportedBy(Number(e.target.value))}
+                  className="flex-1 px-0 py-1 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
+                >
+                  <option value="">Seleziona utente</option>
+                  {users.map(user => (
+                    <option key={user.id} value={user.id}>{user.username}</option>
+                  ))}
+                </select>
               </div>
 
-              <div>
+              {/* In data */}
+              <div className="flex items-center gap-3">
+                <div className="text-sm pl-1 black whitespace-nowrap">In data</div>
+                <input
+                  type="date"
+                  value={editReportedDate}
+                  onChange={(e) => setEditReportedDate(e.target.value)}
+                  className="flex-1 pl-1 pt-1 pb-0.5 bg-transparent border-0 border-b-2 border-primary-ros text-sm black transition-all duration-200 focus:outline-none"
+                />
+              </div>
+
+              {/* Descrizione */}
+              <div className="mt-2">
                 <textarea
                   value={editDescription}
                   onChange={(e) => {

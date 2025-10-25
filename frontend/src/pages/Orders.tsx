@@ -422,14 +422,12 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex flex-col gap-0.5 text-xs text-gray-700 pl-0.5" style={{fontWeight: 500}}>
-                          <div className="flex items-center gap-1">
-                            <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
-                            <span>•</span>
-                            <span>{order.category || 'Categoria'}</span>
-                          </div>
-                          <div>{order.title || 'N/A'}</div>
-                          {order.notes && <div className="text-gray-600 italic">{order.notes.substring(0, 40)}{order.notes.length > 40 ? '...' : ''}</div>}
+                        <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
+                          <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                          <span>•</span>
+                          <span>{order.category || 'Categoria'}</span>
+                          <span>•</span>
+                          <span>{order.title || 'N/A'}</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

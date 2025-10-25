@@ -383,10 +383,10 @@ const Dashboard: React.FC = () => {
                 width: '180px',
                 height: '30px',
                 backgroundColor: '#10B981',
-                top: '63%',
+                top: '64%',
                 right: '4%',
                 opacity: 0.9,
-                transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -399,7 +399,7 @@ const Dashboard: React.FC = () => {
                 top: '54%',
                 right: '10%',
                 opacity: 0.9,
-                transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -409,10 +409,10 @@ const Dashboard: React.FC = () => {
                 width: '35px',
                 height: '15px',
                 backgroundColor: '#10B981',
-                top: '69%',
+                top: '70%',
                 left: '55%',
                 opacity: 0.6,
-                transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -423,10 +423,10 @@ const Dashboard: React.FC = () => {
                 width: '65px',
                 height: '25px',
                 backgroundColor: '#10B981',
-                top: '58%',
+                top: '50%',
                 left: '6%',
                 opacity: 0.4,
-                transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -440,7 +440,7 @@ const Dashboard: React.FC = () => {
                 top: '34%',
                 right: '13%',
                 opacity: 0,
-                transform: `translateY(${-scrollY * 1.2}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${-scrollY * 0.7}px)` // Percorre 1.5x la distanza verso l'alto
               }}
             />
 
@@ -540,7 +540,7 @@ const Dashboard: React.FC = () => {
               </h3>
               
               {problemsLoading ? (
-                <div className="text-center py-8">
+                <div className="text-center py-16">
                   <div className="text-gray-500 text-sm">Caricamento...</div>
                 </div>
               ) : !openProblems || openProblems.length === 0 ? (
@@ -577,10 +577,10 @@ const Dashboard: React.FC = () => {
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="pt-0 text-base font-semibold black mb-0">
+                          <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
+                          <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span>•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
@@ -642,7 +642,7 @@ const Dashboard: React.FC = () => {
               </h3>
               
               {worksLoading ? (
-                <div className="text-center py-8">
+                <div className="text-center py-16">
                   <div className="text-gray-500 text-sm">Caricamento...</div>
                 </div>
               ) : !recentWorks || recentWorks.length === 0 ? (
@@ -678,17 +678,17 @@ const Dashboard: React.FC = () => {
                       onClick={() => navigate(`/works?id=${work.id}`)}
                     >
                       <div className="flex items-start justify-between">
-                        {/* Sinistra: Titolo, user, categoria, data */}
+                        {/* Sinistra: Titolo, categoria, data */}
                         <div className="flex-1">
-                          <h4 className="pt-0 text-base font-semibold black mb-0">
+                          <h4 className="pt-0 text-base font-semibold black mb-1">
                             {work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm text-gray-600 pl-0.5">
+                          <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span>•</span>
                             <span>{work.category}</span>
                             <span>•</span>
-                            <span>{work.created_by || 'User'}</span>
+                            <span>{work.description || 'N/A'}</span>
                           </div>
                         </div>
 
@@ -743,7 +743,7 @@ const Dashboard: React.FC = () => {
               </h3>
               
               {ordersLoading ? (
-                <div className="text-center py-8">
+                <div className="text-center py-16">
                   <div className="text-gray-500 text-sm">Caricamento...</div>
                 </div>
               ) : !recentOrders || recentOrders.length === 0 ? (
@@ -783,14 +783,12 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex flex-col gap-0.5 text-xs text-gray-700 pl-0.5" style={{fontWeight: 500}}>
-                            <div className="flex items-center gap-1">
-                              <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
-                              <span>•</span>
-                              <span>{order.category}</span>
-                            </div>
-                            <div>{order.title}</div>
-                            {order.notes && <div className="text-gray-600 italic">{order.notes.substring(0, 40)}{order.notes.length > 40 ? '...' : ''}</div>}
+                          <div className="flex items-center gap-1 text-xs black pl-0.5 mt-2">
+                            <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
+                            <span>•</span>
+                            <span>{order.category}</span>
+                            <span>•</span>
+                            <span>{order.title}</span>
                           </div>
                         </div>
 
