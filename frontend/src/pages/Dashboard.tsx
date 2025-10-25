@@ -688,7 +688,7 @@ const Dashboard: React.FC = () => {
                             <span>•</span>
                             <span>{work.category}</span>
                             <span>•</span>
-                            <span className="break-words">{work.description || 'N/A'}</span>
+                            <span className="break-words">{work.created_by || 'N/A'}</span>
                           </div>
                         </div>
 

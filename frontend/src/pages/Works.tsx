@@ -382,7 +382,7 @@ const Works: React.FC = () => {
                           <span>•</span>
                           <span>{work.category || 'Categoria'}</span>
                           <span>•</span>
-                          <span className="break-words">{work.description || 'N/A'}</span>
+                          <span className="break-words">{work.created_by || 'N/A'}</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

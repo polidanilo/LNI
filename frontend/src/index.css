@@ -46,8 +46,8 @@
 /* Greycliff CF Font */
 @font-face {
   font-family: 'Greycliff CF';
-  src: url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFRegular.woff2') format('woff2'),
-       url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFRegular.woff') format('woff');
+  src: url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff2') format('woff2'),
+       url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -55,8 +55,8 @@
 
 @font-face {
   font-family: 'Greycliff CF';
-  src: url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFBold.woff2') format('woff2'),
-       url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFBold.woff') format('woff');
+  src: url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff2') format('woff2'),
+       url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -64,8 +64,8 @@
 
 @font-face {
   font-family: 'Greycliff CF';
-  src: url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFExtraBoldRegular.woff2') format('woff2'),
-       url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFExtraBoldRegular.woff') format('woff');
+  src: url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff2') format('woff2'),
+       url('/fonts/Greycliff Heavy/GreycliffCF-Heavy.woff') format('woff');
   font-weight: 800;
   font-style: normal;
   font-display: swap;

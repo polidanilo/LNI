@@ -151,7 +151,7 @@ const OrdersDetails: React.FC = () => {
       <div 
         className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
         style={{
-          height: '74vh',
+          height: '77vh',
           animation: 'slideUp 0.1s ease-out',
           background: `
             linear-gradient(white, white) padding-box,
@@ -168,7 +168,7 @@ const OrdersDetails: React.FC = () => {
         </div>
 
         <div className="pl-7 pr-7 py-4" style={{borderColor: '#0F4295'}}>
-          <div className="flex items-center justify-between max-w-2xl mx-auto mt-12">
+          <div className="flex items-center justify-between max-w-2xl mx-auto mt-2">
             <div>
               <h3 className="text-lg font-bold font-greycliff black">
                 Dettagli ordine
@@ -268,7 +268,7 @@ const OrdersDetails: React.FC = () => {
                 <select
                   value={editCreatedBy || ''}
                   onChange={(e) => setEditCreatedBy(Number(e.target.value))}
-                  className="flex-1 px-0 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 px-0 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
                 >
                   <option value="">Seleziona utente</option>
                   {users.map(user => (
@@ -284,7 +284,7 @@ const OrdersDetails: React.FC = () => {
                   type="date"
                   value={editOrderDate}
                   onChange={(e) => setEditOrderDate(e.target.value)}
-                  className="flex-1 pl-1 pt-1 pb-0.5 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 pt-1.5 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
                 />
               </div>
 
@@ -300,7 +300,7 @@ const OrdersDetails: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -321,6 +321,9 @@ const OrdersDetails: React.FC = () => {
                     }
                   }}
                 />
+                <div className="text-xs black mt-1 text-right">
+                  {editNotes.length}/110 caratteri
+                </div>
               </div>
             </div>
           </CustomScrollbar>
@@ -331,7 +334,7 @@ const OrdersDetails: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
-                className="py-2.5 rounded-full text-sm font-semibold transition-all duration-300 py-1"
+                className="py-2 rounded-full text-sm font-semibold transition-all duration-300 py-1"
                 style={{
                   width: '120px',
                   backgroundColor: editingOrder?.status === 'completed' ? '#39A8FB' : '#FF9151',
@@ -353,12 +356,12 @@ const OrdersDetails: React.FC = () => {
                 <button
                   onClick={() => setShowDeleteConfirm(true)}
                   className="text-sm font-semibold transition-all duration-300"
-                  style={{ color: '#6B7280' }}
+                  style={{ color: '#000000' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = '#39A8FB';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#6B7280';
+                    e.currentTarget.style.color = '#000000';
                   }}
                 >
                   Elimina
@@ -368,13 +371,13 @@ const OrdersDetails: React.FC = () => {
                   className="text-sm mr-1 font-semibold transition-all duration-300"
                   style={{
                     backgroundColor: 'white',
-                    color: '#6B7280'
+                    color: '#000000'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = '#39A8FB';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#6B7280';
+                    e.currentTarget.style.color = '#000000';
                   }}
                 >
                   Chiudi

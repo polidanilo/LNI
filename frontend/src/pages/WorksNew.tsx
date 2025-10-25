@@ -80,7 +80,7 @@ const WorksNew: React.FC = () => {
       <div 
         className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
         style={{
-          height: '74vh',
+          height: '73vh',
           animation: 'slideUp 0.1s ease-out',
           background: `
             linear-gradient(white, white) padding-box,
@@ -97,7 +97,7 @@ const WorksNew: React.FC = () => {
         </div>
 
         <div className="pl-7 pr-7 py-4" style={{borderColor: '#0F4295'}}>
-          <div className="flex items-center justify-between max-w-2xl mx-auto mt-12">
+          <div className="flex items-center justify-between max-w-2xl mx-auto mt-2">
             <div>
               <h3 className="text-lg font-bold font-greycliff black">
                 Aggiungi lavoro
@@ -165,7 +165,7 @@ const WorksNew: React.FC = () => {
                   }}
                   placeholder="Descrizione - Opzionale"
                   maxLength={110}
-                  className="w-full mt-0 px-1 pt-1 pb-1 bg-transparent border-0 border-b-2 text-sm black resize-none transition-all duration-200 focus:outline-none"
+                  className="w-full mt-0 px-1 mt-12 pt-1 pb-1 bg-transparent border-0 border-b-2 text-sm black resize-none transition-all duration-200 focus:outline-none"
                   style={{
                     backgroundColor: 'transparent',
                     height: 'auto',
@@ -187,7 +187,7 @@ const WorksNew: React.FC = () => {
                     }
                   }}
                 />
-                <div className="text-xs text-gray-500 mt-1 text-right">
+                <div className="text-xs black mt-1 text-right">
                   {workForm.description.length}/110 caratteri
                 </div>
               </div>
@@ -200,7 +200,7 @@ const WorksNew: React.FC = () => {
             <button
               onClick={handleAddWork}
               disabled={createWorkMutation.isPending}
-              className="py-2.5 rounded-full text-sm font-semibold transition-all duration-300 py-1"
+              className="py-2 rounded-full text-sm font-semibold transition-all duration-300 py-1"
               style={{
                 width: '120px',
                 backgroundColor: workStatus === 'completed' ? '#10B981' : '#FF9151',
@@ -222,13 +222,13 @@ const WorksNew: React.FC = () => {
               className="text-sm mr-1 font-semibold transition-all duration-300"
               style={{
                 backgroundColor: 'white',
-                color: '#6B7280'
+                color: '#000000'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = '#FF9151';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = '#6B7280';
+                e.currentTarget.style.color = '#000000';
               }}
             >
               Annulla
