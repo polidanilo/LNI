@@ -28,16 +28,23 @@ const Login: React.FC = () => {
 
       setToken(token);
 
-      // Crea un profilo utente di default basato sull'username
-      // Questo funziona anche se il backend non ha l'endpoint /auth/profile
-      const userProfile = {
-        id: 1, // ID di default
-        username: username,
-        full_name: username, // Usa l'username come nome completo se non disponibile
-        email: `${username}@example.com` // Email di default
-      };
-
-      setCurrentUser(userProfile);
+      // Prova a recuperare il profilo utente reale dal backend
+      try {
+        const profileResponse = await api.get('/api/auth/profile', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setCurrentUser(profileResponse.data);
+      } catch (profileError) {
+        console.warn('⚠️ Impossibile recuperare il profilo utente, uso dati di default');
+        // Fallback: crea un profilo utente di default basato sull'username
+        const userProfile = {
+          id: 1,
+          username: username,
+          full_name: username,
+          email: `${username}@example.com`
+        };
+        setCurrentUser(userProfile);
+      }
 
       navigate('/');
     } catch (err: any) {
@@ -211,7 +218,7 @@ const Login: React.FC = () => {
             </form>
 
             {/* Switch Accesso/Registrazione */}
-            <div className="black text-center mt-4 mb-8">
+            <div className="black text-center mt-3 mb-8">
               <button
                 type="button"
                 onClick={() => {
@@ -220,7 +227,21 @@ const Login: React.FC = () => {
                 }}
                 className="font-medium text-sm transition-all"
               >
-                {isRegister ? 'Hai già un account? Accedi' : 'Non hai un account? Registrati'}
+                {isRegister ? (
+                  <>
+                    Hai già un account?{' '}
+                    <span className="text-primary-eme underline hover:text-emerald-800 transition-colors">
+                      Accedi
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Non hai un account?{' '}
+                    <span className="text-primary-eme underline hover:text-emerald-800 transition-colors">
+                      Registrati
+                    </span>
+                  </>
+                )}
               </button>
             </div>
 

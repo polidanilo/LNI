@@ -318,7 +318,7 @@ const Dashboard: React.FC = () => {
             className="pl-2 pr-0 py-1.5 mt-0.5 rounded-full"
             title="Logout"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-primary-ros" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
           </button>
@@ -424,7 +424,7 @@ const Dashboard: React.FC = () => {
                 height: '25px',
                 backgroundColor: '#10B981',
                 top: '50%',
-                left: '6%',
+                left: '7%',
                 opacity: 0.4,
                 transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
               }}
@@ -553,7 +553,7 @@ const Dashboard: React.FC = () => {
                   {openProblems.slice(0, 6).map((problem) => (
                     <div
                       key={problem.id}
-                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
+                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
                       style={{
                         backgroundColor: problem.status === 'closed' 
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -655,7 +655,7 @@ const Dashboard: React.FC = () => {
                   {recentWorks.map((work) => (
                     <div
                       key={work.id}
-                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
+                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
                       style={{
                         backgroundColor: work.status === 'completed'
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -756,7 +756,7 @@ const Dashboard: React.FC = () => {
                   {recentOrders.map((order) => (
                     <div
                       key={order.id}
-                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
+                      className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
                       style={{
                         backgroundColor: order.status === 'completed'
                           ? 'rgb(57, 168, 251, 0.4)'

@@ -143,7 +143,7 @@ const BoatsDetails: React.FC = () => {
 <div
   className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
   style={{
-    height: '73vh',
+    height: '75vh',
     animation: 'slideUp 0.2s ease-out',
     background: `
       linear-gradient(white, white) padding-box,

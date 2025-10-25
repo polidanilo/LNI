@@ -39,6 +39,21 @@ api.interceptors.response.use(
     console.error('❌ Response error:', error);
     console.error('❌ Error status:', error.response?.status);
     console.error('❌ Error data:', error.response?.data);
+    
+    // Se ricevi 401 (Unauthorized), pulisci il token e reindirizza al login
+    if (error.response?.status === 401) {
+      console.log('🔒 Token scaduto o non valido, reindirizzo al login...');
+      localStorage.removeItem('token');
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('selectedSeason');
+      localStorage.removeItem('selectedShift');
+      
+      // Reindirizza al login solo se non siamo già lì
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
+    }
+    
     return Promise.reject(error);
   }
 );

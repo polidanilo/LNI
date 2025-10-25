@@ -393,7 +393,7 @@ const Orders: React.FC = () => {
                 {filteredOrders.map((order) => (
                   <div
                     key={order.id}
-                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
+                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
                     style={{
                       backgroundColor: order.status === 'completed' 
                         ? 'rgb(57, 168, 251, 0.4)'

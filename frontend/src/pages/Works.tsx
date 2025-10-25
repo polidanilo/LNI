@@ -348,7 +348,7 @@ const Works: React.FC = () => {
                 {filteredWorks.map((work) => (
                   <div
                     key={work.id}
-                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-2 pt-3 pr-3"
+                    className="relative transition-all duration-200 cursor-pointer rounded-2xl pl-4 pb-1 pt-3 pr-3"
                     style={{
                       backgroundColor: work.status === 'completed' 
                         ? 'rgba(16, 185, 129, 0.3)'
