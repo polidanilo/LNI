@@ -138,7 +138,7 @@ const WorksNew: React.FC = () => {
                 value={workForm.title}
                 onChange={(e) => setWorkForm({ ...workForm, title: e.target.value })}
                 placeholder="Lavoro"
-                className="w-full px-1 py-1 pb-1 bg-transparent border-0 border-b-2 text-sm black transition-all duration-200 focus:outline-none"
+                className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 text-sm black transition-all duration-200 focus:outline-none"
                 style={{ borderColor: '#FF9151' }}
               />
 

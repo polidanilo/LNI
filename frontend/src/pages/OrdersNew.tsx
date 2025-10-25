@@ -142,7 +142,7 @@ const OrdersNew: React.FC = () => {
                   value={orderForm.title}
                   onChange={(e) => setOrderForm({ ...orderForm, title: e.target.value })}
                   placeholder="Ordine"
-                  className="flex-1 px-1 py-1 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
+                  className="flex-1 px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-primary-azr text-sm black transition-all duration-200 focus:outline-none"
                   style={{ width: '75%' }}
                 />
                 <div className="flex items-center gap-1 overflow-hidden" style={{ width: '25%', maxWidth: '110px' }}>

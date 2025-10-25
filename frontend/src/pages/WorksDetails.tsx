@@ -140,7 +140,7 @@ const WorksDetails: React.FC = () => {
       <div 
         className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
         style={{
-          height: '71vh',
+          height: '68vh',
           animation: 'slideUp 0.1s ease-out',
           background: `
             linear-gradient(white, white) padding-box,
@@ -193,7 +193,7 @@ const WorksDetails: React.FC = () => {
                 type="text"
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
-                className="w-full px-1 py-1 bg-transparent border-0 border-b-2 text-sm black transition-all duration-200 focus:outline-none"
+                className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 text-sm black transition-all duration-200 focus:outline-none"
                 style={{ borderColor: '#FF9151' }}
                 placeholder="Lavoro"
               />

@@ -143,7 +143,7 @@ const BoatsDetails: React.FC = () => {
 <div
   className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
   style={{
-    height: '75vh',
+    height: '73vh',
     animation: 'slideUp 0.2s ease-out',
     background: `
       linear-gradient(white, white) padding-box,
@@ -191,11 +191,11 @@ const BoatsDetails: React.FC = () => {
         <div className="pl-6 pr-3.5 py-4 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
             <div className="space-y-4 max-w-2xl mx-auto">
-              <div className="w-full px-1 py-1 bg-transparent border-0 border-b-2 border-gray-300 text-sm black">
+              <div className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-sm black">
                 {editingProblem.boat_type || 'Categoria'}
               </div>
 
-              <div className="w-full px-1 py-1 bg-transparent border-0 border-b-2 border-gray-300 text-sm black">
+              <div className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-sm black">
                 {editingProblem.boat_name || 'Imbarcazione'}
               </div>
 

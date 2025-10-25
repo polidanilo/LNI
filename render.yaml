@@ -4,7 +4,23 @@ services:
     env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
     routes:
+      - type: rewrite
+        source: /boats
+        destination: /index.html
+      - type: rewrite
+        source: /works
+        destination: /index.html
+      - type: rewrite
+        source: /orders
+        destination: /index.html
+      - type: rewrite
+        source: /reports
+        destination: /index.html
       - type: rewrite
         source: /*
         destination: /index.html
