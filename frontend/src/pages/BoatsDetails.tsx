@@ -17,6 +17,11 @@ const BoatsDetails: React.FC = () => {
   const [editReportedDate, setEditReportedDate] = useState('');
   const [editReportedBy, setEditReportedBy] = useState<number | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [editShiftId, setEditShiftId] = useState<number | null>(null);
+  const [showShiftSelector, setShowShiftSelector] = useState(false);
+  
+  const shiftNames = ['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'];
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI'];
   const [parts, setParts] = useState<string[]>([]);
   const [users, setUsers] = useState<Array<{ id: number; username: string }>>([]);
   
@@ -43,7 +48,8 @@ const BoatsDetails: React.FC = () => {
       setEditingProblem(problem);
       setEditDescription(problem.description || '');
       setEditPartAffected(problem.part_affected || '');
-      setEditReportedDate(problem.reported_date || '');
+      setEditBoatId(problem.boat_id || null);
+      setEditShiftId(problem.shift_id || null);
       setEditReportedBy(problem.reported_by || null);
 
       if (problem.boat_type) {
@@ -100,7 +106,8 @@ const BoatsDetails: React.FC = () => {
         description: editDescription,
         part_affected: editPartAffected,
         reported_date: editReportedDate,
-        reported_by: editReportedBy || undefined
+        reported_by: editReportedBy || undefined,
+        shift_id: editShiftId || undefined
       });
       queryClient.invalidateQueries({ queryKey: ['all-problems'] });
       queryClient.invalidateQueries({ queryKey: ['problem', id] });
@@ -120,7 +127,7 @@ const BoatsDetails: React.FC = () => {
     return (
       <>
         <div className="fixed inset-0 bg-black/70 z-[60]" onClick={handleClose} />
-        <div className="fixed inset-x-0 bottom-0 z-[70] bg-white rounded-t-3xl shadow-sm mx-0.3" style={{ height: '76vh' }}>
+        <div className="fixed inset-x-0 bottom-0 z-[70] bg-white rounded-tr-3xl shadow-sm mx-0.3" style={{ height: '76vh' }}>
           <div className="flex items-center justify-center h-full">
             <div className="text-gray-500">Caricamento...</div>
           </div>
@@ -165,9 +172,43 @@ const BoatsDetails: React.FC = () => {
             <h3 className="text-xl font-bold font-greycliff black">
               Dettagli problema
             </h3>
-            <button
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <button
+                  onClick={() => setShowShiftSelector(!showShiftSelector)}
+                  className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+                  style={{
+                    borderWidth: '2px',
+                    borderStyle: 'solid',
+                    borderColor: '#6B7280'
+                  }}
+                  title="Seleziona turno"
+                >
+                  <span className="text-sm font-bold text-gray-700">
+                    {editShiftId ? romanNumerals[(editShiftId - 1) % 6] : '?'}
+                  </span>
+                </button>
+                {showShiftSelector && (
+                  <div className="absolute top-10 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 min-w-[120px]">
+                    {shiftNames.map((name, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setEditShiftId(index + 1);
+                          setShowShiftSelector(false);
+                        }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center gap-2"
+                      >
+                        <span className="font-bold text-gray-700">{romanNumerals[index]}</span>
+                        <span className="text-sm text-gray-600">{name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <button
               onClick={handleToggleStatus}
-              className="mr-2 w-8 h-8 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="mr-2 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
@@ -185,6 +226,7 @@ const BoatsDetails: React.FC = () => {
                 </svg>
               )}
             </button>
+            </div>
           </div>
         </div>
 
@@ -281,7 +323,7 @@ const BoatsDetails: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
-                className="py-2 rounded-tr-full rounded-bl-full text-base font-semibold transition-all duration-300 py-1"
+                className="py-2 rounded-full text-base font-semibold transition-all duration-300 py-1"
                 style={{
                   width: '120px',
                   backgroundColor: editingProblem?.status === 'closed' ? '#10B981' : '#FF5958',

@@ -200,7 +200,7 @@ const WorksNew: React.FC = () => {
             <button
               onClick={handleAddWork}
               disabled={createWorkMutation.isPending}
-              className="py-2 rounded-tr-full rounded-bl-full text-base font-semibold transition-all duration-300 py-1"
+              className="py-2 rounded-full text-base font-semibold transition-all duration-300 py-1"
               style={{
                 width: '120px',
                 backgroundColor: workStatus === 'completed' ? '#10B981' : '#FF9151',

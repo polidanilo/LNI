@@ -256,7 +256,7 @@ const BoatsNew: React.FC = () => {
         handleAddProblem();
       }}
       disabled={createProblemMutation.isPending}
-      className="py-2 rounded-tr-full rounded-bl-full text-base font-semibold transition-all duration-300 py-1"
+      className="py-2 rounded-full text-base font-semibold transition-all duration-300 py-1"
       style={{
         width: '120px',
         backgroundColor: problemStatus === 'closed' ? '#10B981' : '#FF5958',

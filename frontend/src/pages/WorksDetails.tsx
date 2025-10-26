@@ -21,6 +21,11 @@ const WorksDetails: React.FC = () => {
   const [editWorkDate, setEditWorkDate] = useState('');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [users, setUsers] = useState<Array<{ id: number; username: string }>>([]);
+  const [editShiftId, setEditShiftId] = useState<number | null>(null);
+  const [showShiftSelector, setShowShiftSelector] = useState(false);
+  
+  const shiftNames = ['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'];
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI'];
   
   const { data: work, isLoading } = useQuery({
     queryKey: ['work', id],
@@ -48,6 +53,7 @@ const WorksDetails: React.FC = () => {
       setEditCategory(work.category || '');
       setEditCreatedBy(work.user_id || null);
       setEditWorkDate(work.work_date || '');
+      setEditShiftId(work.shift_id || null);
     }
   }, [work]);
 
@@ -103,6 +109,7 @@ const WorksDetails: React.FC = () => {
         category: editCategory as Work['category'],
         user_id: editCreatedBy || undefined,
         work_date: editWorkDate || undefined,
+        shift_id: editShiftId || undefined,
       });
       queryClient.invalidateQueries({ queryKey: ['all-works'] });
       queryClient.invalidateQueries({ queryKey: ['work', id] });
@@ -163,9 +170,43 @@ const WorksDetails: React.FC = () => {
                 Dettagli lavoro
               </h3>
             </div>
-            <button
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <button
+                  onClick={() => setShowShiftSelector(!showShiftSelector)}
+                  className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+                  style={{
+                    borderWidth: '2px',
+                    borderStyle: 'solid',
+                    borderColor: '#6B7280'
+                  }}
+                  title="Seleziona turno"
+                >
+                  <span className="text-sm font-bold text-gray-700">
+                    {editShiftId ? romanNumerals[(editShiftId - 1) % 6] : '?'}
+                  </span>
+                </button>
+                {showShiftSelector && (
+                  <div className="absolute top-10 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 min-w-[120px]">
+                    {shiftNames.map((name, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setEditShiftId(index + 1);
+                          setShowShiftSelector(false);
+                        }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center gap-2"
+                      >
+                        <span className="font-bold text-gray-700">{romanNumerals[index]}</span>
+                        <span className="text-sm text-gray-600">{name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <button
               onClick={handleToggleStatus}
-              className="w-8 h-8 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
@@ -183,6 +224,7 @@ const WorksDetails: React.FC = () => {
                 </svg>
               )}
             </button>
+            </div>
           </div>
         </div>
 
@@ -285,7 +327,7 @@ const WorksDetails: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
-                className="py-2 rounded-tr-full rounded-bl-full text-base font-semibold transition-all duration-300 py-1"
+                className="py-2 rounded-full text-base font-semibold transition-all duration-300 py-1"
                 style={{
                   width: '120px',
                   backgroundColor: editingWork?.status === 'completed' ? '#10B981' : '#FF9151',

@@ -272,7 +272,7 @@ const Orders: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setFilterStatus('completed')}
-                className="py-1.5 rounded-tr-3xl rounded-bl-3xl text-sm font-semibold transition-all duration-300"
+                className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
                 style={{
                   width: '120px',
                   backgroundColor: filterStatus === 'completed' ? '#39A8FB' : 'white',
@@ -297,7 +297,7 @@ const Orders: React.FC = () => {
               </button>
               <button
                 onClick={() => setFilterStatus('pending')}
-                className="py-1.5 rounded-tr-3xl rounded-bl-3xl text-sm font-semibold transition-all duration-300"
+                className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
                 style={{
                   width: '120px',
                   backgroundColor: filterStatus === 'pending' ? '#FF9151' : 'white',
@@ -409,7 +409,7 @@ const Orders: React.FC = () => {
                 {filteredOrders.map((order) => (
                   <div
                     key={order.id}
-                    className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-1.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: order.status === 'completed' 
                         ? 'rgb(57, 168, 251, 0.4)'
@@ -449,7 +449,7 @@ const Orders: React.FC = () => {
                       <div className="flex flex-col items-center gap-2">
                         <button
                           onClick={(e) => handleToggleStatus(e, order)}
-                          className="group w-8 h-8 mr-1 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
+                          className="group w-8 h-8 mr-1 rounded-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
                           title={order.status === 'completed' ? 'Segna come programmato' : 'Segna come effettuato'}
                         >
                           {/* Icona normale */}

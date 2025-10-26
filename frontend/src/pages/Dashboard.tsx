@@ -510,7 +510,7 @@ const Dashboard: React.FC = () => {
                 onClick={() => navigate('/orders')}
               >
                 <div 
-                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-28 h-28 rounded-tr-3xl rounded-bl-3xl flex flex-col items-center justify-center"
+                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-28 h-28 rounded-full flex flex-col items-center justify-center"
                   style={{backgroundColor: '#39A8FB'}}
                 >
                   <div className="text-white text-center">
@@ -534,7 +534,7 @@ const Dashboard: React.FC = () => {
                 onClick={() => navigate('/boats')}
               >
                 <div 
-                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-52 h-52 rounded-tr-3xl rounded-bl-3xl flex flex-col items-center justify-center"
+                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-52 h-52 rounded-full flex flex-col items-center justify-center"
                   style={{backgroundColor: '#FF5958'}}
                 >
                   <div className="text-white text-center">
@@ -558,7 +558,7 @@ const Dashboard: React.FC = () => {
                 onClick={() => navigate('/works')}
               >
                 <div 
-                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-28 h-28 rounded-tr-3xl rounded-bl-3xl flex flex-col items-center justify-center"
+                  className="shadow-sm cursor-pointer transition-transform hover:scale-110 w-28 h-28 rounded-full flex flex-col items-center justify-center"
                   style={{backgroundColor: ' rgb(255, 145, 81)'}}
                 >
                   <div className="text-white text-center">
@@ -600,7 +600,7 @@ const Dashboard: React.FC = () => {
                   {openProblems.slice(0, 6).map((problem) => (
                     <div
                       key={problem.id}
-                      className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-1.5 rounded-full cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: problem.status === 'closed' 
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -642,7 +642,7 @@ const Dashboard: React.FC = () => {
                         <div className="flex flex-col items-center gap-2">
                           <button
                             onClick={(e) => handleToggleProblemStatus(e, problem)}
-                            className="group w-8 h-8 mr-1 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
+                            className="group w-8 h-8 mr-1 rounded-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
                             title={problem.status === 'closed' ? 'Segna come aperto' : 'Segna come risolto'}
                           >
                             
@@ -702,7 +702,7 @@ const Dashboard: React.FC = () => {
                   {recentWorks.map((work) => (
                     <div
                       key={work.id}
-                      className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-1.5 rounded-full cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: work.status === 'completed'
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -744,7 +744,7 @@ const Dashboard: React.FC = () => {
                           {/* Icona stato cliccabile */}
                           <button
                             onClick={(e) => handleToggleWorkStatus(e, work)}
-                            className="group w-8 h-8 mr-1 rounded-tr-xl rounded-bl-xl flex items-center justify-center shadow-sm transition-all duration-200 bg-white hover:bg-gray-100"
+                            className="group w-8 h-8 mr-1 rounded-full flex items-center justify-center shadow-sm transition-all duration-200 bg-white hover:bg-gray-100"
                             title={work.status === 'completed' ? 'Segna come in corso' : 'Segna come completato'}
                           >
                             {/* Icona normale */}
@@ -803,7 +803,7 @@ const Dashboard: React.FC = () => {
                   {recentOrders.map((order) => (
                     <div
                       key={order.id}
-                      className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-1.5 rounded-full cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: order.status === 'completed'
                           ? 'rgb(57, 168, 251, 0.4)'
@@ -842,7 +842,7 @@ const Dashboard: React.FC = () => {
                         <div className="flex flex-col items-center gap-2">
                           <button
                             onClick={(e) => handleToggleOrderStatus(e, order)}
-                            className="group w-8 h-8 mr-1 rounded-tr-xl rounded-bl-xl flex items-center justify-center shadow-sm transition-all duration-200 bg-white hover:bg-gray-100"
+                            className="group w-8 h-8 mr-1 rounded-full flex items-center justify-center shadow-sm transition-all duration-200 bg-white hover:bg-gray-100"
                             title={order.status === 'completed' ? 'Segna come programmato' : 'Segna come effettuato'}
                           >
                             {/* Icona normale */}
