@@ -72,9 +72,18 @@ const Works: React.FC = () => {
 
   // TUTTI i lavori esistenti
   const { data: allWorks, isLoading: worksLoading } = useQuery({
-    queryKey: ['all-works', selectedShift?.id],
+    queryKey: ['all-works', selectedShift?.id, selectedSeason?.id],
     queryFn: async () => {
       if (!selectedShift?.id) return [];
+      
+      // Se "Tutti" è selezionato (id === -1), recupera tutti i lavori della stagione
+      if (selectedShift.id === -1 && shifts) {
+        const allWorks = await Promise.all(
+          shifts.map(shift => workService.getAll({ shift_id: shift.id }))
+        );
+        return allWorks.flatMap(res => res.data);
+      }
+      
       const res = await workService.getAll({ shift_id: selectedShift.id });
       return res.data;
     },
@@ -193,7 +202,7 @@ const Works: React.FC = () => {
             </div>
             
             <p className="pl-2 pt-2 text-base black">
-              Ecco i lavori effettuati nel turno selezionato:
+              Ecco i lavori effettuati nei turni selezionati:
             </p>
           </div>
         </div>
@@ -222,7 +231,7 @@ const Works: React.FC = () => {
 
           {/* Turno */}
           <select
-            value={selectedShift?.id || ''}
+            value={selectedShift?.id === -1 ? 'all' : (selectedShift?.id || '')}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
             className="px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
@@ -353,7 +362,7 @@ const Works: React.FC = () => {
                 {filteredWorks.map((work) => (
                   <div
                     key={work.id}
-                    className="relative p-4 pb-2.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-1.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: work.status === 'completed'
                         ? 'rgba(16, 185, 129, 0.4)'
@@ -382,7 +391,7 @@ const Works: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.8'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.4'}}>
                           <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{work.category || 'Categoria'}</span>
@@ -393,7 +402,7 @@ const Works: React.FC = () => {
                       <div className="flex flex-col items-center gap-2">
                         <button
                           onClick={(e) => handleToggleStatus(e, work)}
-                          className="group w-8 h-8 mr-1 rounded-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
+                          className="group w-8 h-8 mr-1 rounded-tr-full rounded-bl-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
                           title={work.status === 'completed' ? 'Segna come in corso' : 'Segna come completato'}
                         >
                           {/* Icona normale */}

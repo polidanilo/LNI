@@ -76,7 +76,7 @@ const Login: React.FC = () => {
       <div className="w-full max-w-md px-4 relative z-10">
         {/* Card Login con Gradient Border */}
         <div 
-          className="bg-white rounded-3xl shadow-lg overflow-hidden"
+          className="bg-white rounded-tr-3xl rounded-bl-3xl shadow-lg overflow-hidden"
           style={{
             background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF5958 0%, #39A8FB 33%, #FF9151 66%, #10B981 100%) border-box',
             border: '2px solid transparent'
@@ -85,7 +85,7 @@ const Login: React.FC = () => {
           {/* Immagine protagonista */}
           <div className="pr-5 pt-6 pb-1 bg-white flex items-center justify-center">
             <img src="/logonotag.jpg" alt="LNINazioni" 
-              className="w-full h-auto object-contain rounded-2xl"
+              className="w-full h-auto object-contain rounded-tr-2xl rounded-bl-2xl"
               style={{maxHeight: '180px'}}
             />
           </div>
@@ -196,7 +196,7 @@ const Login: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 bg-primary-eme disabled:bg-gray-400 text-white rounded-full font-bold font-greycliff text-base transition-all duration-200 shadow-sm"
+                  className="w-full py-3 bg-primary-eme disabled:bg-gray-400 text-white rounded-tr-full rounded-bl-full font-bold font-greycliff text-base transition-all duration-200 shadow-sm"
                   style={{
                     backgroundColor: loading ? undefined : '#10B981',
                     cursor: loading ? 'not-allowed' : 'pointer'

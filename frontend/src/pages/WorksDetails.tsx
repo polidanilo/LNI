@@ -165,7 +165,7 @@ const WorksDetails: React.FC = () => {
             </div>
             <button
               onClick={handleToggleStatus}
-              className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="w-8 h-8 rounded-tr-full rounded-bl-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
@@ -285,7 +285,7 @@ const WorksDetails: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
-                className="py-2 rounded-full text-base font-semibold transition-all duration-300 py-1"
+                className="py-2 rounded-tr-full rounded-bl-full text-base font-semibold transition-all duration-300 py-1"
                 style={{
                   width: '120px',
                   backgroundColor: editingWork?.status === 'completed' ? '#10B981' : '#FF9151',

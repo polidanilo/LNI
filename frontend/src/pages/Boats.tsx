@@ -73,9 +73,18 @@ const Boats: React.FC = () => {
 
   // TUTTI i problemi esistenti (non solo della barca selezionata)
   const { data: allProblems, isLoading: problemsLoading } = useQuery({
-    queryKey: ['all-problems', selectedShift?.id],
+    queryKey: ['all-problems', selectedShift?.id, selectedSeason?.id],
     queryFn: async () => {
       if (!selectedShift?.id) return [];
+      
+      // Se "Tutti" è selezionato (id === -1), recupera tutti i problemi della stagione
+      if (selectedShift.id === -1 && shifts) {
+        const allProblems = await Promise.all(
+          shifts.map(shift => problemService.list({ shift_id: shift.id }))
+        );
+        return allProblems.flatMap(res => res.data);
+      }
+      
       const res = await problemService.list({ shift_id: selectedShift.id });
       return res.data;
     },
@@ -200,7 +209,7 @@ const Boats: React.FC = () => {
             </div>
             
             <p className="pl-2 pt-2 text-base black">
-              Ecco i problemi segnalati nel turno selezionato:
+              Ecco i problemi segnalati nei turni selezionati:
             </p>
           </div>
         </div>
@@ -229,7 +238,7 @@ const Boats: React.FC = () => {
 
           {/* Turno */}
           <select
-            value={selectedShift?.id || ''}
+            value={selectedShift?.id === -1 ? 'all' : (selectedShift?.id || '')}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
             className="px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
@@ -360,7 +369,7 @@ const Boats: React.FC = () => {
                 {filteredProblems.map((problem) => (
                   <div
                     key={problem.id}
-                    className="relative p-4 pb-2.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-1.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: problem.status === 'open'
                         ? 'rgba(255, 89, 88, 0.5)'
@@ -389,7 +398,7 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.8'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.4'}}>
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>
@@ -404,7 +413,7 @@ const Boats: React.FC = () => {
                       <div className="flex flex-col items-center gap-2">
                         <button
                           onClick={(e) => handleToggleStatus(e, problem)}
-                          className="group w-8 h-8 mr-1 rounded-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
+                          className="group w-8 h-8 mr-1 rounded-tr-full rounded-bl-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
                           title={problem.status === 'closed' ? 'Segna come aperto' : 'Segna come risolto'}
                         >
                           {/* Icona normale */}

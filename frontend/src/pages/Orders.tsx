@@ -72,9 +72,18 @@ const Orders: React.FC = () => {
 
   // TUTTI gli ordini esistenti
   const { data: allOrders, isLoading: ordersLoading } = useQuery({
-    queryKey: ['all-orders', selectedShift?.id],
+    queryKey: ['all-orders', selectedShift?.id, selectedSeason?.id],
     queryFn: async () => {
       if (!selectedShift?.id) return [];
+      
+      // Se "Tutti" è selezionato (id === -1), recupera tutti gli ordini della stagione
+      if (selectedShift.id === -1 && shifts) {
+        const allOrders = await Promise.all(
+          shifts.map(shift => orderService.getAll({ shift_id: shift.id }))
+        );
+        return allOrders.flatMap(res => res.data);
+      }
+      
       const res = await orderService.getAll({ shift_id: selectedShift.id });
       return res.data;
     },
@@ -193,7 +202,7 @@ const Orders: React.FC = () => {
             </div>
             
             <p className="pl-2 pt-2 text-base black">
-              Ecco gli ordini effettuati nel turno selezionato:
+              Ecco gli ordini effettuati nei turni selezionati:
             </p>
           </div>
         </div>
@@ -222,7 +231,7 @@ const Orders: React.FC = () => {
 
           {/* Turno */}
           <select
-            value={selectedShift?.id || ''}
+            value={selectedShift?.id === -1 ? 'all' : (selectedShift?.id || '')}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
             className="px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 focus:outline-none disabled:opacity-50 black"
@@ -400,7 +409,7 @@ const Orders: React.FC = () => {
                 {filteredOrders.map((order) => (
                   <div
                     key={order.id}
-                    className="relative p-4 pb-2.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-1.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: order.status === 'completed' 
                         ? 'rgb(57, 168, 251, 0.4)'
@@ -429,7 +438,7 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.8'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.4'}}>
                           <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{order.category || 'Categoria'}</span>
@@ -440,7 +449,7 @@ const Orders: React.FC = () => {
                       <div className="flex flex-col items-center gap-2">
                         <button
                           onClick={(e) => handleToggleStatus(e, order)}
-                          className="group w-8 h-8 mr-1 rounded-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
+                          className="group w-8 h-8 mr-1 rounded-tr-full rounded-bl-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
                           title={order.status === 'completed' ? 'Segna come programmato' : 'Segna come effettuato'}
                         >
                           {/* Icona normale */}
