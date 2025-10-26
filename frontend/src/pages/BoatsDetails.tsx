@@ -48,7 +48,6 @@ const BoatsDetails: React.FC = () => {
       setEditingProblem(problem);
       setEditDescription(problem.description || '');
       setEditPartAffected(problem.part_affected || '');
-      setEditBoatId(problem.boat_id || null);
       setEditShiftId(problem.shift_id || null);
       setEditReportedBy(problem.reported_by || null);
 
