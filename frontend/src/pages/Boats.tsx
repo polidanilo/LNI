@@ -59,15 +59,11 @@ const Boats: React.FC = () => {
     }
   }, [seasons, selectedSeason, setSelectedSeason, hasAutoSelected]);
 
-  // Auto-select shift "Sesto" (shift_number 6) when shifts are loaded
+  // Auto-select "Tutti" when shifts are loaded
   React.useEffect(() => {
     if (shifts && shifts.length > 0 && !selectedShift && selectedSeason && hasAutoSelected) {
-      const shiftSesto = shifts.find(s => s.shift_number === 6);
-      if (shiftSesto) {
-        setSelectedShift(shiftSesto);
-      } else {
-        setSelectedShift(shifts[shifts.length - 1]);
-      }
+      // Seleziona "Tutti" - usa un oggetto speciale con id -1
+      setSelectedShift({ id: -1, shift_number: 0, season_id: selectedSeason.id, start_date: '', end_date: '' } as any);
     }
   }, [shifts, selectedShift, selectedSeason, setSelectedShift, hasAutoSelected]);
 
@@ -279,7 +275,7 @@ const Boats: React.FC = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setFilterStatus('open')}
-                  className="py-1.5 rounded-tr-2xl rounded-bl-2xl text-sm font-semibold transition-all duration-300"
+                  className="py-1.5 rounded-tr-xl rounded-bl-xl text-sm font-semibold transition-all duration-300"
                   style={{
                     width: '120px',
                     backgroundColor: filterStatus === 'open' ? '#FF5958' : 'white',
@@ -304,7 +300,7 @@ const Boats: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setFilterStatus('closed')}
-                  className="py-1.5 rounded-tr-2xl rounded-bl-2xl text-sm font-semibold transition-all duration-300"
+                  className="py-1.5 rounded-tr-xl rounded-bl-xl text-sm font-semibold transition-all duration-300"
                   style={{
                     width: '120px',
                     backgroundColor: filterStatus === 'closed' ? '#10B981' : 'white',
@@ -400,6 +396,12 @@ const Boats: React.FC = () => {
                         </h4>
                         <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                          {problem.shift_id && (
+                            <>
+                              <span>,</span>
+                              <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
+                            </>
+                          )}
                           <span className="text-lg font-bold">•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>
                           {problem.part_affected && (

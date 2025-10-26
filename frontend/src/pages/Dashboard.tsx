@@ -78,19 +78,11 @@ const Dashboard: React.FC = () => {
     }
   }, [seasons, selectedSeason, setSelectedSeason, hasAutoSelected]);
 
-  // Auto-select shift "Sesto" (shift_number 6) when shifts are loaded
+  // Auto-select "Tutti" when shifts are loaded
   useEffect(() => {
     if (shifts && shifts.length > 0 && !selectedShift && selectedSeason && hasAutoSelected) {
-      // Try to find shift with shift_number 6 (Sesto)
-      const shiftSesto = shifts.find(s => s.shift_number === 6);
-      if (shiftSesto) {
-        console.log('🎯 Auto-selecting shift Sesto:', shiftSesto);
-        setSelectedShift(shiftSesto);
-      } else {
-        // Fallback to last shift if Sesto not found
-        console.log('⚠️ Shift Sesto not found, selecting last shift:', shifts[shifts.length - 1]);
-        setSelectedShift(shifts[shifts.length - 1]);
-      }
+      // Seleziona "Tutti" - usa un oggetto speciale con id -1
+      setSelectedShift({ id: -1, shift_number: 0, season_id: selectedSeason.id, start_date: '', end_date: '' } as any);
     }
   }, [shifts, selectedShift, selectedSeason, setSelectedShift, hasAutoSelected]);
 
@@ -575,10 +567,9 @@ const Dashboard: React.FC = () => {
             <div className="relative space-y-4 pb-9" style={{backgroundColor: '#FFF4EF', zIndex: 1}}>
               
             {/* Ultimi problemi barche */}
-            <div className="bg-white rounded-tr-3xl rounded-bl-xl px-2 py-5 pb-3 shadow-sm relative" style={{
+            <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
               background: 'linear-gradient(white, white) padding-box, linear-gradient(45deg, #FF5958 0%, #FF5958 85%, #39A8FB 85%) border-box',
               border: '0px solid transparent',
-              borderRadius: '24px',
               height: '340px'
             }}>
               <h3 className="text-xl font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
@@ -629,6 +620,12 @@ const Dashboard: React.FC = () => {
                           </h4>
                           <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                            {problem.shift_id && (
+                              <>
+                                <span>,</span>
+                                <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
+                              </>
+                            )}
                             <span className="text-lg font-bold">•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
                             {problem.part_affected && (
@@ -677,10 +674,9 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Ultimi lavori */}
-            <div className="bg-white rounded-tr-3xl rounded-bl-xl px-2 py-5 pb-3 shadow-sm relative" style={{
+            <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
               background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, rgb(255, 145, 81) 0%, rgb(255, 145, 81) 85%, #39A8FB 85%) border-box',
               border: '0px solid transparent',
-              borderRadius: '24px',
               height: '340px'
             }}>
               <h3 className="text-xl font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
@@ -732,6 +728,12 @@ const Dashboard: React.FC = () => {
                           </h4>
                           <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                            {work.shift_id && (
+                              <>
+                                <span>,</span>
+                                <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}</span>
+                              </>
+                            )}
                             <span className="text-lg font-bold">•</span>
                             <span>{work.category}</span>
                             <span className="text-lg font-bold">•</span>
@@ -778,10 +780,9 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Ultimi ordini */}
-            <div className="bg-white rounded-tr-3xl rounded-bl-xl px-2 py-5 pb-3 shadow-sm relative" style={{
+            <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
               background: 'linear-gradient(white, white) padding-box, linear-gradient(315deg, #39A8FB 0%, #39A8FB 85%, #FF5958 85%) border-box',
               border: '0px solid transparent',
-              borderRadius: '24px',
               height: '340px'
             }}>
               <h3 className="text-xl font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
@@ -832,6 +833,12 @@ const Dashboard: React.FC = () => {
                           </h4>
                           <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
+                            {order.shift_id && (
+                              <>
+                                <span>,</span>
+                                <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
+                              </>
+                            )}
                             <span className="text-lg font-bold">•</span>
                             <span>{order.category}</span>
                             <span className="text-lg font-bold">•</span>

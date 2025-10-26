@@ -183,15 +183,11 @@ const OrdersDetails: React.FC = () => {
             <div className="flex items-center gap-2">
               {/* Icona turno statica (solo visualizzazione) */}
               <div
-                className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm"
-                style={{
-                  borderWidth: '2px',
-                  borderStyle: 'solid',
-                  borderColor: '#6B7280'
-                }}
+                className="w-8 h-8 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center shadow-sm"
+
                 title={editShiftId ? `${shiftNames[(editShiftId - 1) % 6]} turno` : 'Turno non assegnato'}
               >
-                <span className="text-sm font-bold text-gray-700">
+                <span className="text-sm font-extrabold text-gray-700">
                   {editShiftId ? romanNumerals[(editShiftId - 1) % 6] : '?'}
                 </span>
               </div>

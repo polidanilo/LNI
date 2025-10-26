@@ -123,13 +123,13 @@ const OrdersNew: React.FC = () => {
                   }}
                   title="Seleziona turno"
                 >
-                  <span className="text-sm font-bold text-gray-700">
+                  <span className="text-sm font-extrabold text-gray-700">
                     {selectedShiftId ? romanNumerals[(selectedShiftId - 1) % 6] : '?'}
                   </span>
                 </button>
                 
                 {showShiftSelector && (
-                  <div className="absolute top-10 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
+                  <div className="absolute top-10 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50" style={{minWidth: '150px'}}>
                     {shiftNames.map((name, index) => (
                       <button
                         key={index}
@@ -139,8 +139,8 @@ const OrdersNew: React.FC = () => {
                         }}
                         className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center gap-3"
                       >
-                        <span className="font-bold text-gray-700 w-6">{romanNumerals[index]}</span>
-                        <span className="text-sm text-gray-600" style={{minWidth: '80px'}}>{name} turno</span>
+                        <div className="font-extrabold text-gray-700" style={{width: '20px'}}>{romanNumerals[index]}</div>
+                        <div className="text-sm text-gray-600 whitespace-nowrap">{name} turno</div>
                       </button>
                     ))}
                   </div>

@@ -173,15 +173,11 @@ const BoatsDetails: React.FC = () => {
             <div className="flex items-center gap-2">
               {/* Icona turno statica (solo visualizzazione) */}
               <div
-                className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm"
-                style={{
-                  borderWidth: '2px',
-                  borderStyle: 'solid',
-                  borderColor: '#6B7280'
-                }}
+                className="w-8 h-8 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center shadow-sm"
+
                 title={editShiftId ? `${shiftNames[(editShiftId - 1) % 6]} turno` : 'Turno non assegnato'}
               >
-                <span className="text-sm font-bold text-gray-700">
+                <span className="text-sm font-extrabold text-gray-700">
                   {editShiftId ? romanNumerals[(editShiftId - 1) % 6] : '?'}
                 </span>
               </div>
@@ -214,11 +210,11 @@ const BoatsDetails: React.FC = () => {
         <div className="pl-6 pr-3.5 py-2 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
             <div className="space-y-4 max-w-2xl mx-auto">
-              <div className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-base black">
+              <div className="w-full px-1 pt-1 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-base black">
                 {editingProblem.boat_type || 'Categoria'}
               </div>
 
-              <div className="w-full px-1 pt-1.5 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-base black">
+              <div className="w-full px-1 pt-1 pb-0.5 bg-transparent border-0 border-b-2 border-gray-300 text-base black">
                 {editingProblem.boat_name || 'Imbarcazione'}
               </div>
 
