@@ -6,6 +6,7 @@ import type { Season, Shift } from '../types';
 import BottomNav from '../components/Layout/BottomNav';
 import { useAppContext } from '../context/AppContext';
 import { getShiftOrdinalName } from '../utils/shiftNames';
+import { formatDate } from '../utils/dateFormat';
 
 const Reports: React.FC = () => {
   const navigate = useNavigate();
@@ -366,7 +367,7 @@ const Reports: React.FC = () => {
                           <tr key={order.id} className="hover:bg-gray-50">
                             <td className="px-6 py-3 text-sm font-medium black w-[120px]">{order.title}</td>
                             <td className="px-6 py-3 text-sm text-emerald-500 font-medium w-[120px]">€{parseFloat(String(order.amount)).toFixed(2)}</td>
-                            <td className="px-6 py-3 text-sm text-gray-600 w-[120px]">{new Date(order.order_date).toLocaleDateString('it-IT')}</td>
+                            <td className="px-6 py-3 text-sm text-gray-600 w-[120px]">{formatDate(order.order_date)}</td>
                             <td className="px-6 py-3 text-sm black w-[120px]">{order.category}</td>
                             <td className="px-6 py-3 text-sm text-gray-600 w-[120px]">{order.created_by || 'User'}</td>
                             <td className="px-6 py-3 text-sm black w-[120px]">{shift ? getShiftOrdinalName(shift.shift_number) : 'N/A'}</td>

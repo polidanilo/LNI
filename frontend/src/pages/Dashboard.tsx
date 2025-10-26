@@ -6,6 +6,7 @@ import type { Work } from '../types';
 import BottomNav from '../components/Layout/BottomNav';
 import { useAppContext } from '../context/AppContext';
 import { getShiftOrdinalName } from '../utils/shiftNames';
+import { formatDate } from '../utils/dateFormat';
 import CustomScrollbar from '../components/CustomScrollbar';
 
 const Dashboard: React.FC = () => {
@@ -185,6 +186,67 @@ const Dashboard: React.FC = () => {
     staleTime: 1000 * 60 * 5, // 5 minuti
   });
 
+  // Fetch TUTTI i problemi per le statistiche (non solo i 6 mostrati)
+  const { data: allProblemsForStats } = useQuery({
+    queryKey: ['all-problems-stats', selectedShift?.id, selectedSeason?.id],
+    queryFn: async () => {
+      if (!selectedShift) return [];
+      
+      // Se "Tutti" è selezionato, recupera tutti i problemi della stagione
+      if (selectedShift.id === -1 && shifts) {
+        const allProblems = await Promise.all(
+          shifts.map(shift => problemService.list({ shift_id: shift.id }))
+        );
+        return allProblems.flatMap(res => res.data);
+      }
+      
+      const response = await problemService.list({ shift_id: selectedShift.id });
+      return response.data;
+    },
+    enabled: !!selectedShift && (selectedShift.id !== -1 || !!shifts),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // Fetch TUTTI i lavori per le statistiche
+  const { data: allWorksForStats } = useQuery({
+    queryKey: ['all-works-stats', selectedShift?.id, selectedSeason?.id],
+    queryFn: async () => {
+      if (!selectedShift) return [];
+      
+      if (selectedShift.id === -1 && shifts) {
+        const allWorks = await Promise.all(
+          shifts.map(shift => workService.getAll({ shift_id: shift.id }))
+        );
+        return allWorks.flatMap(res => res.data);
+      }
+      
+      const response = await workService.getAll({ shift_id: selectedShift.id });
+      return response.data;
+    },
+    enabled: !!selectedShift && (selectedShift.id !== -1 || !!shifts),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // Fetch TUTTI gli ordini per le statistiche
+  const { data: allOrdersForStats } = useQuery({
+    queryKey: ['all-orders-stats', selectedShift?.id, selectedSeason?.id],
+    queryFn: async () => {
+      if (!selectedShift) return [];
+      
+      if (selectedShift.id === -1 && shifts) {
+        const allOrders = await Promise.all(
+          shifts.map(shift => orderService.getAll({ shift_id: shift.id }))
+        );
+        return allOrders.flatMap(res => res.data);
+      }
+      
+      const response = await orderService.getAll({ shift_id: selectedShift.id });
+      return response.data;
+    },
+    enabled: !!selectedShift && (selectedShift.id !== -1 || !!shifts),
+    staleTime: 1000 * 60 * 5,
+  });
+
   // Fetch statistiche turno
   useQuery({
     queryKey: ['shift-stats', selectedShift?.id],
@@ -204,6 +266,7 @@ const Dashboard: React.FC = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['recent-works', selectedShift?.id] });
+      queryClient.invalidateQueries({ queryKey: ['all-works-stats', selectedShift?.id] });
       queryClient.invalidateQueries({ queryKey: ['shift-stats', selectedShift?.id] });
       setShowDeleteConfirm(false);
       setWorkToDelete(null);
@@ -217,6 +280,7 @@ const Dashboard: React.FC = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['recent-works', selectedShift?.id] });
+      queryClient.invalidateQueries({ queryKey: ['all-works-stats', selectedShift?.id] });
       queryClient.invalidateQueries({ queryKey: ['shift-stats', selectedShift?.id] });
     },
   });
@@ -229,6 +293,7 @@ const Dashboard: React.FC = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['problems-open', selectedShift?.id] });
+      queryClient.invalidateQueries({ queryKey: ['all-problems-stats', selectedShift?.id] });
     },
   });
 
@@ -240,6 +305,7 @@ const Dashboard: React.FC = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['recent-orders', selectedShift?.id] });
+      queryClient.invalidateQueries({ queryKey: ['all-orders-stats', selectedShift?.id] });
     },
   });
 
@@ -327,7 +393,7 @@ const Dashboard: React.FC = () => {
               }}
             >
               {/* Overlay scuro per oscurare l'immagine */}
-              <div className="absolute inset-0 bg-black opacity-35"></div>
+              <div className="absolute inset-0 bg-black opacity-40"></div>
               
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
@@ -507,7 +573,7 @@ const Dashboard: React.FC = () => {
                 >
                   <div className="text-white text-center">
                     <div className="text-2xl font-bold font-greycliff">
-                      €{recentOrders?.filter(o => o.status === 'completed').reduce((sum, o) => sum + parseFloat(String(o.amount)), 0).toFixed(0) || '0'}
+                      €{allOrdersForStats?.filter(o => o.status === 'completed').reduce((sum, o) => sum + parseFloat(String(o.amount)), 0).toFixed(0) || '0'}
                     </div>
                     <div className="text-xs font-bold font-greycliff mt-0 uppercase">Di spese <br /> totali</div>
                   </div>
@@ -531,7 +597,7 @@ const Dashboard: React.FC = () => {
                 >
                   <div className="text-white text-center">
                     <div className="text-4xl font-bold font-greycliff">
-                      {openProblems?.filter(p => p.status === 'open').length || 0}
+                      {allProblemsForStats?.filter(p => p.status === 'open').length || 0}
                     </div>
                     <div className="text-sm font-bold font-greycliff mt-0 uppercase">Imbarcazioni  <br /> danneggiate</div>
                   </div>
@@ -555,7 +621,7 @@ const Dashboard: React.FC = () => {
                 >
                   <div className="text-white text-center">
                     <div className="text-2xl font-bold font-greycliff">
-                      {recentWorks?.filter(w => w.status === 'completed').length || 0}
+                      {allWorksForStats?.filter(w => w.status === 'completed').length || 0}
                     </div>
                     <div className="text-xs font-bold font-greycliff mt-0 uppercase">Lavori  <br /> fatti</div>
                   </div>
@@ -619,7 +685,7 @@ const Dashboard: React.FC = () => {
                             {problem.boat_name || 'Barca'}
                           </h4>
                           <div className="text-sm black mt-3" style={{lineHeight: '1.4'}}>
-                            <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}` : ''}</span></div>
+                            <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {formatDate(problem.reported_date)}{problem.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}` : ''}</span></div>
                             <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.boat_type || 'Categoria'}</span></div>
                             {problem.part_affected && (
                               <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.part_affected}</span></div>
@@ -688,7 +754,7 @@ const Dashboard: React.FC = () => {
                   {recentWorks.map((work) => (
                     <div
                       key={work.id}
-                      className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-3.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: work.status === 'completed'
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -717,7 +783,7 @@ const Dashboard: React.FC = () => {
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
                           <div className="text-sm black mt-3" style={{lineHeight: '1.4'}}>
-                            <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}{work.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}` : ''}</span></div>
+                            <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {formatDate(work.work_date)}{work.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}` : ''}</span></div>
                             <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.category}</span></div>
                             <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.created_by || 'N/A'}</span></div>
                           </div>
@@ -814,7 +880,7 @@ const Dashboard: React.FC = () => {
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
                           <div className="text-sm black mt-3" style={{lineHeight: '1.4'}}>
-                            <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {new Date(order.order_date).toLocaleDateString('it-IT')}{order.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}` : ''}</span></div>
+                            <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {formatDate(order.order_date)}{order.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}` : ''}</span></div>
                             <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.category}</span></div>
                             <div><span className="break-words"><span className="text-lg font-bold">•</span> {order.title.length > 25 ? order.title.substring(0, 25) : order.title}</span></div>
                           </div>

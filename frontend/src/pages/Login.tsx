@@ -196,7 +196,7 @@ const Login: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 bg-primary-eme disabled:bg-gray-400 text-white rounded font-bold font-greycliff text-base transition-all duration-200 shadow-sm"
+                  className="w-full py-3 bg-primary-eme disabled:bg-gray-400 text-white rounded-tr-xl rounded-bl-xl font-bold font-greycliff text-base transition-all duration-200 shadow-sm"
                   style={{
                     backgroundColor: loading ? undefined : '#10B981',
                     cursor: loading ? 'not-allowed' : 'pointer'

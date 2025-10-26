@@ -8,6 +8,7 @@ import { useAppContext } from '../context/AppContext';
 import type { Work } from '../types';
 import BottomNav from '../components/Layout/BottomNav';
 import { getShiftOrdinalName } from '../utils/shiftNames';
+import { formatDate } from '../utils/dateFormat';
 import CustomScrollbar from '../components/CustomScrollbar';
 
 const Works: React.FC = () => {
@@ -187,7 +188,7 @@ const Works: React.FC = () => {
               }}
             >
               {/* Overlay scuro per oscurare l'immagine */}
-              <div className="absolute inset-0 bg-black opacity-35"></div>
+              <div className="absolute inset-0 bg-black opacity-40"></div>
               
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
@@ -388,7 +389,7 @@ const Works: React.FC = () => {
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
                         <div className="text-sm black mt-3" style={{lineHeight: '1.4'}}>
-                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}{work.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}` : ''}</span></div>
+                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {formatDate(work.work_date)}{work.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}` : ''}</span></div>
                           <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.category || 'Categoria'}</span></div>
                           <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.created_by || 'N/A'}</span></div>
                         </div>

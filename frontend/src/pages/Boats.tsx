@@ -8,6 +8,7 @@ import { useAppContext } from '../context/AppContext';
 import type { Boat, Problem } from '../types';
 import BottomNav from '../components/Layout/BottomNav';
 import { getShiftOrdinalName } from '../utils/shiftNames';
+import { formatDate } from '../utils/dateFormat';
 import CustomScrollbar from '../components/CustomScrollbar';
 
 const Boats: React.FC = () => {
@@ -162,6 +163,7 @@ const Boats: React.FC = () => {
       filtered = filtered.filter(p =>
         p.description.toLowerCase().includes(searchText.toLowerCase()) ||
         (p.part_affected || '').toLowerCase().includes(searchText.toLowerCase()) ||
+        (p.boat_type || '').toLowerCase().includes(searchText.toLowerCase()) ||
         p.boat_name?.toLowerCase().includes(searchText.toLowerCase()) || false
       );
     }
@@ -194,7 +196,7 @@ const Boats: React.FC = () => {
               }}
             >
               {/* Overlay scuro per oscurare l'immagine */}
-              <div className="absolute inset-0 bg-black opacity-40"></div>
+              <div className="absolute inset-0 bg-black opacity-45"></div>
               
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
@@ -395,7 +397,7 @@ const Boats: React.FC = () => {
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
                         <div className="text-sm black mt-3" style={{lineHeight: '1.4'}}>
-                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}` : ''}</span></div>
+                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {formatDate(problem.reported_date)}{problem.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}` : ''}</span></div>
                           <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.boat_type || 'Categoria'}</span></div>
                           {problem.part_affected && (
                             <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.part_affected}</span></div>
