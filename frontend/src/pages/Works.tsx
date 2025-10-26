@@ -161,11 +161,16 @@ const Works: React.FC = () => {
       );
     }
 
-    // Ordina: lavori pending sempre in cima
+    // Ordina: lavori pending sempre in cima, poi per data (più recenti prima)
     return filtered.sort((a, b) => {
+      // Prima ordina per status
       if (a.status === 'pending' && b.status !== 'pending') return -1;
       if (a.status !== 'pending' && b.status === 'pending') return 1;
-      return 0;
+      
+      // Poi ordina per data (più recenti prima)
+      const dateA = new Date(a.work_date || 0).getTime();
+      const dateB = new Date(b.work_date || 0).getTime();
+      return dateB - dateA;
     });
   }, [allWorks, searchText, filterStatus]);
 

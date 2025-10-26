@@ -161,11 +161,16 @@ const Orders: React.FC = () => {
       );
     }
 
-    // Ordina: ordini pending sempre in cima
+    // Ordina: ordini pending sempre in cima, poi per data (più recenti prima)
     return filtered.sort((a, b) => {
+      // Prima ordina per status
       if (a.status === 'pending' && b.status !== 'pending') return -1;
       if (a.status !== 'pending' && b.status === 'pending') return 1;
-      return 0;
+      
+      // Poi ordina per data (più recenti prima)
+      const dateA = new Date(a.order_date || 0).getTime();
+      const dateB = new Date(b.order_date || 0).getTime();
+      return dateB - dateA;
     });
   }, [allOrders, searchText, filterStatus]);
 

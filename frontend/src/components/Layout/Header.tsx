@@ -16,8 +16,8 @@ const Header: React.FC = () => {
       <div className="px-6 py-4 flex items-center justify-between">
         {/* Left - Logo */}
         <div className="flex items-center">
-          <span className="text-2xl">⚓</span>
-          <span className="ml-2 font-bold text-lg text-gray-800">LNI Works</span>
+          <span className="text-2xl"></span>
+          <span className="ml-2 font-bold text-lg text-gray-800">LNI Manager</span>
         </div>
 
         {/* Right - Logout button */}

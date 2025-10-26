@@ -168,11 +168,16 @@ const Boats: React.FC = () => {
       );
     }
 
-    // Ordina: problemi aperti sempre in cima
+    // Ordina: problemi aperti sempre in cima, poi per data (più recenti prima)
     return filtered.sort((a, b) => {
+      // Prima ordina per status
       if (a.status === 'open' && b.status !== 'open') return -1;
       if (a.status !== 'open' && b.status === 'open') return 1;
-      return 0;
+      
+      // Poi ordina per data (più recenti prima)
+      const dateA = new Date(a.reported_date || 0).getTime();
+      const dateB = new Date(b.reported_date || 0).getTime();
+      return dateB - dateA;
     });
   }, [allProblems, selectedBoat, searchText, filterStatus]);
 
