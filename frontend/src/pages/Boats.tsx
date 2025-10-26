@@ -365,7 +365,7 @@ const Boats: React.FC = () => {
                 {filteredProblems.map((problem) => (
                   <div
                     key={problem.id}
-                    className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: problem.status === 'open'
                         ? 'rgba(255, 89, 88, 0.5)'
@@ -395,19 +395,14 @@ const Boats: React.FC = () => {
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
                         <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                          <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                          <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? ', ' : ''}</span>
                           {problem.shift_id && (
-                            <>
-                              <span>, </span>
-                              <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
-                            </>
+                            <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
                           )}
-                          <span className="text-lg font-bold whitespace-nowrap">•</span>
-                          <span>{problem.boat_type || 'Categoria'}</span>
+                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.boat_type || 'Categoria'}</span>
                           {problem.part_affected && (
                             <>
-                              <span className="text-lg font-bold whitespace-nowrap">•</span>
-                              <span>{problem.part_affected}</span>
+                              <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.part_affected}</span>
                             </>
                           )}
                         </div>

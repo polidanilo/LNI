@@ -22,7 +22,9 @@ const BoatsNew: React.FC = () => {
   const [selectedBoat, setSelectedBoat] = useState<Boat | null>(null);
   const [problemForm, setProblemForm] = useState<ProblemForm>({ description: '', part_affected: '' });
   const [problemStatus, setProblemStatus] = useState<'open' | 'closed'>('open');
-  const [selectedShiftId, setSelectedShiftId] = useState<number | null>(selectedShift?.id || null);
+  const [selectedShiftId, setSelectedShiftId] = useState<number | null>(
+    selectedShift?.id && selectedShift.id !== -1 ? selectedShift.id : null
+  );
   const [showShiftSelector, setShowShiftSelector] = useState(false);
   
   const shiftNames = ['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'];
@@ -134,7 +136,7 @@ const BoatsNew: React.FC = () => {
                   title="Seleziona turno"
                 >
                   <span className="text-sm text-gray-700" style={{fontFamily: 'Greycliff CF', fontWeight: 900}}>
-                    {selectedShiftId ? romanNumerals[(selectedShiftId - 1) % 6] : 'T'}
+                    {selectedShiftId && selectedShiftId !== -1 ? romanNumerals[(selectedShiftId - 1) % 6] : 'T'}
                   </span>
                 </button>
                 {showShiftSelector && (

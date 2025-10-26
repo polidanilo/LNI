@@ -358,7 +358,7 @@ const Works: React.FC = () => {
                 {filteredWorks.map((work) => (
                   <div
                     key={work.id}
-                    className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: work.status === 'completed'
                         ? 'rgba(16, 185, 129, 0.4)'
@@ -388,17 +388,12 @@ const Works: React.FC = () => {
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
                         <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                          <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                          <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}{work.shift_id ? ', ' : ''}</span>
                           {work.shift_id && (
-                            <>
-                              <span>, </span>
-                              <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}</span>
-                            </>
+                            <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}</span>
                           )}
-                          <span className="text-lg font-bold whitespace-nowrap">•</span>
-                          <span>{work.category || 'Categoria'}</span>
-                          <span className="text-lg font-bold whitespace-nowrap">•</span>
-                          <span className="break-words">{work.created_by || 'N/A'}</span>
+                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.category || 'Categoria'}</span>
+                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.created_by || 'N/A'}</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

@@ -405,7 +405,7 @@ const Orders: React.FC = () => {
                 {filteredOrders.map((order) => (
                   <div
                     key={order.id}
-                    className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: order.status === 'completed' 
                         ? 'rgb(57, 168, 251, 0.4)'
@@ -435,17 +435,12 @@ const Orders: React.FC = () => {
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
                         <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                          <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                          <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}{order.shift_id ? ', ' : ''}</span>
                           {order.shift_id && (
-                            <>
-                              <span>, </span>
-                              <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
-                            </>
+                            <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
                           )}
-                          <span className="text-lg font-bold whitespace-nowrap">•</span>
-                          <span>{order.category || 'Categoria'}</span>
-                          <span className="text-lg font-bold whitespace-nowrap">•</span>
-                          <span className="break-words truncate">{order.title ? (order.title.length > 25 ? order.title.substring(0, 25) : order.title) : 'N/A'}</span>
+                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.category || 'Categoria'}</span>
+                          <span className="break-words truncate"><span className="text-lg font-bold">•</span> {order.title ? (order.title.length > 25 ? order.title.substring(0, 25) : order.title) : 'N/A'}</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

@@ -591,7 +591,7 @@ const Dashboard: React.FC = () => {
                   {openProblems.slice(0, 6).map((problem) => (
                     <div
                       key={problem.id}
-                      className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: problem.status === 'closed' 
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -619,19 +619,14 @@ const Dashboard: React.FC = () => {
                             {problem.boat_name || 'Barca'}
                           </h4>
                           <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                            <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                            <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? ', ' : ''}</span>
                             {problem.shift_id && (
-                              <>
-                                <span>, </span>
-                                <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
-                              </>
+                              <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
                             )}
-                            <span className="text-lg font-bold whitespace-nowrap">•</span>
-                            <span>{problem.boat_type || 'Categoria'}</span>
+                            <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.boat_type || 'Categoria'}</span>
                             {problem.part_affected && (
                               <>
-                                <span className="text-lg font-bold whitespace-nowrap">•</span>
-                                <span>{problem.part_affected}</span>
+                                <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.part_affected}</span>
                               </>
                             )}
                           </div>
@@ -698,7 +693,7 @@ const Dashboard: React.FC = () => {
                   {recentWorks.map((work) => (
                     <div
                       key={work.id}
-                      className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: work.status === 'completed'
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -727,17 +722,12 @@ const Dashboard: React.FC = () => {
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
                           <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                            <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
+                            <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}{work.shift_id ? ', ' : ''}</span>
                             {work.shift_id && (
-                              <>
-                                <span>, </span>
-                                <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}</span>
-                              </>
+                              <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}</span>
                             )}
-                            <span className="text-lg font-bold whitespace-nowrap">•</span>
-                            <span>{work.category}</span>
-                            <span className="text-lg font-bold whitespace-nowrap">•</span>
-                            <span className="break-words">{work.created_by || 'N/A'}</span>
+                            <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.category}</span>
+                            <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.created_by || 'N/A'}</span>
                           </div>
                         </div>
 
@@ -801,10 +791,10 @@ const Dashboard: React.FC = () => {
               ) : (
                 <CustomScrollbar maxHeight="232px">
                   <div className="space-y-2 mr-2">
-                  {recentOrders.map((order) => (
+                  {recentOrders?.slice(0, 6).map((order) => (
                     <div
                       key={order.id}
-                      className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: order.status === 'completed'
                           ? 'rgb(57, 168, 251, 0.4)'
@@ -832,17 +822,12 @@ const Dashboard: React.FC = () => {
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
                           <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                            <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
+                            <span>{new Date(order.order_date).toLocaleDateString('it-IT')}{order.shift_id ? ', ' : ''}</span>
                             {order.shift_id && (
-                              <>
-                                <span>, </span>
-                                <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
-                              </>
+                              <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
                             )}
-                            <span className="text-lg font-bold whitespace-nowrap">•</span>
-                            <span>{order.category}</span>
-                            <span className="text-lg font-bold whitespace-nowrap">•</span>
-                            <span className="break-words truncate">{order.title.length > 25 ? order.title.substring(0, 25) : order.title}</span>
+                            <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.category}</span>
+                            <span className="break-words truncate"><span className="text-lg font-bold">•</span> {order.title.length > 25 ? order.title.substring(0, 25) : order.title}</span>
                           </div>
                         </div>
 
