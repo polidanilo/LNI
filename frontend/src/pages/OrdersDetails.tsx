@@ -176,7 +176,7 @@ const OrdersDetails: React.FC = () => {
             </div>
             <button
               onClick={handleToggleStatus}
-              className="w-8 h-8 rounded-tr-full rounded-bl-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="w-8 h-8 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',

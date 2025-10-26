@@ -123,7 +123,7 @@ const BoatsNew: React.FC = () => {
                 setProblemStatus(newStatus);
                 setTimeout(() => e.currentTarget.blur(), 0);
               }}
-              className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="w-8 h-8 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',

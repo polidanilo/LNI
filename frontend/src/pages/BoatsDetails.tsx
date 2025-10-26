@@ -140,19 +140,19 @@ const BoatsDetails: React.FC = () => {
         onClick={handleClose}
       />
       
-<div
-  className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
-  style={{
-    height: '75vh',
-    animation: 'slideUp 0.2s ease-out',
-    background: `
-      linear-gradient(white, white) padding-box,
-      linear-gradient(135deg, #FF5958, #39A8FB 33%, #FF9151 66%, #10B981) border-box
-    `,
-    border: '2px solid transparent',
-    borderBottom: '0'
-  }}
->
+      <div 
+        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-tr-3xl rounded-bl-3xl shadow-sm mx-0.3"
+        style={{
+          height: '75vh',
+          animation: 'slideUp 0.2s ease-out',
+          background: `
+            linear-gradient(white, white) padding-box,
+            linear-gradient(135deg, #FF5958, #39A8FB 33%, #FF9151 66%, #10B981) border-box
+          `,
+          border: '2px solid transparent',
+          borderBottom: '0'
+        }}
+      >
 
         <div 
           className="flex justify-center pt-2 pb-2"
@@ -167,7 +167,7 @@ const BoatsDetails: React.FC = () => {
             </h3>
             <button
               onClick={handleToggleStatus}
-              className="mr-2 w-8 h-8 rounded-tr-full rounded-bl-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="mr-2 w-8 h-8 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
