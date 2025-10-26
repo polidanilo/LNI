@@ -187,7 +187,7 @@ const OrdersDetails: React.FC = () => {
 
                 title={editShiftId ? `${shiftNames[(editShiftId - 1) % 6]} turno` : 'Turno non assegnato'}
               >
-                <span className="text-sm font-extrabold text-gray-700">
+                <span className="text-sm text-gray-700" style={{fontFamily: 'Greycliff CF', fontWeight: 900}}>
                   {editShiftId ? romanNumerals[(editShiftId - 1) % 6] : '?'}
                 </span>
               </div>

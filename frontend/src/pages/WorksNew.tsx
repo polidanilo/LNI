@@ -120,8 +120,8 @@ const WorksNew: React.FC = () => {
                   }}
                   title="Seleziona turno"
                 >
-                  <span className="text-sm font-extrabold text-gray-700">
-                    {selectedShiftId ? romanNumerals[(selectedShiftId - 1) % 6] : '?'}
+                  <span className="text-sm text-gray-700" style={{fontFamily: 'Greycliff CF', fontWeight: 900}}>
+                    {selectedShiftId ? romanNumerals[(selectedShiftId - 1) % 6] : 'T'}
                   </span>
                 </button>
                 {showShiftSelector && (
@@ -135,7 +135,7 @@ const WorksNew: React.FC = () => {
                         }}
                         className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center gap-3"
                       >
-                        <div className="font-extrabold text-gray-700" style={{width: '20px'}}>{romanNumerals[index]}</div>
+                        <div className="text-gray-700" style={{width: '20px', fontFamily: 'Greycliff CF', fontWeight: 900}}>{romanNumerals[index]}</div>
                         <div className="text-sm text-gray-600 whitespace-nowrap">{name} turno</div>
                       </button>
                     ))}

@@ -121,7 +121,7 @@ const Dashboard: React.FC = () => {
       });
       return response.data.slice(0, 6);
     },
-    enabled: !!selectedShift,
+    enabled: !!selectedShift && (selectedShift.id !== -1 || !!shifts),
     staleTime: 1000 * 60 * 5, // 5 minuti
   });
 
@@ -151,7 +151,7 @@ const Dashboard: React.FC = () => {
       });
       return response.data.slice(0, 6);
     },
-    enabled: !!selectedShift,
+    enabled: !!selectedShift && (selectedShift.id !== -1 || !!shifts),
     staleTime: 1000 * 60 * 5, // 5 minuti
   });
 
@@ -181,7 +181,7 @@ const Dashboard: React.FC = () => {
       });
       return response.data.slice(0, 6);
     },
-    enabled: !!selectedShift,
+    enabled: !!selectedShift && (selectedShift.id !== -1 || !!shifts),
     staleTime: 1000 * 60 * 5, // 5 minuti
   });
 
@@ -618,19 +618,19 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             {problem.shift_id && (
                               <>
-                                <span>,</span>
+                                <span>, </span>
                                 <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
                               </>
                             )}
-                            <span className="text-lg font-bold">•</span>
+                            <span className="text-lg font-bold whitespace-nowrap">•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
                             {problem.part_affected && (
                               <>
-                                <span className="text-lg font-bold">•</span>
+                                <span className="text-lg font-bold whitespace-nowrap">•</span>
                                 <span>{problem.part_affected}</span>
                               </>
                             )}
@@ -726,17 +726,17 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             {work.shift_id && (
                               <>
-                                <span>,</span>
+                                <span>, </span>
                                 <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}</span>
                               </>
                             )}
-                            <span className="text-lg font-bold">•</span>
+                            <span className="text-lg font-bold whitespace-nowrap">•</span>
                             <span>{work.category}</span>
-                            <span className="text-lg font-bold">•</span>
+                            <span className="text-lg font-bold whitespace-nowrap">•</span>
                             <span className="break-words">{work.created_by || 'N/A'}</span>
                           </div>
                         </div>
@@ -831,17 +831,17 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
                             {order.shift_id && (
                               <>
-                                <span>,</span>
+                                <span>, </span>
                                 <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
                               </>
                             )}
-                            <span className="text-lg font-bold">•</span>
+                            <span className="text-lg font-bold whitespace-nowrap">•</span>
                             <span>{order.category}</span>
-                            <span className="text-lg font-bold">•</span>
+                            <span className="text-lg font-bold whitespace-nowrap">•</span>
                             <span className="break-words truncate">{order.title.length > 25 ? order.title.substring(0, 25) : order.title}</span>
                           </div>
                         </div>

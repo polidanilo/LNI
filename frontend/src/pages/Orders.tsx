@@ -83,7 +83,7 @@ const Orders: React.FC = () => {
       const res = await orderService.getAll({ shift_id: selectedShift.id });
       return res.data;
     },
-    enabled: !!selectedShift?.id,
+    enabled: !!selectedShift?.id && (selectedShift.id !== -1 || !!shifts),
   });
 
 
@@ -434,17 +434,17 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
                           <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           {order.shift_id && (
                             <>
-                              <span>,</span>
+                              <span>, </span>
                               <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
                             </>
                           )}
-                          <span className="text-lg font-bold">•</span>
+                          <span className="text-lg font-bold whitespace-nowrap">•</span>
                           <span>{order.category || 'Categoria'}</span>
-                          <span className="text-lg font-bold">•</span>
+                          <span className="text-lg font-bold whitespace-nowrap">•</span>
                           <span className="break-words truncate">{order.title ? (order.title.length > 25 ? order.title.substring(0, 25) : order.title) : 'N/A'}</span>
                         </div>
                       </div>

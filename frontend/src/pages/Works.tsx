@@ -83,7 +83,7 @@ const Works: React.FC = () => {
       const res = await workService.getAll({ shift_id: selectedShift.id });
       return res.data;
     },
-    enabled: !!selectedShift?.id,
+    enabled: !!selectedShift?.id && (selectedShift.id !== -1 || !!shifts),
   });
 
 
@@ -387,17 +387,17 @@ const Works: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
                           <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           {work.shift_id && (
                             <>
-                              <span>,</span>
+                              <span>, </span>
                               <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}</span>
                             </>
                           )}
-                          <span className="text-lg font-bold">•</span>
+                          <span className="text-lg font-bold whitespace-nowrap">•</span>
                           <span>{work.category || 'Categoria'}</span>
-                          <span className="text-lg font-bold">•</span>
+                          <span className="text-lg font-bold whitespace-nowrap">•</span>
                           <span className="break-words">{work.created_by || 'N/A'}</span>
                         </div>
                       </div>

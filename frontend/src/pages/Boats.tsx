@@ -84,7 +84,7 @@ const Boats: React.FC = () => {
       const res = await problemService.list({ shift_id: selectedShift.id });
       return res.data;
     },
-    enabled: !!selectedShift?.id,
+    enabled: !!selectedShift?.id && (selectedShift.id !== -1 || !!shifts),
   });
 
 
@@ -394,19 +394,19 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           {problem.shift_id && (
                             <>
-                              <span>,</span>
+                              <span>, </span>
                               <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
                             </>
                           )}
-                          <span className="text-lg font-bold">•</span>
+                          <span className="text-lg font-bold whitespace-nowrap">•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>
                           {problem.part_affected && (
                             <>
-                              <span className="text-lg font-bold">•</span>
+                              <span className="text-lg font-bold whitespace-nowrap">•</span>
                               <span>{problem.part_affected}</span>
                             </>
                           )}

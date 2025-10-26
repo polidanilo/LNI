@@ -71,6 +71,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Greycliff CF';
+  src: url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFHeavyRegular.woff2') format('woff2'),
+       url('/fonts/Greycliff/FONTSPRINGDEMO-GreycliffCFHeavyRegular.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   * {
     margin: 0;
