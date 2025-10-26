@@ -20,8 +20,13 @@ const WorksNew: React.FC = () => {
   const queryClient = useQueryClient();
   const { selectedShift } = useAppContext();
 
-  const [workForm, setWorkForm] = useState<WorkForm>({ title: '', description: '', category: 'Campo', notes: '' });
+  const [workForm, setWorkForm] = useState<WorkForm>({ title: '', description: '', category: '', notes: '' });
   const [workStatus, setWorkStatus] = useState<'pending' | 'completed'>('completed');
+  const [selectedShiftId, setSelectedShiftId] = useState<number | null>(selectedShift?.id || null);
+  const [showShiftSelector, setShowShiftSelector] = useState(false);
+
+  const shiftNames = ['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'];
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
   const createWorkMutation = useMutation({
     mutationFn: async (payload: Omit<Work, 'id'>) => {
@@ -43,7 +48,7 @@ const WorksNew: React.FC = () => {
   };
 
   const handleAddWork = () => {
-    if (!selectedShift?.id) {
+    if (!selectedShiftId) {
       alert('Seleziona un turno');
       return;
     }
@@ -62,7 +67,7 @@ const WorksNew: React.FC = () => {
       category: workForm.category as Work['category'],
       status: workStatus,
       work_date: new Date().toISOString().split('T')[0],
-      shift_id: selectedShift.id,
+      shift_id: selectedShiftId,
       notes: '',
       created_by: '',
     } as Omit<Work, 'id'>;
@@ -103,13 +108,47 @@ const WorksNew: React.FC = () => {
                 Aggiungi lavoro
               </h3>
             </div>
-            <button
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <button
+                  onClick={() => setShowShiftSelector(!showShiftSelector)}
+                  className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+                  style={{
+                    borderWidth: '2px',
+                    borderStyle: 'solid',
+                    borderColor: '#6B7280'
+                  }}
+                  title="Seleziona turno"
+                >
+                  <span className="text-sm font-bold text-gray-700">
+                    {selectedShiftId ? romanNumerals[(selectedShiftId - 1) % 6] : '?'}
+                  </span>
+                </button>
+                {showShiftSelector && (
+                  <div className="absolute top-10 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
+                    {shiftNames.map((name, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setSelectedShiftId(index + 1);
+                          setShowShiftSelector(false);
+                        }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center gap-3"
+                      >
+                        <span className="font-bold text-gray-700 w-6">{romanNumerals[index]}</span>
+                        <span className="text-sm text-gray-600" style={{minWidth: '80px'}}>{name} turno</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <button
               onClick={(e) => {
                 const newStatus = workStatus === 'pending' ? 'completed' : 'pending';
                 setWorkStatus(newStatus);
                 setTimeout(() => e.currentTarget.blur(), 0);
               }}
-              className="w-8 h-8 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
@@ -127,6 +166,7 @@ const WorksNew: React.FC = () => {
                 </svg>
               )}
             </button>
+            </div>
           </div>
         </div>
 

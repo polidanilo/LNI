@@ -22,6 +22,11 @@ const BoatsNew: React.FC = () => {
   const [selectedBoat, setSelectedBoat] = useState<Boat | null>(null);
   const [problemForm, setProblemForm] = useState<ProblemForm>({ description: '', part_affected: '' });
   const [problemStatus, setProblemStatus] = useState<'open' | 'closed'>('open');
+  const [selectedShiftId, setSelectedShiftId] = useState<number | null>(selectedShift?.id || null);
+  const [showShiftSelector, setShowShiftSelector] = useState(false);
+  
+  const shiftNames = ['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'];
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI'];
   
   const { data: boats } = useQuery({
     queryKey: ['boats', selectedType],
@@ -65,7 +70,7 @@ const BoatsNew: React.FC = () => {
       alert('Seleziona un\'imbarcazione');
       return;
     }
-    if (!selectedShift?.id) {
+    if (!selectedShiftId) {
       alert('Seleziona un turno');
       return;
     }
@@ -76,7 +81,7 @@ const BoatsNew: React.FC = () => {
       part_affected: problemForm.part_affected || undefined,
       status: problemStatus,
       reported_date: new Date().toISOString().split('T')[0],
-      shift_id: selectedShift.id,
+      shift_id: selectedShiftId,
     } as Omit<Problem, 'id' | 'resolved_date'>;
     
     console.log('Creating problem with status:', problemStatus, 'Full payload:', payload);
@@ -115,15 +120,48 @@ const BoatsNew: React.FC = () => {
               <h3 className="text-xl font-bold font-greycliff black">
                 Aggiungi problema
               </h3>
-
             </div>
-            <button
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <button
+                  onClick={() => setShowShiftSelector(!showShiftSelector)}
+                  className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+                  style={{
+                    borderWidth: '2px',
+                    borderStyle: 'solid',
+                    borderColor: '#6B7280'
+                  }}
+                  title="Seleziona turno"
+                >
+                  <span className="text-sm font-bold text-gray-700">
+                    {selectedShiftId ? romanNumerals[(selectedShiftId - 1) % 6] : '?'}
+                  </span>
+                </button>
+                {showShiftSelector && (
+                  <div className="absolute top-10 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
+                    {shiftNames.map((name, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setSelectedShiftId(index + 1);
+                          setShowShiftSelector(false);
+                        }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center gap-3"
+                      >
+                        <span className="font-bold text-gray-700 w-6">{romanNumerals[index]}</span>
+                        <span className="text-sm text-gray-600" style={{minWidth: '80px'}}>{name} turno</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <button
               onClick={(e) => {
                 const newStatus = problemStatus === 'open' ? 'closed' : 'open';
                 setProblemStatus(newStatus);
                 setTimeout(() => e.currentTarget.blur(), 0);
               }}
-              className="w-8 h-8 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
@@ -141,6 +179,7 @@ const BoatsNew: React.FC = () => {
                 </svg>
               )}
             </button>
+            </div>
           </div>
         </div>
 

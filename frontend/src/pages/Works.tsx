@@ -272,7 +272,7 @@ const Works: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setFilterStatus('completed')}
-                className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
+                className="py-1.5 rounded-tr-2xl rounded-bl-2xl text-sm font-semibold transition-all duration-300"
                 style={{
                   width: '120px',
                   backgroundColor: filterStatus === 'completed' ? '#10B981' : 'white',
@@ -297,7 +297,7 @@ const Works: React.FC = () => {
               </button>
               <button
                 onClick={() => setFilterStatus('pending')}
-                className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
+                className="py-1.5 rounded-tr-2xl rounded-bl-2xl text-sm font-semibold transition-all duration-300"
                 style={{
                   width: '120px',
                   backgroundColor: filterStatus === 'pending' ? '#FF9151' : 'white',
@@ -362,7 +362,7 @@ const Works: React.FC = () => {
                 {filteredWorks.map((work) => (
                   <div
                     key={work.id}
-                    className="relative p-4 pb-1.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: work.status === 'completed'
                         ? 'rgba(16, 185, 129, 0.4)'
@@ -391,7 +391,7 @@ const Works: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.4'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                           <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{work.category || 'Categoria'}</span>

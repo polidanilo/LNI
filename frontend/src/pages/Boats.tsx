@@ -279,7 +279,7 @@ const Boats: React.FC = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setFilterStatus('open')}
-                  className="py-1.5 rounded-tr-3xl rounded-bl-3xl text-sm font-semibold transition-all duration-300"
+                  className="py-1.5 rounded-tr-2xl rounded-bl-2xl text-sm font-semibold transition-all duration-300"
                   style={{
                     width: '120px',
                     backgroundColor: filterStatus === 'open' ? '#FF5958' : 'white',
@@ -304,7 +304,7 @@ const Boats: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setFilterStatus('closed')}
-                  className="py-1.5 rounded-tr-3xl rounded-bl-3xl text-sm font-semibold transition-all duration-300"
+                  className="py-1.5 rounded-tr-2xl rounded-bl-2xl text-sm font-semibold transition-all duration-300"
                   style={{
                     width: '120px',
                     backgroundColor: filterStatus === 'closed' ? '#10B981' : 'white',
@@ -369,7 +369,7 @@ const Boats: React.FC = () => {
                 {filteredProblems.map((problem) => (
                   <div
                     key={problem.id}
-                    className="relative p-4 pb-1.5 rounded-tr-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: problem.status === 'open'
                         ? 'rgba(255, 89, 88, 0.5)'

@@ -22,8 +22,7 @@ const OrdersDetails: React.FC = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [users, setUsers] = useState<Array<{ id: number; username: string }>>([]);
   const [editShiftId, setEditShiftId] = useState<number | null>(null);
-  const [showShiftSelector, setShowShiftSelector] = useState(false);
-  
+
   const shiftNames = ['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'];
   const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
@@ -182,41 +181,19 @@ const OrdersDetails: React.FC = () => {
               </h3>
             </div>
             <div className="flex items-center gap-2">
-              {/* Bottone selettore turno con numero romano */}
-              <div className="relative">
-                <button
-                  onClick={() => setShowShiftSelector(!showShiftSelector)}
-                  className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
-                  style={{
-                    borderWidth: '2px',
-                    borderStyle: 'solid',
-                    borderColor: '#6B7280'
-                  }}
-                  title="Seleziona turno"
-                >
-                  <span className="text-sm font-bold text-gray-700">
-                    {editShiftId ? romanNumerals[(editShiftId - 1) % 6] : '?'}
-                  </span>
-                </button>
-                
-                {/* Dropdown selettore turno */}
-                {showShiftSelector && (
-                  <div className="absolute top-10 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 min-w-[120px]">
-                    {shiftNames.map((name, index) => (
-                      <button
-                        key={index}
-                        onClick={() => {
-                          setEditShiftId(index + 1);
-                          setShowShiftSelector(false);
-                        }}
-                        className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center gap-2"
-                      >
-                        <span className="font-bold text-gray-700">{romanNumerals[index]}</span>
-                        <span className="text-sm text-gray-600">{name}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
+              {/* Icona turno statica (solo visualizzazione) */}
+              <div
+                className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm"
+                style={{
+                  borderWidth: '2px',
+                  borderStyle: 'solid',
+                  borderColor: '#6B7280'
+                }}
+                title={editShiftId ? `${shiftNames[(editShiftId - 1) % 6]} turno` : 'Turno non assegnato'}
+              >
+                <span className="text-sm font-bold text-gray-700">
+                  {editShiftId ? romanNumerals[(editShiftId - 1) % 6] : '?'}
+                </span>
               </div>
               
               {/* Bottone stato */}

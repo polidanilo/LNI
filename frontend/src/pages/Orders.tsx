@@ -272,7 +272,7 @@ const Orders: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setFilterStatus('completed')}
-                className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
+                className="py-1.5 rounded-tr-2xl rounded-bl-2xl text-sm font-semibold transition-all duration-300"
                 style={{
                   width: '120px',
                   backgroundColor: filterStatus === 'completed' ? '#39A8FB' : 'white',
@@ -297,7 +297,7 @@ const Orders: React.FC = () => {
               </button>
               <button
                 onClick={() => setFilterStatus('pending')}
-                className="py-1.5 rounded-full text-sm font-semibold transition-all duration-300"
+                className="py-1.5 rounded-tr-2xl rounded-bl-2xl text-sm font-semibold transition-all duration-300"
                 style={{
                   width: '120px',
                   backgroundColor: filterStatus === 'pending' ? '#FF9151' : 'white',
@@ -409,7 +409,7 @@ const Orders: React.FC = () => {
                 {filteredOrders.map((order) => (
                   <div
                     key={order.id}
-                    className="relative p-4 pb-1.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-1.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: order.status === 'completed' 
                         ? 'rgb(57, 168, 251, 0.4)'
@@ -438,7 +438,7 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.4'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                           <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{order.category || 'Categoria'}</span>

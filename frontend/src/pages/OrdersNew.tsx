@@ -21,6 +21,11 @@ const OrdersNew: React.FC = () => {
   const [orderForm, setOrderForm] = useState<OrderForm>({ title: '', amount: 0, category: '', notes: '' });
   const [orderStatus, setOrderStatus] = useState<'pending' | 'completed'>('completed');
   const [amountInput, setAmountInput] = useState<string>('');
+  const [selectedShiftId, setSelectedShiftId] = useState<number | null>(selectedShift?.id || null);
+  const [showShiftSelector, setShowShiftSelector] = useState(false);
+  
+  const shiftNames = ['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'];
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
   const createOrderMutation = useMutation({
     mutationFn: async (payload: Omit<Order, 'id'>) => {
@@ -42,7 +47,7 @@ const OrdersNew: React.FC = () => {
   };
 
   const handleAddOrder = () => {
-    if (!selectedShift?.id) {
+    if (!selectedShiftId) {
       alert('Seleziona un turno');
       return;
     }
@@ -66,7 +71,7 @@ const OrdersNew: React.FC = () => {
       order_date: new Date().toISOString().split('T')[0],
       notes: orderForm.notes || '',
       status: orderStatus,
-      shift_id: selectedShift.id,
+      shift_id: selectedShiftId,
     } as Omit<Order, 'id'>;
     
     createOrderMutation.mutate(payload);
@@ -105,13 +110,51 @@ const OrdersNew: React.FC = () => {
                 Aggiungi ordine
               </h3>
             </div>
-            <button
+            <div className="flex items-center gap-2">
+              {/* Selettore turno modificabile */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowShiftSelector(!showShiftSelector)}
+                  className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+                  style={{
+                    borderWidth: '2px',
+                    borderStyle: 'solid',
+                    borderColor: '#6B7280'
+                  }}
+                  title="Seleziona turno"
+                >
+                  <span className="text-sm font-bold text-gray-700">
+                    {selectedShiftId ? romanNumerals[(selectedShiftId - 1) % 6] : '?'}
+                  </span>
+                </button>
+                
+                {showShiftSelector && (
+                  <div className="absolute top-10 right-0 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
+                    {shiftNames.map((name, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setSelectedShiftId(index + 1);
+                          setShowShiftSelector(false);
+                        }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center gap-3"
+                      >
+                        <span className="font-bold text-gray-700 w-6">{romanNumerals[index]}</span>
+                        <span className="text-sm text-gray-600" style={{minWidth: '80px'}}>{name} turno</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Bottone stato */}
+              <button
               onClick={(e) => {
                 const newStatus = orderStatus === 'pending' ? 'completed' : 'pending';
                 setOrderStatus(newStatus);
                 setTimeout(() => e.currentTarget.blur(), 0);
               }}
-              className="w-8 h-8 rounded-full text-base items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
+              className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm transition-all duration-200 cursor-pointer"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
@@ -129,6 +172,7 @@ const OrdersNew: React.FC = () => {
                 </svg>
               )}
             </button>
+            </div>
           </div>
         </div>
 
