@@ -122,6 +122,9 @@ const Works: React.FC = () => {
     const value = e.target.value;
     if (value === '') {
       setSelectedShift(null);
+    } else if (value === 'all') {
+      // Seleziona "Tutti" - usa un oggetto speciale
+      setSelectedShift({ id: -1, shift_number: 0, season_id: selectedSeason?.id || 0, start_date: '', end_date: '' } as any);
     } else {
       const shiftId = Number(value);
       const shift = shifts?.find((s) => s.id === shiftId);
@@ -170,7 +173,7 @@ const Works: React.FC = () => {
           {/* Riquadro Imbarcazioni con immagine di sfondo */}
           <div className="flex-1">
             <div 
-              className="relative overflow-hidden rounded-2xl shadow-sm mb-4"
+              className="relative overflow-hidden rounded-tr-2xl rounded-bl-2xl shadow-sm mb-4"
               style={{
                 height: '90px',
                 backgroundImage: 'url(/works3.png)', // ← Modifica qui il nome dell'immagine
@@ -233,6 +236,9 @@ const Works: React.FC = () => {
                !shifts || shifts.length === 0 ? 'Nessun turno' :
                'Seleziona turno'}
             </option>
+            {selectedSeason && shifts && shifts.length > 0 && (
+              <option value="all">Tutti</option>
+            )}
             {shifts?.map((shift) => (
               <option key={shift.id} value={shift.id}>
                 {getShiftOrdinalName(shift.shift_number)}
@@ -245,10 +251,9 @@ const Works: React.FC = () => {
       {/* Tab Lavori o Messaggio Empty State */}
       {selectedShift ? (
         <div style={{backgroundColor: '#FFF4EF', zIndex: 1, position: 'relative'}} className="px-4 pb-9 mt-8" >
-        <div className="bg-white rounded-3xl px-4 pb-10 mt-6 mb-8 shadow-sm relative" style={{paddingBottom: '15px',
+        <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-4 pb-10 mt-6 mb-8 shadow-sm relative" style={{paddingBottom: '15px',
           background: 'linear-gradient(white, white) padding-box, linear-gradient(45deg, #FF9151 0%, #FF9151 85%, #39A8FB 85%) border-box',
           border: '0px solid transparent',
-          borderRadius: '24px',
           minHeight: '750px',
           zIndex: 1
         }}>
@@ -348,7 +353,7 @@ const Works: React.FC = () => {
                 {filteredWorks.map((work) => (
                   <div
                     key={work.id}
-                    className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-2.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: work.status === 'completed'
                         ? 'rgba(16, 185, 129, 0.4)'
@@ -377,7 +382,7 @@ const Works: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.8'}}>
                           <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{work.category || 'Categoria'}</span>

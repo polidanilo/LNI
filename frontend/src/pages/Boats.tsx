@@ -123,6 +123,9 @@ const Boats: React.FC = () => {
     const value = e.target.value;
     if (value === '') {
       setSelectedShift(null);
+    } else if (value === 'all') {
+      // Seleziona "Tutti" - usa un oggetto speciale
+      setSelectedShift({ id: -1, shift_number: 0, season_id: selectedSeason?.id || 0, start_date: '', end_date: '' } as any);
     } else {
       const shiftId = Number(value);
       const shift = shifts?.find((s) => s.id === shiftId);
@@ -177,7 +180,7 @@ const Boats: React.FC = () => {
           {/* Riquadro Imbarcazioni con immagine di sfondo */}
           <div className="flex-1">
             <div 
-              className="relative overflow-hidden rounded-2xl shadow-sm mb-4"
+              className="relative overflow-hidden rounded-tr-2xl rounded-bl-2xl shadow-sm mb-4"
               style={{
                 height: '90px',
                 backgroundImage: 'url(/boats.png)', // ← Modifica qui il nome dell'immagine
@@ -197,7 +200,7 @@ const Boats: React.FC = () => {
             </div>
             
             <p className="pl-2 pt-2 text-base black">
-              Ecco problemi e danni segnalati nel turno selezionato:
+              Ecco i problemi segnalati nel turno selezionato:
             </p>
           </div>
         </div>
@@ -240,6 +243,9 @@ const Boats: React.FC = () => {
                !shifts || shifts.length === 0 ? 'Nessun turno' :
                'Seleziona turno'}
             </option>
+            {selectedSeason && shifts && shifts.length > 0 && (
+              <option value="all">Tutti</option>
+            )}
             {shifts?.map((shift) => (
               <option key={shift.id} value={shift.id}>
                 {getShiftOrdinalName(shift.shift_number)}
@@ -252,10 +258,9 @@ const Boats: React.FC = () => {
       {/* Tab Problemi o Messaggio Empty State */}
       {selectedShift ? (
         <div style={{backgroundColor: '#FFF4EF', zIndex: 1, position: 'relative'}} className="px-4 pb-9 mt-8" >
-          <div className="bg-white rounded-3xl px-4 pb-10 mt-6 mb-8 shadow-sm relative" style={{paddingBottom: '15px',
+          <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-4 pb-10 mt-6 mb-8 shadow-sm relative" style={{paddingBottom: '15px',
             background: 'linear-gradient(white, white) padding-box, linear-gradient(45deg, #FF5958 0%, #FF5958 85%, #39A8FB 85%) border-box',
             border: '0px solid transparent',
-            borderRadius: '24px',
             minHeight: '750px',
             zIndex: 1
           }}>
@@ -355,7 +360,7 @@ const Boats: React.FC = () => {
                 {filteredProblems.map((problem) => (
                   <div
                     key={problem.id}
-                    className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-2.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: problem.status === 'open'
                         ? 'rgba(255, 89, 88, 0.5)'
@@ -384,7 +389,7 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.8'}}>
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>

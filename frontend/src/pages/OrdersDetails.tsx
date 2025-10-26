@@ -149,7 +149,7 @@ const OrdersDetails: React.FC = () => {
       />
       
       <div 
-        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-t-3xl shadow-sm mx-0.3"
+        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-tr-3xl shadow-sm mx-0.3"
         style={{
           height: '68vh',
           animation: 'slideUp 0.1s ease-out',
@@ -197,7 +197,7 @@ const OrdersDetails: React.FC = () => {
           </div>
         </div>
 
-        <div className="pl-6 pr-5 py-4 pb-0">
+        <div className="pl-6 pr-5 py-2 pb-0">
           <CustomScrollbar maxHeight="calc(81vh - 130px)">
             <div className="space-y-4 max-w-2xl mx-auto">
               {/* Titolo e Importo sulla stessa riga */}
@@ -258,7 +258,7 @@ const OrdersDetails: React.FC = () => {
                 <option value="Attrezzatura">Attrezzatura</option>
                 <option value="Materiali">Materiali</option>
                 <option value="Manutenzione">Manutenzione</option>
-                <option value="Forniture">Forniture</option>
+                <option value="Consumabili">Consumabili</option>
                 <option value="Altro">Altro</option>
               </select>
 

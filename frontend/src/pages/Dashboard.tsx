@@ -254,6 +254,9 @@ const Dashboard: React.FC = () => {
     if (value === '') {
       // Deseleziona turno
       setSelectedShift(null);
+    } else if (value === 'all') {
+      // Seleziona "Tutti" - usa un oggetto speciale
+      setSelectedShift({ id: -1, shift_number: 0, season_id: selectedSeason?.id || 0, start_date: '', end_date: '' } as any);
     } else {
       const shiftId = Number(value);
       console.log('🔄 handleShiftChange called with:', shiftId);
@@ -282,7 +285,7 @@ const Dashboard: React.FC = () => {
           {/* Riquadro Dashboard con immagine di sfondo */}
           <div className="flex-1">
             <div 
-              className="relative overflow-hidden rounded-2xl shadow-sm mb-4"
+              className="relative overflow-hidden rounded-tr-2xl rounded-bl-2xl shadow-sm mb-4"
               style={{
                 height: '116px',
                 backgroundImage: 'url(/lake.png)', // ← Modifica qui il nome dell'immagine
@@ -363,6 +366,9 @@ const Dashboard: React.FC = () => {
                !shifts || shifts.length === 0 ? 'Nessun turno' :
                'Seleziona turno'}
             </option>
+            {selectedSeason && shifts && shifts.length > 0 && (
+              <option value="all">Tutti</option>
+            )}
             {shifts?.map((shift) => (
               <option key={shift.id} value={shift.id}>
                 {getShiftOrdinalName(shift.shift_number)}
@@ -387,7 +393,7 @@ const Dashboard: React.FC = () => {
                 top: '64%',
                 right: '4%',
                 opacity: 0.9,
-                transform: `translateY(${Math.max(-scrollY * 0.4, -150)}px)` // Movimento limitato
+                transform: `translateY(-${scrollY * 0.4}px)` // Parallax illimitato verso l'alto
               }}
             />
 
@@ -400,7 +406,7 @@ const Dashboard: React.FC = () => {
                 top: '54%',
                 right: '10%',
                 opacity: 0.9,
-                transform: `translateY(${Math.max(-scrollY * 0.4, -120)}px)` // Movimento limitato
+                transform: `translateY(-${scrollY * 0.4}px)` // Parallax illimitato verso l'alto
               }}
             />
 
@@ -413,7 +419,7 @@ const Dashboard: React.FC = () => {
                 top: '70%',
                 left: '55%',
                 opacity: 0.6,
-                transform: `translateY(${Math.max(-scrollY * 0.4, -180)}px)` // Movimento limitato
+                transform: `translateY(-${scrollY * 0.4}px)` // Parallax illimitato verso l'alto
               }}
             />
 
@@ -427,7 +433,7 @@ const Dashboard: React.FC = () => {
                 top: '50%',
                 left: '8%',
                 opacity: 0.4,
-                transform: `translateY(${Math.max(-scrollY * 0.4, -100)}px)` // Movimento limitato
+                transform: `translateY(-${scrollY * 0.4}px)` // Parallax illimitato verso l'alto
               }}
             />
 
@@ -441,7 +447,7 @@ const Dashboard: React.FC = () => {
                 top: '34%',
                 right: '13%',
                 opacity: 0,
-                transform: `translateY(${Math.max(-scrollY * 0.4, -50)}px)` // Movimento limitato
+                transform: `translateY(-${scrollY * 0.4}px)` // Parallax illimitato verso l'alto
               }}
             />
 
@@ -529,7 +535,7 @@ const Dashboard: React.FC = () => {
             <div className="relative space-y-4 pb-9" style={{backgroundColor: '#FFF4EF', zIndex: 1}}>
               
             {/* Ultimi problemi barche */}
-            <div className="bg-white rounded-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
+            <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
               background: 'linear-gradient(white, white) padding-box, linear-gradient(45deg, #FF5958 0%, #FF5958 85%, #39A8FB 85%) border-box',
               border: '0px solid transparent',
               borderRadius: '24px',
@@ -554,7 +560,7 @@ const Dashboard: React.FC = () => {
                   {openProblems.slice(0, 6).map((problem) => (
                     <div
                       key={problem.id}
-                      className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-2.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: problem.status === 'closed' 
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -581,7 +587,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.8'}}>
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
@@ -631,7 +637,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Ultimi lavori */}
-            <div className="bg-white rounded-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
+            <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
               background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, rgb(255, 145, 81) 0%, rgb(255, 145, 81) 85%, #39A8FB 85%) border-box',
               border: '0px solid transparent',
               borderRadius: '24px',
@@ -656,7 +662,7 @@ const Dashboard: React.FC = () => {
                   {recentWorks.map((work) => (
                     <div
                       key={work.id}
-                      className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-2.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: work.status === 'completed'
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -684,7 +690,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.8'}}>
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{work.category}</span>
@@ -732,7 +738,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Ultimi ordini */}
-            <div className="bg-white rounded-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
+            <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
               background: 'linear-gradient(white, white) padding-box, linear-gradient(315deg, #39A8FB 0%, #39A8FB 85%, #FF5958 85%) border-box',
               border: '0px solid transparent',
               borderRadius: '24px',
@@ -757,7 +763,7 @@ const Dashboard: React.FC = () => {
                   {recentOrders.map((order) => (
                     <div
                       key={order.id}
-                      className="relative p-4 pb-3.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-2.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: order.status === 'completed'
                           ? 'rgb(57, 168, 251, 0.4)'
@@ -784,7 +790,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '1.3'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.8'}}>
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{order.category}</span>
