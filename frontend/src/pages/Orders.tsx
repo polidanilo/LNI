@@ -434,10 +434,10 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3 flex-wrap" style={{lineHeight: '1.4'}}>
-                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}{order.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}` : ''}</span>
-                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.category || 'Categoria'}</span>
-                          <span className="break-words truncate"><span className="text-lg font-bold">•</span> {order.title ? (order.title.length > 25 ? order.title.substring(0, 25) : order.title) : 'N/A'}</span>
+                        <div className="text-sm black mt-3" style={{lineHeight: '1.4'}}>
+                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}{order.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}` : ''}</span></div>
+                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.category || 'Categoria'}</span></div>
+                          <div><span className="break-words"><span className="text-lg font-bold">•</span> {order.title ? (order.title.length > 25 ? order.title.substring(0, 25) : order.title) : 'N/A'}</span></div>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

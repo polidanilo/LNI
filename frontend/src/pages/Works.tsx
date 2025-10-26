@@ -181,7 +181,7 @@ const Works: React.FC = () => {
               className="relative overflow-hidden rounded-tr-2xl rounded-bl-2xl shadow-sm mb-4"
               style={{
                 height: '90px',
-                backgroundImage: 'url(/works6.png)', // ← Modifica qui il nome dell'immagine
+                backgroundImage: 'url(/works7.png)', // ← Modifica qui il nome dell'immagine
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
@@ -387,10 +387,10 @@ const Works: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {work.title ? (work.title.length > 25 ? work.title.substring(0, 25) : work.title) : 'N/A'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3 flex-wrap" style={{lineHeight: '1.4'}}>
-                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}{work.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}` : ''}</span>
-                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.category || 'Categoria'}</span>
-                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.created_by || 'N/A'}</span>
+                        <div className="text-sm black mt-3" style={{lineHeight: '1.4'}}>
+                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}{work.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}` : ''}</span></div>
+                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.category || 'Categoria'}</span></div>
+                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.created_by || 'N/A'}</span></div>
                         </div>
                       </div>
                       <div className="flex flex-col items-center gap-2">

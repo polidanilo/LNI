@@ -394,13 +394,11 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3 flex-wrap" style={{lineHeight: '1.4'}}>
-                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}` : ''}</span>
-                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.boat_type || 'Categoria'}</span>
+                        <div className="text-sm black mt-3" style={{lineHeight: '1.4'}}>
+                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}` : ''}</span></div>
+                          <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.boat_type || 'Categoria'}</span></div>
                           {problem.part_affected && (
-                            <>
-                              <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.part_affected}</span>
-                            </>
+                            <div><span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.part_affected}</span></div>
                           )}
                         </div>
                       </div>
