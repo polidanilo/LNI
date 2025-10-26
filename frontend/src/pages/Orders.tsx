@@ -189,7 +189,7 @@ const Orders: React.FC = () => {
               </div>
             </div>
             
-            <p className="pl-2 pt-2 text-sm black">
+            <p className="pl-2 pt-2 text-base black">
               Ecco gli ordini effettuati nel turno selezionato:
             </p>
           </div>
@@ -204,7 +204,7 @@ const Orders: React.FC = () => {
             value={selectedSeason?.id || ''}
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 black"
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 disabled:opacity-50 black"
             style={{backgroundColor: 'transparent', borderColor: '#39A8FB'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#39A8FB'}
             onBlur={(e) => e.currentTarget.style.borderColor = '#39A8FB'}
@@ -222,7 +222,7 @@ const Orders: React.FC = () => {
             value={selectedShift?.id || ''}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 black"
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 focus:outline-none disabled:opacity-50 black"
             style={{backgroundColor: 'transparent', borderColor: '#39A8FB'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#39A8FB'}
             onBlur={(e) => e.currentTarget.style.borderColor = '#39A8FB'}

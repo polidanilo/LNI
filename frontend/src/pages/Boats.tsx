@@ -196,7 +196,7 @@ const Boats: React.FC = () => {
               </div>
             </div>
             
-            <p className="pl-2 pt-2 text-sm black">
+            <p className="pl-2 pt-2 text-base black">
               Ecco problemi e danni segnalati nel turno selezionato:
             </p>
           </div>
@@ -211,7 +211,7 @@ const Boats: React.FC = () => {
             value={selectedSeason?.id || ''}
             onChange={handleSeasonChange}
             disabled={seasonsLoading}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 disabled:opacity-50 text-gray-700"
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 disabled:opacity-50 text-gray-700"
             style={{backgroundColor: 'transparent', borderColor: '#FF5958'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#FF5958'}
             onBlur={(e) => e.currentTarget.style.borderColor = '#FF5958'}
@@ -229,7 +229,7 @@ const Boats: React.FC = () => {
             value={selectedShift?.id || ''}
             onChange={handleShiftChange}
             disabled={!selectedSeason || shiftsLoading || !shifts || shifts.length === 0}
-            className="px-0 py-1 bg-transparent border-0 border-b-2 text-sm transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
+            className="px-0 py-1 bg-transparent border-0 border-b-2 text-base transition-all duration-200 focus:outline-none disabled:opacity-50 text-gray-700"
             style={{backgroundColor: 'transparent', borderColor: '#FF5958'}}
             onFocus={(e) => e.currentTarget.style.borderColor = '#FF5958'}
             onBlur={(e) => e.currentTarget.style.borderColor = '#FF5958'}
