@@ -575,7 +575,7 @@ const Dashboard: React.FC = () => {
             <div className="relative space-y-4 pb-9" style={{backgroundColor: '#FFF4EF', zIndex: 1}}>
               
             {/* Ultimi problemi barche */}
-            <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
+            <div className="bg-white rounded-tr-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
               background: 'linear-gradient(white, white) padding-box, linear-gradient(45deg, #FF5958 0%, #FF5958 85%, #39A8FB 85%) border-box',
               border: '0px solid transparent',
               borderRadius: '24px',
@@ -600,7 +600,7 @@ const Dashboard: React.FC = () => {
                   {openProblems.slice(0, 6).map((problem) => (
                     <div
                       key={problem.id}
-                      className="relative p-4 pb-1.5 rounded-full cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-1.5 rounded-tr-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: problem.status === 'closed' 
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -627,7 +627,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.4'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                             <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{problem.boat_type || 'Categoria'}</span>
@@ -677,7 +677,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Ultimi lavori */}
-            <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
+            <div className="bg-white rounded-tr-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
               background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, rgb(255, 145, 81) 0%, rgb(255, 145, 81) 85%, #39A8FB 85%) border-box',
               border: '0px solid transparent',
               borderRadius: '24px',
@@ -702,7 +702,7 @@ const Dashboard: React.FC = () => {
                   {recentWorks.map((work) => (
                     <div
                       key={work.id}
-                      className="relative p-4 pb-1.5 rounded-full cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-1.5 rounded-tr-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: work.status === 'completed'
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -730,7 +730,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.4'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                             <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{work.category}</span>
@@ -778,7 +778,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Ultimi ordini */}
-            <div className="bg-white rounded-tr-3xl rounded-bl-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
+            <div className="bg-white rounded-tr-3xl px-2 py-5 pb-3 shadow-sm relative" style={{
               background: 'linear-gradient(white, white) padding-box, linear-gradient(315deg, #39A8FB 0%, #39A8FB 85%, #FF5958 85%) border-box',
               border: '0px solid transparent',
               borderRadius: '24px',
@@ -803,7 +803,7 @@ const Dashboard: React.FC = () => {
                   {recentOrders.map((order) => (
                     <div
                       key={order.id}
-                      className="relative p-4 pb-1.5 rounded-full cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-1.5 rounded-tr-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: order.status === 'completed'
                           ? 'rgb(57, 168, 251, 0.4)'
@@ -830,7 +830,7 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.4'}}>
+                          <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                             <span>{new Date(order.order_date).toLocaleDateString('it-IT')}</span>
                             <span className="text-lg font-bold">•</span>
                             <span>{order.category}</span>

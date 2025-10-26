@@ -369,7 +369,7 @@ const Boats: React.FC = () => {
                 {filteredProblems.map((problem) => (
                   <div
                     key={problem.id}
-                    className="relative p-4 pb-1.5 rounded-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-1.5 rounded-tr-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: problem.status === 'open'
                         ? 'rgba(255, 89, 88, 0.5)'
@@ -398,7 +398,7 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.4'}}>
+                        <div className="flex items-center gap-1 text-sm black mt-3.5 flex-wrap" style={{lineHeight: '0.9'}}>
                           <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}</span>
                           <span className="text-lg font-bold">•</span>
                           <span>{problem.boat_type || 'Categoria'}</span>
@@ -413,7 +413,7 @@ const Boats: React.FC = () => {
                       <div className="flex flex-col items-center gap-2">
                         <button
                           onClick={(e) => handleToggleStatus(e, problem)}
-                          className="group w-8 h-8 mr-1 rounded-tr-xl rounded-bl-xl bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
+                          className="group w-8 h-8 mr-1 rounded-full bg-white flex items-center justify-center shadow-sm hover:bg-gray-100 transition-all duration-200"
                           title={problem.status === 'closed' ? 'Segna come aperto' : 'Segna come risolto'}
                         >
                           {/* Icona normale */}

@@ -147,7 +147,7 @@ const BoatsDetails: React.FC = () => {
       />
       
       <div 
-        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-tr-3xl rounded-bl-3xl shadow-sm mx-0.3"
+        className="fixed inset-x-0 bottom-0 z-[70] bg-white backdrop-blur-sm rounded-tr-3xl shadow-sm mx-0.3"
         style={{
           height: '75vh',
           animation: 'slideUp 0.2s ease-out',

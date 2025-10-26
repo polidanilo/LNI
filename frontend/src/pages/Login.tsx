@@ -129,7 +129,7 @@ const Login: React.FC = () => {
                     }
                   }}
                   maxLength={8}
-                  className="w-full px-2 py-2 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-ara black placeholder-gray-400"
+                  className="w-full px-2 py-2 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme black placeholder-gray-400"
                   placeholder="Username"
                   required
                 />
@@ -161,7 +161,7 @@ const Login: React.FC = () => {
                   autoComplete="off"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-2 py-2 pr-10 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-azr black placeholder-gray-400"
+                  className="w-full px-2 py-2 pr-10 bg-transparent border-0 border-b-2 border-gray-300 text-base font-medium transition-all duration-200 focus:outline-none focus:border-primary-eme black placeholder-gray-400"
                   placeholder="Password"
                   required
                 />
@@ -196,7 +196,7 @@ const Login: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 bg-primary-eme disabled:bg-gray-400 text-white rounded-full font-bold font-greycliff text-base transition-all duration-200 shadow-sm"
+                  className="w-full py-3 bg-primary-eme disabled:bg-gray-400 text-white rounded font-bold font-greycliff text-base transition-all duration-200 shadow-sm"
                   style={{
                     backgroundColor: loading ? undefined : '#10B981',
                     cursor: loading ? 'not-allowed' : 'pointer'
