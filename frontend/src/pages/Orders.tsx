@@ -187,7 +187,7 @@ const Orders: React.FC = () => {
               }}
             >
               {/* Overlay scuro per oscurare l'immagine */}
-              <div className="absolute inset-0 bg-black opacity-25"></div>
+              <div className="absolute inset-0 bg-black opacity-20"></div>
               
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
@@ -435,10 +435,7 @@ const Orders: React.FC = () => {
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
                         <div className="flex items-center gap-1 text-sm black mt-3 flex-wrap" style={{lineHeight: '1.4'}}>
-                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}{order.shift_id ? ', ' : ''}</span>
-                          {order.shift_id && (
-                            <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
-                          )}
+                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}{order.shift_id ? `, ${['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}` : ''}</span>
                           <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.category || 'Categoria'}</span>
                           <span className="break-words truncate"><span className="text-lg font-bold">•</span> {order.title ? (order.title.length > 25 ? order.title.substring(0, 25) : order.title) : 'N/A'}</span>
                         </div>
