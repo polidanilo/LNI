@@ -277,7 +277,7 @@ const Dashboard: React.FC = () => {
       <CustomScrollbar maxHeight="100vh" onScroll={(scrollTop) => setScrollY(scrollTop)} hideOnMobile={false}>
         <div className="pb-9" style={{backgroundColor: '#FFF4EF'}}>
       {/* Top Bar con Saluto e Logout */}
-      <div style={{backgroundColor: '#FFF4EF', zIndex: 20}} className="px-4 pt-10 pb-0.5 relative">
+      <div style={{backgroundColor: '#FFF4EF', zIndex: 10, position: 'relative'}} className="px-4 pt-10 pb-0.5">
         <div className="max-w-4xl mx-auto flex items-start justify-between">
           {/* Riquadro Dashboard con immagine di sfondo */}
           <div className="flex-1">
@@ -327,7 +327,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Selettori Stagione e Turno */}
-      <div style={{backgroundColor: '#FFF4EF', zIndex: 20}} className="px-4 pb-2 relative">
+      <div style={{backgroundColor: '#FFF4EF', zIndex: 10, position: 'relative'}} className="px-4 pb-2">
         <div className="px-1 max-w-4xl mx-auto flex gap-3">
           {/* Stagione */}
           <select
@@ -376,7 +376,7 @@ const Dashboard: React.FC = () => {
       {selectedShift ? (
         <div style={{backgroundColor: '#FFF4EF'}} className="px-4 pb-9 relative">
           {/* Cerchi decorativi emerald di sfondo - parallax nuvolette */}
-          <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{zIndex: 0, right: '15px'}}>
+          <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{zIndex: 1, right: '15px'}}>
             {/* Cerchio emerald grande - alto destra */}
             <div 
               className="absolute rounded-full shadow-sm transition-transform duration-200"
@@ -387,7 +387,7 @@ const Dashboard: React.FC = () => {
                 top: '64%',
                 right: '4%',
                 opacity: 0.9,
-                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${Math.max(-scrollY * 0.4, -150)}px)` // Movimento limitato
               }}
             />
 
@@ -400,7 +400,7 @@ const Dashboard: React.FC = () => {
                 top: '54%',
                 right: '10%',
                 opacity: 0.9,
-                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${Math.max(-scrollY * 0.4, -120)}px)` // Movimento limitato
               }}
             />
 
@@ -413,7 +413,7 @@ const Dashboard: React.FC = () => {
                 top: '70%',
                 left: '55%',
                 opacity: 0.6,
-                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${Math.max(-scrollY * 0.4, -180)}px)` // Movimento limitato
               }}
             />
 
@@ -427,7 +427,7 @@ const Dashboard: React.FC = () => {
                 top: '50%',
                 left: '8%',
                 opacity: 0.4,
-                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${Math.max(-scrollY * 0.4, -100)}px)` // Movimento limitato
               }}
             />
 
@@ -441,7 +441,7 @@ const Dashboard: React.FC = () => {
                 top: '34%',
                 right: '13%',
                 opacity: 0,
-                transform: `translateY(${-scrollY * 1.3}px)` // Percorre 1.5x la distanza verso l'alto
+                transform: `translateY(${Math.max(-scrollY * 0.4, -50)}px)` // Movimento limitato
               }}
             />
 
@@ -535,7 +535,7 @@ const Dashboard: React.FC = () => {
               borderRadius: '24px',
               height: '340px'
             }}>
-              <h3 className="text-lg font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
+              <h3 className="text-xl font-bold font-greycliff black mb-3 pb-1 pl-4 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#FF5958'}} />
                 Ultimi problemi aggiunti
               </h3>
@@ -639,7 +639,7 @@ const Dashboard: React.FC = () => {
             }}>
               <h3 className="text-xl font-bold font-greycliff black mb-3 pl-4 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#FF9151'}} />
-                Ultimi lavori
+                Ultimi lavori aggiunti
               </h3>
               
               {worksLoading ? (
@@ -740,7 +740,7 @@ const Dashboard: React.FC = () => {
             }}>
               <h3 className="text-xl font-bold font-greycliff black mb-3 pl-4 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#39A8FB'}} />
-                Ultimi ordini
+                Ultimi ordini aggiunti
               </h3>
               
               {ordersLoading ? (
