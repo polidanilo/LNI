@@ -591,7 +591,7 @@ const Dashboard: React.FC = () => {
                   {openProblems.slice(0, 6).map((problem) => (
                     <div
                       key={problem.id}
-                      className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-3.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: problem.status === 'closed' 
                           ? 'rgba(16, 185, 129, 0.3)'
@@ -618,8 +618,8 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             {problem.boat_name || 'Barca'}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                            <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? ', ' : ''}</span>
+                          <div className="flex items-center gap-1 text-sm black mt-3 flex-wrap" style={{lineHeight: '1.4'}}>
+                            <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? ', ' : ''}</span>
                             {problem.shift_id && (
                               <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
                             )}
@@ -721,8 +721,8 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                             {work.title.length > 25 ? work.title.substring(0, 25) : work.title}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                            <span>{work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}{work.shift_id ? ', ' : ''}</span>
+                          <div className="flex items-center gap-1 text-sm black mt-3 flex-wrap" style={{lineHeight: '1.4'}}>
+                            <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {work.work_date ? new Date(work.work_date).toLocaleDateString('it-IT') : 'N/A'}{work.shift_id ? ', ' : ''}</span>
                             {work.shift_id && (
                               <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(work.shift_id - 1) % 6]}</span>
                             )}
@@ -794,7 +794,7 @@ const Dashboard: React.FC = () => {
                   {recentOrders?.slice(0, 6).map((order) => (
                     <div
                       key={order.id}
-                      className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                      className="relative p-4 pb-3.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                       style={{
                         backgroundColor: order.status === 'completed'
                           ? 'rgb(57, 168, 251, 0.4)'
@@ -821,8 +821,8 @@ const Dashboard: React.FC = () => {
                           <h4 className="pt-0 text-base font-semibold black mb-1">
                             €{parseFloat(String(order.amount)).toFixed(2)}
                           </h4>
-                          <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                            <span>{new Date(order.order_date).toLocaleDateString('it-IT')}{order.shift_id ? ', ' : ''}</span>
+                          <div className="flex items-center gap-1 text-sm black mt-3 flex-wrap" style={{lineHeight: '1.4'}}>
+                            <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {new Date(order.order_date).toLocaleDateString('it-IT')}{order.shift_id ? ', ' : ''}</span>
                             {order.shift_id && (
                               <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
                             )}

@@ -181,13 +181,13 @@ const Orders: React.FC = () => {
               className="relative overflow-hidden rounded-tr-2xl rounded-bl-2xl shadow-sm mb-4"
               style={{
                 height: '90px',
-                backgroundImage: 'url(/orders4.png)', // ← Modifica qui il nome dell'immagine
+                backgroundImage: 'url(/orders5.png)', // ← Modifica qui il nome dell'immagine
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
             >
               {/* Overlay scuro per oscurare l'immagine */}
-              <div className="absolute inset-0 bg-black opacity-30"></div>
+              <div className="absolute inset-0 bg-black opacity-25"></div>
               
               {/* Testo sopra l'immagine */}
               <div className="ml-6 relative z-10 flex items-center h-full">
@@ -405,7 +405,7 @@ const Orders: React.FC = () => {
                 {filteredOrders.map((order) => (
                   <div
                     key={order.id}
-                    className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-3.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: order.status === 'completed' 
                         ? 'rgb(57, 168, 251, 0.4)'
@@ -434,8 +434,8 @@ const Orders: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1">
                           €{order.amount ? order.amount.toFixed(2) : '0.00'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                          <span>{order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}{order.shift_id ? ', ' : ''}</span>
+                        <div className="flex items-center gap-1 text-sm black mt-3 flex-wrap" style={{lineHeight: '1.4'}}>
+                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {order.order_date ? new Date(order.order_date).toLocaleDateString('it-IT') : 'N/A'}{order.shift_id ? ', ' : ''}</span>
                           {order.shift_id && (
                             <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(order.shift_id - 1) % 6]}</span>
                           )}

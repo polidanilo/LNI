@@ -365,7 +365,7 @@ const Boats: React.FC = () => {
                 {filteredProblems.map((problem) => (
                   <div
                     key={problem.id}
-                    className="relative p-4 pb-2.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
+                    className="relative p-4 pb-3.5 rounded-tr-xl rounded-bl-xl cursor-pointer transition-all duration-200 shadow-sm"
                     style={{
                       backgroundColor: problem.status === 'open'
                         ? 'rgba(255, 89, 88, 0.5)'
@@ -394,8 +394,8 @@ const Boats: React.FC = () => {
                         <h4 className="pt-0 text-base font-semibold black mb-1 truncate">
                           {problem.boat_name || 'Imbarcazione'}
                         </h4>
-                        <div className="flex items-center gap-1 text-sm black mt-2 flex-wrap" style={{lineHeight: '1.4'}}>
-                          <span>{problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? ', ' : ''}</span>
+                        <div className="flex items-center gap-1 text-sm black mt-3 flex-wrap" style={{lineHeight: '1.4'}}>
+                          <span className="whitespace-nowrap"><span className="text-lg font-bold">•</span> {problem.reported_date ? new Date(problem.reported_date).toLocaleDateString('it-IT') : 'N/A'}{problem.shift_id ? ', ' : ''}</span>
                           {problem.shift_id && (
                             <span>{['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto', 'Sesto'][(problem.shift_id - 1) % 6]}</span>
                           )}
